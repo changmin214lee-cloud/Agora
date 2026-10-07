@@ -213,10 +213,10 @@
       box-shadow: 0 0 18px rgba(255, 255, 255, 0.5);
     }
 
-    /* 3 Large App Cards Grid */
+    /* 6 App Cards Grid Layout */
     .dashboard-bottom-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.25rem;
     }
 
@@ -227,8 +227,8 @@
       border: 2px solid var(--card-border);
       border-top: 2px solid #ffffff;
       border-radius: 32px;
-      padding: 2.5rem 1.5rem;
-      min-height: 420px;
+      padding: 2rem 1.25rem;
+      min-height: 260px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -244,13 +244,13 @@
     }
 
     .app-card-icon {
-      font-size: 3.5rem;
+      font-size: 3rem;
       color: var(--primary);
-      margin-bottom: 1.25rem;
+      margin-bottom: 1rem;
     }
 
     .column-header-title {
-      font-size: 2.4rem;
+      font-size: 1.8rem;
       font-weight: 900;
       text-align: center;
     }
@@ -292,13 +292,11 @@
       outline: none;
     }
 
-    /* Fix Dropdown visibility across all themes */
     select.form-control option {
       background-color: var(--dropdown-option-bg);
       color: var(--text);
     }
 
-    /* Paste / File Upload Area */
     .image-upload-box {
       border: 2px dashed var(--card-border);
       background: var(--input-bg);
@@ -346,6 +344,16 @@
       object-fit: cover;
       border: 2px solid #ffffff;
       background: rgba(0,0,0,0.2);
+    }
+
+    /* Custom Reddit Post & Auction Cards */
+    .feed-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      backdrop-filter: blur(16px);
     }
 
     /* Modals */
@@ -431,7 +439,7 @@
         </div>
       </div>
 
-      <!-- 3 Main Apps: 마켓 / 주식 / 은행 -->
+      <!-- 6 Main Apps Grid -->
       <div class="dashboard-bottom-grid">
         
         <!-- App 1: 마켓 -->
@@ -450,6 +458,24 @@
         <div class="app-card" onclick="openAppScreen('screen-bank')">
           <i class="fa-solid fa-building-columns app-card-icon"></i>
           <h2 class="column-header-title">은행</h2>
+        </div>
+
+        <!-- App 4: 이메일 (Email) -->
+        <div class="app-card" onclick="openAppScreen('screen-email')">
+          <i class="fa-solid fa-envelope app-card-icon"></i>
+          <h2 class="column-header-title">이메일</h2>
+        </div>
+
+        <!-- App 5: 아고라 피드 (Reddit Version) -->
+        <div class="app-card" onclick="openAppScreen('screen-feed')">
+          <i class="fa-brands fa-reddit-alien app-card-icon"></i>
+          <h2 class="column-header-title">아고라 피드</h2>
+        </div>
+
+        <!-- App 6: 경매장 (Auction) -->
+        <div class="app-card" onclick="openAppScreen('screen-auction')">
+          <i class="fa-solid fa-gavel app-card-icon"></i>
+          <h2 class="column-header-title">경매장</h2>
         </div>
 
       </div>
@@ -500,7 +526,7 @@
     </div>
   </div>
 
-  <!-- FULL-SCREEN APP 2: STOCK (WITH CLEAN LINE PRICE GRAPH) -->
+  <!-- FULL-SCREEN APP 2: STOCK -->
   <div id="screen-stock" class="fullscreen-app-overlay hidden">
     <div class="app-header-bar">
       <button class="btn btn-outline" onclick="closeAppScreen('screen-stock')"><i class="fa-solid fa-arrow-left"></i> 메인으로</button>
@@ -509,7 +535,6 @@
     </div>
 
     <div class="container" style="max-width:900px; margin:0 auto; width:100%;">
-      <!-- Visual Stock Price Chart -->
       <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem; margin-bottom:1.5rem; backdrop-filter:blur(20px);">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
           <h3 style="color:var(--primary); font-size:1.2rem;"><i class="fa-solid fa-chart-area"></i> 실시간 주가 추이 그래프</h3>
@@ -538,7 +563,6 @@
     </div>
 
     <div class="container" style="max-width:1000px; margin:0 auto; width:100%;">
-      <!-- Bank Account Overview Header -->
       <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem 2rem; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center;">
         <div>
           <h2 style="font-size:1.5rem;"><span id="bank-user-name">-</span> 님의 계좌</h2>
@@ -557,8 +581,6 @@
       </div>
 
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
-        
-        <!-- Transfer Money -->
         <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem;">
           <h3 style="color:var(--primary); margin-bottom:1rem;"><i class="fa-solid fa-paper-plane"></i> 계좌 송금</h3>
           <form onsubmit="handleTransfer(event)">
@@ -574,10 +596,8 @@
           </form>
         </div>
 
-        <!-- Loan & Payback System -->
         <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem;">
           <h3 style="color:var(--primary); margin-bottom:1rem;"><i class="fa-solid fa-hand-holding-dollar"></i> 대출 및 상환</h3>
-          
           <div style="margin-bottom:1.25rem;">
             <label style="font-size:0.85rem; color:var(--text-muted); display:block; margin-bottom:0.4rem;">대출 받기 (G)</label>
             <div style="display:flex; gap:0.5rem;">
@@ -585,9 +605,7 @@
               <button class="btn btn-primary" onclick="handleTakeLoan()">대출</button>
             </div>
           </div>
-
           <hr style="border:0; border-top:1px solid var(--card-border); margin:1rem 0;">
-
           <div>
             <label style="font-size:0.85rem; color:var(--text-muted); display:block; margin-bottom:0.4rem;">대출금 상환하기 (G)</label>
             <div style="display:flex; gap:0.5rem;">
@@ -596,10 +614,8 @@
             </div>
           </div>
         </div>
-
       </div>
 
-      <!-- Portfolio Section -->
       <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem; margin-top:1.5rem;">
         <h3 style="color:var(--primary); margin-bottom:1rem;"><i class="fa-solid fa-chart-pie"></i> 나의 주식 포트폴리오</h3>
         <table>
@@ -607,7 +623,52 @@
           <tbody id="portfolio-list"></tbody>
         </table>
       </div>
+    </div>
+  </div>
 
+  <!-- FULL-SCREEN APP 4: EMAIL -->
+  <div id="screen-email" class="fullscreen-app-overlay hidden">
+    <div class="app-header-bar">
+      <button class="btn btn-outline" onclick="closeAppScreen('screen-email')"><i class="fa-solid fa-arrow-left"></i> 메인으로</button>
+      <h1 style="font-size:1.8rem; font-weight:900; color:var(--primary);"><i class="fa-solid fa-envelope"></i> 이메일 센터</h1>
+      <button class="btn btn-primary" onclick="openModal('modal-compose-email')"><i class="fa-solid fa-pen"></i> 메일 작성</button>
+    </div>
+
+    <div class="container" style="max-width:900px; margin:0 auto; width:100%;">
+      <div style="display:flex; gap:1rem; margin-bottom:1rem;">
+        <button class="btn btn-primary" onclick="switchMailTab('inbox')">받은 메일함</button>
+        <button class="btn btn-outline" onclick="switchMailTab('sent')">보낸 메일함</button>
+      </div>
+
+      <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem; backdrop-filter:blur(20px);">
+        <div id="email-list-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FULL-SCREEN APP 5: AGORA FEED (REDDIT) -->
+  <div id="screen-feed" class="fullscreen-app-overlay hidden">
+    <div class="app-header-bar">
+      <button class="btn btn-outline" onclick="closeAppScreen('screen-feed')"><i class="fa-solid fa-arrow-left"></i> 메인으로</button>
+      <h1 style="font-size:1.8rem; font-weight:900; color:var(--primary);"><i class="fa-brands fa-reddit-alien"></i> 아고라 피드</h1>
+      <button class="btn btn-primary" onclick="openModal('modal-create-post')"><i class="fa-solid fa-plus"></i> 포스트 작성</button>
+    </div>
+
+    <div class="container" style="max-width:800px; margin:0 auto; width:100%;">
+      <div id="feed-posts-container"></div>
+    </div>
+  </div>
+
+  <!-- FULL-SCREEN APP 6: AUCTION -->
+  <div id="screen-auction" class="fullscreen-app-overlay hidden">
+    <div class="app-header-bar">
+      <button class="btn btn-outline" onclick="closeAppScreen('screen-auction')"><i class="fa-solid fa-arrow-left"></i> 메인으로</button>
+      <h1 style="font-size:1.8rem; font-weight:900; color:var(--primary);"><i class="fa-solid fa-gavel"></i> 경매장</h1>
+      <button class="btn btn-primary" onclick="openModal('modal-create-auction')"><i class="fa-solid fa-plus"></i> 경매 물품 등록</button>
+    </div>
+
+    <div class="container" style="max-width:950px; margin:0 auto; width:100%;">
+      <div id="auction-grid-container" style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;"></div>
     </div>
   </div>
 
@@ -629,7 +690,6 @@
       <hr style="border: 0; border-top: 1px solid var(--card-border); margin: 1rem 0;">
 
       <h4 style="margin-bottom: 0.5rem; color: var(--primary);">프로필 사진 변경</h4>
-      
       <div class="image-upload-box" id="avatar-paste-area">
         <i class="fa-solid fa-paste" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
         <span>클립보드 이미지를 <strong>Ctrl+V / Cmd+V</strong> 로 붙여넣거나 파일 선택</span>
@@ -646,6 +706,95 @@
     </div>
   </div>
 
+  <!-- COMPOSE EMAIL MODAL -->
+  <div id="modal-compose-email" class="modal-overlay">
+    <div class="modal">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;">메일 작성</h3>
+        <button class="btn btn-outline" onclick="closeModal('modal-compose-email')">&times;</button>
+      </div>
+      <form onsubmit="handleSendEmail(event)">
+        <div class="form-group">
+          <label>받는 사람 계좌번호</label>
+          <input type="text" id="email-to-acc" class="form-control" placeholder="예: 101-002" required>
+        </div>
+        <div class="form-group">
+          <label>제목</label>
+          <input type="text" id="email-subject" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>내용</label>
+          <textarea id="email-body" class="form-control" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">발송하기</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CREATE POST MODAL -->
+  <div id="modal-create-post" class="modal-overlay">
+    <div class="modal">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;">아고라 피드 포스트 작성</h3>
+        <button class="btn btn-outline" onclick="closeModal('modal-create-post')">&times;</button>
+      </div>
+      <form onsubmit="handleCreatePost(event)">
+        <div class="form-group">
+          <label>제목</label>
+          <input type="text" id="post-title" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>본문 내용</label>
+          <textarea id="post-content" class="form-control" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>첨부 이미지 (선택)</label>
+          <div class="image-upload-box" id="post-img-paste-area">
+            <i class="fa-solid fa-image" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
+            <span>이미지를 붙여넣거나 파일 선택</span>
+            <input type="file" id="post-img-file" accept="image/*" style="display:none;">
+            <center><img id="post-img-preview" class="image-preview"></center>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">게시하기</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CREATE AUCTION MODAL -->
+  <div id="modal-create-auction" class="modal-overlay">
+    <div class="modal">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;">경매 물품 등록</h3>
+        <button class="btn btn-outline" onclick="closeModal('modal-create-auction')">&times;</button>
+      </div>
+      <form onsubmit="handleCreateAuction(event)">
+        <div class="form-group">
+          <label>경매 물품명</label>
+          <input type="text" id="auc-item-name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>시작가 (G)</label>
+          <input type="number" id="auc-start-price" class="form-control" min="1" required>
+        </div>
+        <div class="form-group">
+          <label>즉시 구매가 (G) (선택)</label>
+          <input type="number" id="auc-buyout-price" class="form-control" min="1">
+        </div>
+        <div class="form-group">
+          <label>물품 이미지</label>
+          <div class="image-upload-box" id="auc-img-paste-area">
+            <i class="fa-solid fa-gavel" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
+            <span>이미지를 붙여넣거나 파일 선택</span>
+            <input type="file" id="auc-img-file" accept="image/*" style="display:none;">
+            <center><img id="auc-img-preview" class="image-preview"></center>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">경매 시작</button>
+      </form>
+    </div>
+  </div>
+
   <!-- CREATE STORE MODAL -->
   <div id="modal-create-store" class="modal-overlay">
     <div class="modal">
@@ -658,9 +807,8 @@
           <label>상점 이름</label>
           <input type="text" id="store-name" class="form-control" required>
         </div>
-
         <div class="form-group">
-          <label>상점 로고 이미지 (복사&붙여넣기 또는 파일 업로드)</label>
+          <label>상점 로고 이미지</label>
           <div class="image-upload-box" id="store-logo-paste-area">
             <i class="fa-solid fa-image" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
             <span>이미지를 붙여넣거나 클릭하여 파일 선택</span>
@@ -669,7 +817,6 @@
           </div>
           <input type="url" id="store-logo-url" class="form-control" placeholder="또는 로고 이미지 URL">
         </div>
-
         <div class="form-group">
           <label>발행 주식 수량 (주)</label>
           <input type="number" id="store-shares" class="form-control" min="10" value="100" required>
@@ -690,12 +837,10 @@
         <h3 id="modal-store-title" style="font-size:1.4rem; color:var(--primary); font-weight:800;">상점 상세보기</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-store-detail')">&times;</button>
       </div>
-
       <div id="store-owner-actions" class="hidden" style="margin-bottom: 1rem; display:flex; gap:0.5rem;">
         <button class="btn btn-primary" onclick="openModal('modal-add-item')"><i class="fa-solid fa-plus"></i> 상품 추가</button>
         <button class="btn btn-danger" onclick="eraseCurrentStore()"><i class="fa-solid fa-trash"></i> 상점 폐업 (삭제)</button>
       </div>
-
       <h4>판매 상품 목록</h4>
       <div id="store-products-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:0.75rem;"></div>
     </div>
@@ -718,7 +863,7 @@
           <input type="number" id="item-price" class="form-control" min="1" required>
         </div>
         <div class="form-group">
-          <label>상품 이미지 (붙여넣기 또는 파일 선택)</label>
+          <label>상품 이미지</label>
           <div class="image-upload-box" id="item-img-paste-area">
             <i class="fa-solid fa-upload" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
             <span>이미지를 붙여넣거나 파일 선택</span>
@@ -739,9 +884,7 @@
         <h3 id="pop-product-title" style="font-size:1.3rem; color:var(--primary); font-weight:800;">상품 상세 정보</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-product-popup')">&times;</button>
       </div>
-
       <img id="pop-product-img" src="" style="width:100%; height:200px; object-fit:cover; border-radius:16px; margin-bottom:1rem; background:var(--input-bg);">
-
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h2 id="pop-product-price" style="color:var(--primary);">0 G</h2>
         <div style="display:flex; gap:0.5rem;">
@@ -749,12 +892,10 @@
           <button class="reaction-btn" onclick="reactProduct('dislike')"><i class="fa-solid fa-thumbs-down"></i> <span id="pop-dislikes">0</span></button>
         </div>
       </div>
-
       <div style="display:flex; gap:0.5rem; margin-bottom:1.5rem;">
         <button class="btn btn-primary" style="flex:1; justify-content:center; font-size:1rem;" onclick="buyActiveProduct()"><i class="fa-solid fa-cart-shopping"></i> 구매하기</button>
         <button id="pop-erase-btn" class="btn btn-danger hidden" onclick="eraseActiveProduct()"><i class="fa-solid fa-trash"></i> 삭제하기</button>
       </div>
-
       <h4 style="margin-bottom:0.5rem;">상품 리뷰</h4>
       <form onsubmit="handlePostReview(event)" style="margin-bottom:1rem;">
         <div style="display:flex; gap:0.5rem; margin-bottom:0.5rem;">
@@ -769,7 +910,6 @@
         </div>
         <button type="submit" class="btn btn-outline" style="width:100%; justify-content:center;">리뷰 등록</button>
       </form>
-
       <div id="pop-review-list"></div>
     </div>
   </div>
@@ -816,28 +956,46 @@
     const defaultAvatar = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150";
     const defaultStoreLogo = "https://images.unsplash.com/photo-1534723452862-4c874018d66d?w=150";
 
-    let accounts = JSON.parse(localStorage.getItem('ag_accs_v14')) || [
+    let accounts = JSON.parse(localStorage.getItem('ag_accs_v15')) || [
       { name: "민수", account: "101-001", pin: "1234", balance: 5000, loan: 0, avatar: defaultAvatar, shares: {} },
       { name: "지아", account: "101-002", pin: "1234", balance: 12000, loan: 0, avatar: defaultAvatar, shares: {} }
     ];
 
-    let stores = JSON.parse(localStorage.getItem('ag_stores_v14')) || [
+    let stores = JSON.parse(localStorage.getItem('ag_stores_v15')) || [
       { id: "S1", name: "아고라 메인 상점", logo: defaultStoreLogo, owner: "101-001", totalShares: 100, price: 50, priceHistory: [30, 35, 40, 45, 50], totalSales: 0, items: [] }
+    ];
+
+    let emails = JSON.parse(localStorage.getItem('ag_emails_v15')) || [
+      { id: "E1", from: "101-001", fromName: "민수", to: "101-002", subject: "환영합니다!", body: "아고라 캐피탈에 오신 것을 환영합니다.", time: "방금 전", read: false }
+    ];
+
+    let posts = JSON.parse(localStorage.getItem('ag_posts_v15')) || [
+      { id: "P1", author: "민수", authorAcc: "101-001", title: "첫 번째 게시글입니다!", content: "아고라 피드가 오픈했습니다. 많은 공유 부탁드립니다.", img: "", likes: 5, comments: [] }
+    ];
+
+    let auctions = JSON.parse(localStorage.getItem('ag_auctions_v15')) || [
+      { id: "A1", seller: "지아", sellerAcc: "101-002", title: "희귀 카드 컬렉션", currentBid: 500, highestBidder: "민수", buyout: 1500, img: "https://via.placeholder.com/300" }
     ];
 
     let currentUser = null;
     let activeStoreId = null;
     let activeItemId = null;
+    let currentMailTab = "inbox";
     let isAdmin = false;
 
     // Image Upload Data Buffers
     let tempAvatarBase64 = "";
     let tempStoreLogoBase64 = "";
     let tempItemImgBase64 = "";
+    let tempPostImgBase64 = "";
+    let tempAucImgBase64 = "";
 
     function save() {
-      localStorage.setItem('ag_accs_v14', JSON.stringify(accounts));
-      localStorage.setItem('ag_stores_v14', JSON.stringify(stores));
+      localStorage.setItem('ag_accs_v15', JSON.stringify(accounts));
+      localStorage.setItem('ag_stores_v15', JSON.stringify(stores));
+      localStorage.setItem('ag_emails_v15', JSON.stringify(emails));
+      localStorage.setItem('ag_posts_v15', JSON.stringify(posts));
+      localStorage.setItem('ag_auctions_v15', JSON.stringify(auctions));
     }
 
     function changeTheme(themeName) {
@@ -851,6 +1009,8 @@
       tempAvatarBase64 = "";
       tempStoreLogoBase64 = "";
       tempItemImgBase64 = "";
+      tempPostImgBase64 = "";
+      tempAucImgBase64 = "";
       document.querySelectorAll('.image-preview').forEach(img => {
         img.src = '';
         img.style.display = 'none';
@@ -868,10 +1028,10 @@
 
     function openAppScreen(id) { 
       document.getElementById(id).classList.remove('hidden'); 
-      if (id === 'screen-stock') {
-        populateChartStoreSelect();
-        renderStockChart();
-      }
+      if (id === 'screen-stock') { populateChartStoreSelect(); renderStockChart(); }
+      if (id === 'screen-email') renderEmails();
+      if (id === 'screen-feed') renderFeedPosts();
+      if (id === 'screen-auction') renderAuctions();
     }
     function closeAppScreen(id) { document.getElementById(id).classList.add('hidden'); }
 
@@ -913,6 +1073,8 @@
     setupImagePasteAndFile('avatar-paste-area', 'avatar-file-input', 'avatar-preview', (base64) => tempAvatarBase64 = base64);
     setupImagePasteAndFile('store-logo-paste-area', 'store-logo-file', 'store-logo-preview', (base64) => tempStoreLogoBase64 = base64);
     setupImagePasteAndFile('item-img-paste-area', 'item-img-file', 'item-img-preview', (base64) => tempItemImgBase64 = base64);
+    setupImagePasteAndFile('post-img-paste-area', 'post-img-file', 'post-img-preview', (base64) => tempPostImgBase64 = base64);
+    setupImagePasteAndFile('auc-img-paste-area', 'auc-img-file', 'auc-img-preview', (base64) => tempAucImgBase64 = base64);
 
     function handleLogin(e) {
       e.preventDefault();
@@ -942,7 +1104,6 @@
       document.getElementById('profile-modal-acc').innerText = currentUser.account;
       document.getElementById('profile-modal-balance').innerText = `${currentUser.balance.toLocaleString()} G`;
 
-      // Bank Specific Info
       document.getElementById('bank-user-name').innerText = currentUser.name;
       document.getElementById('bank-user-acc').innerText = currentUser.account;
       document.getElementById('bank-user-balance').innerText = `${currentUser.balance.toLocaleString()} G`;
@@ -1043,7 +1204,6 @@
       if (!storeSelect.value) return;
 
       const store = stores.find(s => s.id === storeSelect.value);
-
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       if (!store || !store.priceHistory || store.priceHistory.length === 0) {
@@ -1053,10 +1213,8 @@
         return;
       }
 
-      // Smooth & Clean Window: Show max last 15 updates
       const rawHistory = store.priceHistory;
       const history = rawHistory.slice(-15);
-
       const maxVal = Math.max(...history) * 1.15;
       const minVal = Math.min(...history) * 0.85;
       const range = maxVal - minVal || 1;
@@ -1065,7 +1223,6 @@
       const chartWidth = canvas.width - padding * 2;
       const chartHeight = canvas.height - padding * 2;
 
-      // Draw Grid Background
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
       ctx.lineWidth = 1;
       for (let i = 0; i <= 4; i++) {
@@ -1076,7 +1233,6 @@
         ctx.stroke();
       }
 
-      // Draw Clean Solid Line Graph (No dots)
       ctx.strokeStyle = '#38bdf8';
       ctx.lineWidth = 3;
       ctx.beginPath();
@@ -1089,6 +1245,220 @@
         else ctx.lineTo(x, y);
       });
       ctx.stroke();
+    }
+
+    /* EMAIL LOGIC */
+    function switchMailTab(tab) {
+      currentMailTab = tab;
+      renderEmails();
+    }
+
+    function renderEmails() {
+      const box = document.getElementById('email-list-container');
+      box.innerHTML = '';
+
+      const list = emails.filter(e => currentMailTab === 'inbox' ? e.to === currentUser.account : e.from === currentUser.account);
+
+      if (list.length === 0) {
+        box.innerHTML = '<p style="color:var(--text-muted); text-align:center;">보관된 메일이 없습니다.</p>';
+        return;
+      }
+
+      list.forEach(m => {
+        box.innerHTML += `
+          <div class="review-box" style="margin-bottom:0.75rem;">
+            <div style="display:flex; justify-content:space-between; font-weight:700; color:var(--primary);">
+              <span>${currentMailTab === 'inbox' ? '보낸 사람: ' + m.fromName + ' (' + m.from + ')' : '받는 사람: ' + m.to}</span>
+              <span style="font-size:0.8rem; color:var(--text-muted);">${m.time}</span>
+            </div>
+            <h4 style="margin:0.4rem 0;">${m.subject}</h4>
+            <p style="font-size:0.9rem;">${m.body}</p>
+          </div>
+        `;
+      });
+    }
+
+    function handleSendEmail(e) {
+      e.preventDefault();
+      const toAcc = document.getElementById('email-to-acc').value;
+      const subject = document.getElementById('email-subject').value;
+      const body = document.getElementById('email-body').value;
+
+      const target = accounts.find(a => a.account === toAcc);
+      if (!target) return alert("존재하지 않는 계좌번호입니다.");
+
+      emails.unshift({
+        id: "E" + Date.now(),
+        from: currentUser.account,
+        fromName: currentUser.name,
+        to: toAcc,
+        subject: subject,
+        body: body,
+        time: "방금 전",
+        read: false
+      });
+
+      save();
+      closeModal('modal-compose-email');
+      renderEmails();
+      alert("메일이 성공적으로 발송되었습니다!");
+    }
+
+    /* AGORA FEED / REDDIT LOGIC */
+    function renderFeedPosts() {
+      const box = document.getElementById('feed-posts-container');
+      box.innerHTML = '';
+
+      if (posts.length === 0) {
+        box.innerHTML = '<p style="color:var(--text-muted); text-align:center;">작성된 포스트가 없습니다.</p>';
+        return;
+      }
+
+      posts.forEach(p => {
+        box.innerHTML += `
+          <div class="feed-card">
+            <div style="display:flex; justify-content:space-between; font-weight:600; font-size:0.85rem; color:var(--text-muted); margin-bottom:0.4rem;">
+              <span>작성자: ${p.author} (${p.authorAcc})</span>
+            </div>
+            <h3 style="font-size:1.3rem; margin-bottom:0.5rem; color:var(--primary);">${p.title}</h3>
+            <p style="margin-bottom:1rem; font-size:0.95rem;">${p.content}</p>
+            ${p.img ? `<img src="${p.img}" style="width:100%; max-height:300px; object-fit:cover; border-radius:12px; margin-bottom:1rem;">` : ''}
+            
+            <div style="display:flex; gap:1rem; align-items:center;">
+              <button class="reaction-btn" onclick="likePost('${p.id}')"><i class="fa-solid fa-arrow-up"></i> 추천 ${p.likes}</button>
+            </div>
+
+            <div style="margin-top:1rem; border-top:1px solid var(--card-border); padding-top:0.75rem;">
+              <h5 style="margin-bottom:0.5rem;">댓글 (${p.comments ? p.comments.length : 0})</h5>
+              <div id="comments-${p.id}">
+                ${(p.comments || []).map(c => `<p style="font-size:0.85rem; margin-bottom:0.25rem;"><strong>${c.author}:</strong>${c.text}</p>`).join('')}
+              </div>
+              <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+                <input type="text" id="comment-input-${p.id}" class="form-control" placeholder="댓글 달기...">
+                <button class="btn btn-outline" onclick="addComment('${p.id}')">작성</button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function handleCreatePost(e) {
+      e.preventDefault();
+      posts.unshift({
+        id: "P" + Date.now(),
+        author: currentUser.name,
+        authorAcc: currentUser.account,
+        title: document.getElementById('post-title').value,
+        content: document.getElementById('post-content').value,
+        img: tempPostImgBase64 || "",
+        likes: 0,
+        comments: []
+      });
+
+      tempPostImgBase64 = "";
+      save();
+      closeModal('modal-create-post');
+      renderFeedPosts();
+    }
+
+    function likePost(id) {
+      const p = posts.find(post => post.id === id);
+      p.likes++;
+      save();
+      renderFeedPosts();
+    }
+
+    function addComment(id) {
+      const input = document.getElementById(`comment-input-${id}`);
+      if (!input.value.trim()) return;
+
+      const p = posts.find(post => post.id === id);
+      if (!p.comments) p.comments = [];
+
+      p.comments.push({ author: currentUser.name, text: input.value });
+      save();
+      renderFeedPosts();
+    }
+
+    /* AUCTION LOGIC */
+    function renderAuctions() {
+      const grid = document.getElementById('auction-grid-container');
+      grid.innerHTML = '';
+
+      if (auctions.length === 0) {
+        grid.innerHTML = '<p style="color:var(--text-muted); grid-column:1/-1; text-align:center;">진행 중인 경매가 없습니다.</p>';
+        return;
+      }
+
+      auctions.forEach(a => {
+        grid.innerHTML += `
+          <div class="feed-card">
+            <img src="${a.img || 'https://via.placeholder.com/300'}" style="width:100%; height:160px; object-fit:cover; border-radius:12px; margin-bottom:0.75rem;">
+            <h3 style="color:var(--primary); font-size:1.2rem;">${a.title}</h3>
+            <p style="font-size:0.85rem; color:var(--text-muted);">판매자: ${a.seller}</p>
+            <p style="font-size:1.1rem; font-weight:800; margin:0.5rem 0;">현재 입찰가: ${a.currentBid.toLocaleString()} G</p>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">최고 입찰자: ${a.highestBidder || '없음'}</p>
+            
+            <div style="display:flex; gap:0.5rem;">
+              <button class="btn btn-primary" style="flex:1;" onclick="placeBid('${a.id}')">입찰하기 (+50G)</button>
+              ${a.buyout ? `<button class="btn btn-danger" onclick="buyoutAuction('${a.id}')">즉시 구매 (${a.buyout.toLocaleString()}G)</button>` : ''}
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function handleCreateAuction(e) {
+      e.preventDefault();
+      auctions.unshift({
+        id: "A" + Date.now(),
+        seller: currentUser.name,
+        sellerAcc: currentUser.account,
+        title: document.getElementById('auc-item-name').value,
+        currentBid: parseInt(document.getElementById('auc-start-price').value),
+        buyout: parseInt(document.getElementById('auc-buyout-price').value) || null,
+        highestBidder: null,
+        img: tempAucImgBase64 || "https://via.placeholder.com/300"
+      });
+
+      tempAucImgBase64 = "";
+      save();
+      closeModal('modal-create-auction');
+      renderAuctions();
+    }
+
+    function placeBid(id) {
+      const a = auctions.find(auc => auc.id === id);
+      const nextBid = a.currentBid + 50;
+
+      if (currentUser.balance < nextBid) return alert("잔액이 부족합니다.");
+
+      currentUser.balance -= 50;
+      a.currentBid = nextBid;
+      a.highestBidder = currentUser.name;
+
+      save();
+      updateDash();
+      renderAuctions();
+      alert(`${nextBid.toLocaleString()} G로 입찰 완료!`);
+    }
+
+    function buyoutAuction(id) {
+      const a = auctions.find(auc => auc.id === id);
+      if (currentUser.balance < a.buyout) return alert("잔액이 부족합니다.");
+
+      currentUser.balance -= a.buyout;
+
+      const sellerAcc = accounts.find(acc => acc.account === a.sellerAcc);
+      if (sellerAcc) sellerAcc.balance += a.buyout;
+
+      auctions = auctions.filter(auc => auc.id !== id);
+
+      save();
+      updateDash();
+      renderAuctions();
+      alert(`[${a.title}] 물품 즉시 구매가 완료되었습니다!`);
     }
 
     function renderPortfolio() {
@@ -1177,7 +1547,6 @@
       const store = stores.find(s => s.id === storeId);
       document.getElementById('modal-store-title').innerText = store.name;
 
-      // Strict Ownership Check: ONLY show management/erase buttons if logged in user is the owner OR admin
       const actions = document.getElementById('store-owner-actions');
       const isOwner = currentUser && (currentUser.account === store.owner || isAdmin);
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="liquid-green">
+<html lang="ko" data-theme="emerald">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,19 +9,89 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    /* Liquid Glass Green Theme */
-    :root[data-theme="liquid-green"] {
-      --bg-gradient: linear-gradient(135deg, #74b832 0%, #5d9828 50%, #437119 100%);
-      --card-bg: rgba(62, 107, 20, 0.78);
-      --card-border: rgba(255, 255, 255, 0.3);
+    /* Themes Configuration with Crisp White Accents */
+    :root[data-theme="emerald"] {
+      --bg-gradient: linear-gradient(135deg, #2d6a4f 0%, #1b4332 50%, #081c15 100%);
+      --card-bg: rgba(255, 255, 255, 0.12);
+      --card-border: rgba(255, 255, 255, 0.45);
       --text: #ffffff;
-      --text-muted: #d2f8a6;
-      --primary: #a3f345;
-      --primary-hover: #8ee031;
+      --text-muted: #d8f3dc;
+      --primary: #52b788;
+      --primary-hover: #74c69d;
       --danger: #ef4444;
-      --header-bg: rgba(45, 80, 14, 0.88);
-      --input-bg: rgba(30, 56, 9, 0.65);
-      --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.25);
+      --header-bg: rgba(27, 67, 50, 0.85);
+      --input-bg: rgba(255, 255, 255, 0.18);
+      --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.35);
+    }
+
+    :root[data-theme="skyblue"] {
+      --bg-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #0c4a6e 100%);
+      --card-bg: rgba(255, 255, 255, 0.15);
+      --card-border: rgba(255, 255, 255, 0.5);
+      --text: #ffffff;
+      --text-muted: #e0f2fe;
+      --primary: #38bdf8;
+      --primary-hover: #7dd3fc;
+      --danger: #f87171;
+      --header-bg: rgba(3, 105, 161, 0.85);
+      --input-bg: rgba(255, 255, 255, 0.2);
+      --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.3);
+    }
+
+    :root[data-theme="retro"] {
+      --bg-gradient: linear-gradient(135deg, #c2410c 0%, #9a3412 50%, #431407 100%);
+      --card-bg: rgba(255, 255, 255, 0.14);
+      --card-border: rgba(255, 255, 255, 0.45);
+      --text: #ffffff;
+      --text-muted: #ffedd5;
+      --primary: #fb923c;
+      --primary-hover: #fdba74;
+      --danger: #ef4444;
+      --header-bg: rgba(154, 52, 18, 0.85);
+      --input-bg: rgba(255, 255, 255, 0.18);
+      --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.35);
+    }
+
+    :root[data-theme="lemon"] {
+      --bg-gradient: linear-gradient(135deg, #a16207 0%, #854d0e 50%, #3f2c06 100%);
+      --card-bg: rgba(255, 255, 255, 0.16);
+      --card-border: rgba(255, 255, 255, 0.5);
+      --text: #ffffff;
+      --text-muted: #fef9c3;
+      --primary: #facc15;
+      --primary-hover: #fde047;
+      --danger: #f87171;
+      --header-bg: rgba(133, 77, 14, 0.85);
+      --input-bg: rgba(255, 255, 255, 0.2);
+      --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.35);
+    }
+
+    :root[data-theme="dark"] {
+      --bg-gradient: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #020617 100%);
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --card-border: rgba(255, 255, 255, 0.35);
+      --text: #ffffff;
+      --text-muted: #cbd5e1;
+      --primary: #818cf8;
+      --primary-hover: #a5b4fc;
+      --danger: #f87171;
+      --header-bg: rgba(15, 23, 42, 0.88);
+      --input-bg: rgba(255, 255, 255, 0.12);
+      --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    :root[data-theme="light"] {
+      --bg-gradient: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 50%, #94a3b8 100%);
+      --card-bg: rgba(255, 255, 255, 0.55);
+      --card-border: rgba(255, 255, 255, 0.85);
+      --text: #0f172a;
+      --text-muted: #334155;
+      --primary: #2563eb;
+      --primary-hover: #3b82f6;
+      --danger: #dc2626;
+      --header-bg: rgba(255, 255, 255, 0.7);
+      --input-bg: rgba(255, 255, 255, 0.6);
+      --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.15);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
@@ -39,7 +109,7 @@
       background: var(--header-bg);
       -webkit-backdrop-filter: blur(20px);
       backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--card-border);
+      border-bottom: 2px solid var(--card-border);
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
@@ -71,11 +141,11 @@
       gap: 6px;
       transition: all 0.2s;
     }
-    .btn-primary { background-color: var(--primary); color: #1e3a05; }
-    .btn-primary:hover { background-color: var(--primary-hover); color: #000; }
+    .btn-primary { background-color: var(--primary); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+    .btn-primary:hover { background-color: var(--primary-hover); }
     .btn-danger { background-color: var(--danger); color: white; }
-    .btn-outline { background: rgba(255, 255, 255, 0.1); border: 1px solid var(--card-border); color: var(--text); }
-    .btn-outline:hover { background: rgba(255, 255, 255, 0.2); }
+    .btn-outline { background: rgba(255, 255, 255, 0.2); border: 1px solid var(--card-border); color: var(--text); }
+    .btn-outline:hover { background: rgba(255, 255, 255, 0.35); }
 
     .container { max-width: 1150px; margin: 2rem auto; padding: 0 1rem; }
 
@@ -91,8 +161,8 @@
       background: var(--card-bg);
       -webkit-backdrop-filter: blur(20px);
       backdrop-filter: blur(20px);
-      border: 1px solid var(--card-border);
-      border-top: 1px solid rgba(255, 255, 255, 0.45);
+      border: 2px solid var(--card-border);
+      border-top: 2px solid #ffffff;
       border-radius: 32px;
       padding: 1.5rem 2.5rem;
       display: flex;
@@ -104,7 +174,6 @@
     .banner-main-title {
       font-size: 2.4rem;
       font-weight: 900;
-      color: #ffffff;
       letter-spacing: -1px;
     }
 
@@ -112,8 +181,8 @@
       background: var(--card-bg);
       -webkit-backdrop-filter: blur(20px);
       backdrop-filter: blur(20px);
-      border: 1px solid var(--card-border);
-      border-top: 1px solid rgba(255, 255, 255, 0.45);
+      border: 2px solid var(--card-border);
+      border-top: 2px solid #ffffff;
       border-radius: 32px;
       display: flex;
       flex-direction: column;
@@ -126,7 +195,7 @@
     }
     .top-profile-box:hover {
       transform: scale(1.04);
-      border-color: var(--primary);
+      border-color: #ffffff;
     }
 
     .user-avatar-lg {
@@ -134,8 +203,8 @@
       height: 76px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid var(--primary);
-      box-shadow: 0 0 18px rgba(163, 243, 69, 0.45);
+      border: 3px solid #ffffff;
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.5);
     }
 
     /* 3 Large App Cards Grid */
@@ -149,8 +218,8 @@
       background: var(--card-bg);
       -webkit-backdrop-filter: blur(20px);
       backdrop-filter: blur(20px);
-      border: 1px solid var(--card-border);
-      border-top: 1px solid rgba(255, 255, 255, 0.45);
+      border: 2px solid var(--card-border);
+      border-top: 2px solid #ffffff;
       border-radius: 32px;
       padding: 2.5rem 1.5rem;
       min-height: 420px;
@@ -164,7 +233,7 @@
     }
     .app-card:hover {
       transform: translateY(-8px);
-      border-color: var(--primary);
+      border-color: #ffffff;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
     }
 
@@ -177,7 +246,6 @@
     .column-header-title {
       font-size: 2.4rem;
       font-weight: 900;
-      color: #ffffff;
       text-align: center;
     }
 
@@ -200,7 +268,7 @@
       align-items: center;
       background: var(--header-bg);
       backdrop-filter: blur(20px);
-      border: 1px solid var(--card-border);
+      border: 2px solid var(--card-border);
       border-radius: 20px;
       padding: 1rem 2rem;
       margin-bottom: 2rem;
@@ -218,24 +286,60 @@
       outline: none;
     }
 
+    /* Paste / File Upload Area */
+    .image-upload-box {
+      border: 2px dashed var(--card-border);
+      background: var(--input-bg);
+      border-radius: 16px;
+      padding: 1.25rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      margin-bottom: 0.5rem;
+    }
+    .image-upload-box:hover {
+      border-color: #ffffff;
+    }
+    .image-preview {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid #ffffff;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
     .store-item-card {
       background: var(--input-bg);
       border: 1px solid var(--card-border);
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 1.25rem;
       margin-bottom: 1rem;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
       transition: transform 0.2s ease, border-color 0.2s ease;
     }
     .store-item-card:hover {
       transform: translateY(-2px);
-      border-color: var(--primary);
+      border-color: #ffffff;
+    }
+
+    .store-logo-img {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      object-fit: cover;
+      border: 2px solid #ffffff;
+      background: rgba(0,0,0,0.2);
     }
 
     /* Modals */
     .modal-overlay {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(10, 20, 5, 0.82);
+      background: rgba(0, 0, 0, 0.75);
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       display: flex; align-items: center; justify-content: center; z-index: 1000;
@@ -243,8 +347,9 @@
     }
     .modal-overlay.active { opacity: 1; pointer-events: auto; }
     .modal {
-      background: rgba(45, 80, 14, 0.95);
-      border: 1px solid var(--card-border);
+      background: var(--header-bg);
+      border: 2px solid var(--card-border);
+      border-top: 2px solid #ffffff;
       border-radius: 28px;
       width: 100%;
       max-width: 600px;
@@ -392,7 +497,7 @@
     </div>
 
     <div class="container" style="max-width:900px; margin:0 auto; width:100%;">
-      <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:24px; padding:2rem; backdrop-filter:blur(20px);">
+      <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:2rem; backdrop-filter:blur(20px);">
         <table>
           <thead>
             <tr><th>상점명</th><th>현재 주가</th><th>매매 액션</th></tr>
@@ -403,7 +508,7 @@
     </div>
   </div>
 
-  <!-- FULL-SCREEN APP 3: BANK (WITH LOAN SYSTEM & PAYBACK) -->
+  <!-- FULL-SCREEN APP 3: BANK -->
   <div id="screen-bank" class="fullscreen-app-overlay hidden">
     <div class="app-header-bar">
       <button class="btn btn-outline" onclick="closeAppScreen('screen-bank')"><i class="fa-solid fa-arrow-left"></i> 메인으로</button>
@@ -413,7 +518,7 @@
 
     <div class="container" style="max-width:1000px; margin:0 auto; width:100%;">
       <!-- Bank Account Overview Header -->
-      <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:24px; padding:1.5rem 2rem; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center;">
+      <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem 2rem; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center;">
         <div>
           <h2 style="font-size:1.5rem;"><span id="bank-user-name">-</span> 님의 계좌</h2>
           <p style="color:var(--text-muted);">계좌번호: <span id="bank-user-acc">-</span></p>
@@ -433,7 +538,7 @@
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
         
         <!-- Transfer Money -->
-        <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:24px; padding:1.5rem;">
+        <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem;">
           <h3 style="color:var(--primary); margin-bottom:1rem;"><i class="fa-solid fa-paper-plane"></i> 계좌 송금</h3>
           <form onsubmit="handleTransfer(event)">
             <div class="form-group">
@@ -449,7 +554,7 @@
         </div>
 
         <!-- Loan & Payback System -->
-        <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:24px; padding:1.5rem;">
+        <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem;">
           <h3 style="color:var(--primary); margin-bottom:1rem;"><i class="fa-solid fa-hand-holding-dollar"></i> 대출 및 상환</h3>
           
           <div style="margin-bottom:1.25rem;">
@@ -474,7 +579,7 @@
       </div>
 
       <!-- Portfolio Section -->
-      <div style="background:var(--card-bg); border:1px solid var(--card-border); border-radius:24px; padding:1.5rem; margin-top:1.5rem;">
+      <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem; margin-top:1.5rem;">
         <h3 style="color:var(--primary); margin-bottom:1rem;"><i class="fa-solid fa-chart-pie"></i> 나의 주식 포트폴리오</h3>
         <table>
           <thead><tr><th>종목</th><th>보유 주식</th><th>지분율</th></tr></thead>
@@ -485,7 +590,7 @@
     </div>
   </div>
 
-  <!-- PROFILE MODAL (Opens when pressing profile picture) -->
+  <!-- PROFILE MODAL -->
   <div id="modal-profile" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
@@ -494,7 +599,7 @@
       </div>
 
       <div style="text-align: center; margin-bottom: 1.5rem;">
-        <img id="profile-modal-avatar" src="" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--primary); object-fit: cover; margin-bottom: 0.5rem;">
+        <img id="profile-modal-avatar" src="" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #ffffff; object-fit: cover; margin-bottom: 0.5rem;">
         <h2 id="dash-name" style="font-size: 1.8rem; color: #fff;">-</h2>
         <p style="font-size: 0.95rem; color: var(--text-muted);">계좌번호: <span id="dash-acc">-</span></p>
         <p style="font-size: 1.2rem; color: var(--primary); font-weight: 800; margin-top: 0.5rem;">현재 잔액: <span id="dash-balance">0 G</span></p>
@@ -503,11 +608,56 @@
       <hr style="border: 0; border-top: 1px solid var(--card-border); margin: 1rem 0;">
 
       <h4 style="margin-bottom: 0.5rem; color: var(--primary);">프로필 사진 변경</h4>
+      
+      <div class="image-upload-box" id="avatar-paste-area">
+        <i class="fa-solid fa-paste" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
+        <span>클립보드 이미지를 <strong>Ctrl+V / Cmd+V</strong> 로 붙여넣거나 파일 선택</span>
+        <input type="file" id="avatar-file-input" accept="image/*" style="display:none;">
+        <center><img id="avatar-preview" class="image-preview"></center>
+      </div>
+
       <form onsubmit="handleUpdateAvatar(event)">
         <div class="form-group">
-          <input type="url" id="avatar-url-input" class="form-control" placeholder="이미지 URL 입력 (https://...)" required>
+          <input type="url" id="avatar-url-input" class="form-control" placeholder="또는 이미지 URL 입력 (https://...)">
         </div>
         <button type="submit" class="btn btn-primary" style="width: 100%;">프로필 저장</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CREATE STORE MODAL -->
+  <div id="modal-create-store" class="modal-overlay">
+    <div class="modal">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;">신규 상점 개설 (1,000 G)</h3>
+        <button class="btn btn-outline" onclick="closeModal('modal-create-store')">&times;</button>
+      </div>
+      <form onsubmit="handleCreateStore(event)">
+        <div class="form-group">
+          <label>상점 이름</label>
+          <input type="text" id="store-name" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label>상점 로고 이미지 (복사&붙여넣기 또는 파일 업로드)</label>
+          <div class="image-upload-box" id="store-logo-paste-area">
+            <i class="fa-solid fa-image" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
+            <span>이미지를 붙여넣거나 클릭하여 파일 선택</span>
+            <input type="file" id="store-logo-file" accept="image/*" style="display:none;">
+            <center><img id="store-logo-preview" class="image-preview"></center>
+          </div>
+          <input type="url" id="store-logo-url" class="form-control" placeholder="또는 로고 이미지 URL">
+        </div>
+
+        <div class="form-group">
+          <label>발행 주식 수량 (주)</label>
+          <input type="number" id="store-shares" class="form-control" min="10" value="100" required>
+        </div>
+        <div class="form-group">
+          <label>주당 초기 가격 (G)</label>
+          <input type="number" id="store-price" class="form-control" min="1" value="10" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">개설 및 주식 발행</button>
       </form>
     </div>
   </div>
@@ -527,6 +677,37 @@
 
       <h4>판매 상품 목록</h4>
       <div id="store-products-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:0.75rem;"></div>
+    </div>
+  </div>
+
+  <!-- ADD ITEM MODAL -->
+  <div id="modal-add-item" class="modal-overlay">
+    <div class="modal">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;">상품 등록</h3>
+        <button class="btn btn-outline" onclick="closeModal('modal-add-item')">&times;</button>
+      </div>
+      <form onsubmit="handleAddItem(event)">
+        <div class="form-group">
+          <label>상품명</label>
+          <input type="text" id="item-name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>가격 (G)</label>
+          <input type="number" id="item-price" class="form-control" min="1" required>
+        </div>
+        <div class="form-group">
+          <label>상품 이미지 (붙여넣기 또는 파일 선택)</label>
+          <div class="image-upload-box" id="item-img-paste-area">
+            <i class="fa-solid fa-upload" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
+            <span>이미지를 붙여넣거나 파일 선택</span>
+            <input type="file" id="item-img-file" accept="image/*" style="display:none;">
+            <center><img id="item-img-preview" class="image-preview"></center>
+          </div>
+          <input type="url" id="item-img-url" class="form-control" placeholder="또는 이미지 URL">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">등록하기</button>
+      </form>
     </div>
   </div>
 
@@ -572,56 +753,6 @@
     </div>
   </div>
 
-  <!-- CREATE STORE MODAL -->
-  <div id="modal-create-store" class="modal-overlay">
-    <div class="modal">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-        <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;">신규 상점 개설 (1,000 G)</h3>
-        <button class="btn btn-outline" onclick="closeModal('modal-create-store')">&times;</button>
-      </div>
-      <form onsubmit="handleCreateStore(event)">
-        <div class="form-group">
-          <label>상점 이름</label>
-          <input type="text" id="store-name" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label>발행 주식 수량 (주)</label>
-          <input type="number" id="store-shares" class="form-control" min="10" value="100" required>
-        </div>
-        <div class="form-group">
-          <label>주당 초기 가격 (G)</label>
-          <input type="number" id="store-price" class="form-control" min="1" value="10" required>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%;">개설 및 주식 발행</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- ADD ITEM MODAL -->
-  <div id="modal-add-item" class="modal-overlay">
-    <div class="modal">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-        <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;">상품 등록</h3>
-        <button class="btn btn-outline" onclick="closeModal('modal-add-item')">&times;</button>
-      </div>
-      <form onsubmit="handleAddItem(event)">
-        <div class="form-group">
-          <label>상품명</label>
-          <input type="text" id="item-name" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label>가격 (G)</label>
-          <input type="number" id="item-price" class="form-control" min="1" required>
-        </div>
-        <div class="form-group">
-          <label>이미지 URL (선택사항)</label>
-          <input type="url" id="item-img" class="form-control" placeholder="https://example.com/photo.jpg">
-        </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%;">등록하기</button>
-      </form>
-    </div>
-  </div>
-
   <!-- SETTINGS MODAL -->
   <div id="modal-settings" class="modal-overlay">
     <div class="modal">
@@ -631,8 +762,13 @@
       </div>
       <div class="form-group">
         <label>테마 선택</label>
-        <select class="form-control">
-          <option value="liquid-green">리퀴드 그린 (Liquid Green)</option>
+        <select class="form-control" onchange="changeTheme(this.value)">
+          <option value="emerald">에메랄드 그린 (Emerald Green)</option>
+          <option value="skyblue">스카이 블루 (Sky Blue)</option>
+          <option value="retro">레트로 오렌지 (Retro Orange)</option>
+          <option value="lemon">레몬 옐로우 (Lemon Yellow)</option>
+          <option value="dark">다크 글래스 (Dark Glass)</option>
+          <option value="light">라이트 글래스 (Light Glass)</option>
         </select>
       </div>
     </div>
@@ -657,14 +793,15 @@
 
   <script>
     const defaultAvatar = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150";
+    const defaultStoreLogo = "https://images.unsplash.com/photo-1534723452862-4c874018d66d?w=150";
 
-    let accounts = JSON.parse(localStorage.getItem('ag_accs_v10')) || [
+    let accounts = JSON.parse(localStorage.getItem('ag_accs_v11')) || [
       { name: "민수", account: "101-001", pin: "1234", balance: 5000, loan: 0, avatar: defaultAvatar, shares: {} },
       { name: "지아", account: "101-002", pin: "1234", balance: 12000, loan: 0, avatar: defaultAvatar, shares: {} }
     ];
 
-    let stores = JSON.parse(localStorage.getItem('ag_stores_v10')) || [
-      { id: "S1", name: "아고라 메인 상점", owner: "101-001", totalShares: 100, price: 50, totalSales: 0, items: [] }
+    let stores = JSON.parse(localStorage.getItem('ag_stores_v11')) || [
+      { id: "S1", name: "아고라 메인 상점", logo: defaultStoreLogo, owner: "101-001", totalShares: 100, price: 50, totalSales: 0, items: [] }
     ];
 
     let currentUser = null;
@@ -672,16 +809,68 @@
     let activeItemId = null;
     let isAdmin = false;
 
+    // Image Upload Data Buffers
+    let tempAvatarBase64 = "";
+    let tempStoreLogoBase64 = "";
+    let tempItemImgBase64 = "";
+
     function save() {
-      localStorage.setItem('ag_accs_v10', JSON.stringify(accounts));
-      localStorage.setItem('ag_stores_v10', JSON.stringify(stores));
+      localStorage.setItem('ag_accs_v11', JSON.stringify(accounts));
+      localStorage.setItem('ag_stores_v11', JSON.stringify(stores));
     }
+
+    function changeTheme(themeName) {
+      document.documentElement.setAttribute('data-theme', themeName);
+      localStorage.setItem('ag_theme_choice', themeName);
+    }
+    const savedTheme = localStorage.getItem('ag_theme_choice') || 'emerald';
+    changeTheme(savedTheme);
 
     function openModal(id) { document.getElementById(id).classList.add('active'); }
     function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
     function openAppScreen(id) { document.getElementById(id).classList.remove('hidden'); }
     function closeAppScreen(id) { document.getElementById(id).classList.add('hidden'); }
+
+    // Paste & File Helper
+    function setupImagePasteAndFile(boxId, fileInputId, previewId, callback) {
+      const box = document.getElementById(boxId);
+      const fileInput = document.getElementById(fileInputId);
+      const preview = document.getElementById(previewId);
+
+      box.addEventListener('click', () => fileInput.click());
+
+      fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) processImageFile(file, preview, callback);
+      });
+
+      document.addEventListener('paste', (e) => {
+        if (!document.getElementById(boxId).offsetParent) return; // Check if visible
+        const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+        for (let item of items) {
+          if (item.kind === 'file' && item.type.startsWith('image/')) {
+            const blob = item.getAsFile();
+            processImageFile(blob, preview, callback);
+          }
+        }
+      });
+    }
+
+    function processImageFile(file, previewElem, callback) {
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        const base64 = evt.target.result;
+        previewElem.src = base64;
+        previewElem.style.display = 'block';
+        callback(base64);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    setupImagePasteAndFile('avatar-paste-area', 'avatar-file-input', 'avatar-preview', (base64) => tempAvatarBase64 = base64);
+    setupImagePasteAndFile('store-logo-paste-area', 'store-logo-file', 'store-logo-preview', (base64) => tempStoreLogoBase64 = base64);
+    setupImagePasteAndFile('item-img-paste-area', 'item-img-file', 'item-img-preview', (base64) => tempItemImgBase64 = base64);
 
     function handleLogin(e) {
       e.preventDefault();
@@ -712,7 +901,7 @@
       document.getElementById('dash-avatar').src = userImg;
       document.getElementById('profile-modal-avatar').src = userImg;
 
-      // Update Bank Specific Infos
+      // Update Bank Specific Info
       document.getElementById('bank-user-name').innerText = currentUser.name;
       document.getElementById('bank-user-acc').innerText = currentUser.account;
       document.getElementById('bank-user-balance').innerText = `${currentUser.balance.toLocaleString()} G`;
@@ -767,10 +956,14 @@
       }
 
       stores.forEach(s => {
+        const logo = s.logo || defaultStoreLogo;
         box.innerHTML += `
           <div class="store-item-card" onclick="openStoreDetail('${s.id}')">
-            <h4 style="color:var(--primary); font-size:1.2rem;">${s.name}</h4>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.3rem;">상품 수: ${s.items.length}개 | 현재 주가: ${s.price} G</p>
+            <img src="${logo}" class="store-logo-img">
+            <div>
+              <h4 style="color:var(--primary); font-size:1.3rem;">${s.name}</h4>
+              <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.2rem;">상품 수: ${s.items.length}개 | 현재 주가: ${s.price} G</p>
+            </div>
           </div>
         `;
       });
@@ -812,8 +1005,11 @@
 
     function handleUpdateAvatar(e) {
       e.preventDefault();
-      const newUrl = document.getElementById('avatar-url-input').value;
-      currentUser.avatar = newUrl;
+      const urlInput = document.getElementById('avatar-url-input').value;
+      const finalAvatar = tempAvatarBase64 || urlInput || defaultAvatar;
+
+      currentUser.avatar = finalAvatar;
+      tempAvatarBase64 = "";
       save();
       updateDash();
       closeModal('modal-profile');
@@ -844,11 +1040,15 @@
       currentUser.balance -= 1000;
       const sharesCount = parseInt(document.getElementById('store-shares').value);
       const initialPrice = parseInt(document.getElementById('store-price').value);
+      const logoInput = document.getElementById('store-logo-url').value;
+      const finalLogo = tempStoreLogoBase64 || logoInput || defaultStoreLogo;
+
       const storeId = "S" + Date.now();
 
       stores.push({
         id: storeId,
         name: document.getElementById('store-name').value,
+        logo: finalLogo,
         owner: currentUser.account,
         totalShares: sharesCount,
         price: initialPrice,
@@ -859,6 +1059,7 @@
       if (!currentUser.shares) currentUser.shares = {};
       currentUser.shares[storeId] = sharesCount;
 
+      tempStoreLogoBase64 = "";
       save();
       closeModal('modal-create-store');
       updateDash();
@@ -908,16 +1109,20 @@
       e.preventDefault();
       const store = stores.find(s => s.id === activeStoreId);
 
+      const imgInput = document.getElementById('item-img-url').value;
+      const finalImg = tempItemImgBase64 || imgInput || "https://via.placeholder.com/300";
+
       store.items.push({
         id: "I" + Date.now(),
         name: document.getElementById('item-name').value,
         price: parseInt(document.getElementById('item-price').value),
-        img: document.getElementById('item-img').value || "https://via.placeholder.com/300",
+        img: finalImg,
         likes: 0,
         dislikes: 0,
         reviews: []
       });
 
+      tempItemImgBase64 = "";
       save();
       closeModal('modal-add-item');
       renderStoreProducts();

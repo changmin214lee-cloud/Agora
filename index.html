@@ -9,17 +9,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    /* Vibrant Liquid Glass Green Theme */
+    /* Liquid Glass Green Theme */
     :root[data-theme="liquid-green"] {
-      --bg-gradient: linear-gradient(135deg, #70b031 0%, #5d9828 50%, #4a7a1e 100%);
-      --card-bg: rgba(62, 107, 20, 0.75);
-      --card-border: rgba(255, 255, 255, 0.25);
+      --bg-gradient: linear-gradient(135deg, #74b832 0%, #5d9828 50%, #437119 100%);
+      --card-bg: rgba(62, 107, 20, 0.78);
+      --card-border: rgba(255, 255, 255, 0.3);
       --text: #ffffff;
       --text-muted: #d2f8a6;
       --primary: #a3f345;
       --primary-hover: #8ee031;
       --danger: #ef4444;
-      --header-bg: rgba(45, 80, 14, 0.85);
+      --header-bg: rgba(45, 80, 14, 0.88);
       --input-bg: rgba(30, 56, 9, 0.65);
       --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.25);
     }
@@ -34,7 +34,7 @@
       min-height: 100vh;
     }
 
-    /* Glass Header */
+    /* Header */
     header {
       background: var(--header-bg);
       -webkit-backdrop-filter: blur(20px);
@@ -58,26 +58,6 @@
       font-weight: 800;
       color: var(--primary);
     }
-    
-    .nav-tabs { display: flex; gap: 8px; }
-    
-    .nav-btn {
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid var(--card-border);
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.2s ease;
-    }
-    .nav-btn:hover, .nav-btn.active {
-      background: var(--primary);
-      color: #1e3a05;
-      box-shadow: 0 0 15px rgba(163, 243, 69, 0.5);
-    }
-
-    .header-actions { display: flex; gap: 10px; align-items: center; }
 
     .btn {
       padding: 0.50rem 1rem;
@@ -97,14 +77,14 @@
     .btn-outline { background: rgba(255, 255, 255, 0.1); border: 1px solid var(--card-border); color: var(--text); }
     .btn-outline:hover { background: rgba(255, 255, 255, 0.2); }
 
-    .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+    .container { max-width: 1150px; margin: 2rem auto; padding: 0 1rem; }
 
-    /* Custom Home Dashboard Layout matching your image */
+    /* Top Row Layout */
     .dashboard-top-row {
       display: grid;
-      grid-template-columns: 1fr 140px;
+      grid-template-columns: 1fr 160px;
       gap: 1.25rem;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
     }
 
     .top-banner-card {
@@ -112,13 +92,20 @@
       -webkit-backdrop-filter: blur(20px);
       backdrop-filter: blur(20px);
       border: 1px solid var(--card-border);
-      border-top: 1px solid rgba(255, 255, 255, 0.4);
-      border-radius: 28px;
-      padding: 1.5rem 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 32px;
+      padding: 1.5rem 2.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       box-shadow: var(--glass-glow);
+    }
+
+    .banner-main-title {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -1px;
     }
 
     .top-profile-box {
@@ -126,55 +113,67 @@
       -webkit-backdrop-filter: blur(20px);
       backdrop-filter: blur(20px);
       border: 1px solid var(--card-border);
-      border-top: 1px solid rgba(255, 255, 255, 0.4);
-      border-radius: 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 32px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       box-shadow: var(--glass-glow);
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      padding: 1rem;
     }
-    .top-profile-box:hover { transform: scale(1.03); }
+    .top-profile-box:hover {
+      transform: scale(1.04);
+      border-color: var(--primary);
+    }
 
     .user-avatar-lg {
-      width: 72px;
-      height: 72px;
+      width: 76px;
+      height: 76px;
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid var(--primary);
-      box-shadow: 0 0 15px rgba(163, 243, 69, 0.4);
+      box-shadow: 0 0 18px rgba(163, 243, 69, 0.45);
     }
 
-    /* 3 Large Vertical Cards Grid */
+    /* 3 Large Vertical Columns Grid */
     .dashboard-bottom-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 1.25rem;
     }
 
-    .vertical-glass-card {
+    .vertical-column-card {
       background: var(--card-bg);
       -webkit-backdrop-filter: blur(20px);
       backdrop-filter: blur(20px);
       border: 1px solid var(--card-border);
-      border-top: 1px solid rgba(255, 255, 255, 0.4);
-      border-radius: 28px;
+      border-top: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 32px;
       padding: 1.5rem;
-      min-height: 420px;
+      min-height: 480px;
       display: flex;
       flex-direction: column;
       box-shadow: var(--glass-glow);
     }
 
-    .card-title { font-size: 1.15rem; font-weight: 700; color: var(--primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+    .column-header-title {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 1.25rem;
+      text-align: center;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 0.75rem;
+    }
 
     .form-group { margin-bottom: 1rem; }
     .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-muted); }
     .form-control {
       width: 100%;
-      padding: 0.6rem 0.8rem;
+      padding: 0.65rem 0.8rem;
       background: var(--input-bg);
       border: 1px solid var(--card-border);
       color: var(--text);
@@ -182,24 +181,25 @@
       outline: none;
     }
 
-    /* Store & Product Cards */
-    .product-card {
+    /* Stores List inside Column */
+    .store-item-card {
       background: var(--input-bg);
       border: 1px solid var(--card-border);
-      border-radius: 14px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      border-radius: 16px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
-    .product-card:hover { transform: translateY(-3px); }
-    .product-img { width: 100%; height: 140px; object-fit: cover; }
+    .store-item-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+    }
 
     /* Modals */
     .modal-overlay {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(10, 20, 5, 0.8);
+      background: rgba(10, 20, 5, 0.82);
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       display: flex; align-items: center; justify-content: center; z-index: 1000;
@@ -209,10 +209,10 @@
     .modal {
       background: rgba(45, 80, 14, 0.95);
       border: 1px solid var(--card-border);
-      border-radius: 24px;
+      border-radius: 28px;
       width: 100%;
       max-width: 600px;
-      padding: 1.5rem;
+      padding: 1.75rem;
       max-height: 90vh;
       overflow-y: auto;
       box-shadow: var(--glass-glow);
@@ -237,12 +237,6 @@
       <span>AGORA CAPITAL</span>
     </div>
 
-    <div id="nav-menu" class="nav-tabs hidden">
-      <button class="nav-btn active" onclick="switchTab('dashboard')"><i class="fa-solid fa-house"></i> 홈</button>
-      <button class="nav-btn" onclick="switchTab('stores')"><i class="fa-solid fa-store"></i> 상점 탐색</button>
-      <button class="nav-btn" onclick="switchTab('stock')"><i class="fa-solid fa-chart-line"></i> 주식 거래소</button>
-    </div>
-
     <div class="header-actions">
       <button class="btn btn-outline" onclick="openModal('modal-settings')"><i class="fa-solid fa-gear"></i> 설정</button>
       <button id="admin-login-btn" class="btn btn-outline" onclick="openModal('modal-admin')"><i class="fa-solid fa-user-shield"></i> 관리자</button>
@@ -252,9 +246,9 @@
 
   <div class="container">
 
-    <!-- LOGIN -->
-    <div id="view-login" class="vertical-glass-card" style="max-width: 400px; margin: 3rem auto; min-height: auto;">
-      <h2 class="card-title"><i class="fa-solid fa-key"></i> 계좌 로그인</h2>
+    <!-- LOGIN VIEW -->
+    <div id="view-login" class="vertical-column-card" style="max-width: 400px; margin: 3rem auto; min-height: auto;">
+      <h2 class="column-header-title">계좌 로그인</h2>
       <form onsubmit="handleLogin(event)">
         <div class="form-group">
           <label>계좌번호</label>
@@ -268,106 +262,94 @@
       </form>
     </div>
 
-    <!-- DASHBOARD (LAYOUT MATCHING YOUR IMAGE) -->
+    <!-- MAIN HOME DASHBOARD VIEW -->
     <div id="view-dashboard" class="hidden">
       
-      <!-- Top Section: Long Banner Card + Right Profile Container -->
+      <!-- Top Banner: 아고라 메인 + Profile Box -->
       <div class="dashboard-top-row">
         <div class="top-banner-card">
           <div>
-            <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">환영합니다!</span>
-            <h1 id="dash-name" style="font-size: 1.8rem;">-</h1>
-            <p style="font-size: 0.9rem; opacity: 0.9;">계좌번호: <span id="dash-acc">-</span></p>
+            <h1 class="banner-main-title">아고라 메인</h1>
+            <p style="font-size: 1rem; color: var(--text-muted); margin-top: 0.2rem;">
+              <span id="dash-name" style="color:#fff; font-weight:700;">-</span> (<span id="dash-acc">-</span>)
+            </p>
           </div>
           <div style="text-align: right;">
-            <p style="font-size: 0.85rem; color: var(--text-muted);">총 현금 잔액</p>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">현재 잔액</p>
             <h1 id="dash-balance" style="font-size: 2.2rem; color: var(--primary);">0 G</h1>
           </div>
         </div>
 
         <div class="top-profile-box" onclick="openModal('modal-avatar')" title="프로필 사진 변경">
           <img id="dash-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" class="user-avatar-lg">
-          <span style="font-size:0.75rem; color: var(--text-muted); margin-top:0.4rem;">프로필 수정</span>
+          <span style="font-size:0.75rem; color: var(--text-muted); margin-top:0.4rem; font-weight:600;">프로필 변경</span>
         </div>
       </div>
 
-      <!-- Bottom Section: 3 Large Vertical Glass Cards -->
+      <!-- 3 Main Columns: 마켓 / 주식 / 은행 -->
       <div class="dashboard-bottom-grid">
         
-        <!-- Vertical Card 1: 송금 & 계좌 정보 -->
-        <div class="vertical-glass-card">
-          <h3 class="card-title"><i class="fa-solid fa-paper-plane"></i> 계좌 송금</h3>
-          <form onsubmit="handleTransfer(event)" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-              <div class="form-group">
-                <label>받는 계좌번호</label>
-                <input type="text" id="trans-acc" class="form-control" placeholder="상대 계좌" required>
-              </div>
-              <div class="form-group">
-                <label>송금 금액 (G)</label>
-                <input type="number" id="trans-amt" class="form-control" min="1" required>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">송금하기</button>
-          </form>
+        <!-- Column 1: 마켓 (Market) -->
+        <div class="vertical-column-card">
+          <h2 class="column-header-title">마켓</h2>
+          <button class="btn btn-primary" style="width:100%; justify-content:center; margin-bottom:1rem;" onclick="openModal('modal-create-store')">
+            <i class="fa-solid fa-plus"></i> 상점 개설 (1,000 G)
+          </button>
+          <div id="market-store-list" style="flex-grow: 1; overflow-y: auto;"></div>
         </div>
 
-        <!-- Vertical Card 2: 주식 지분율 -->
-        <div class="vertical-glass-card">
-          <h3 class="card-title"><i class="fa-solid fa-chart-pie"></i> 나의 주식 포트폴리오</h3>
+        <!-- Column 2: 주식 (Stock) -->
+        <div class="vertical-column-card">
+          <h2 class="column-header-title">주식</h2>
           <div style="flex-grow: 1; overflow-y: auto;">
             <table>
-              <thead><tr><th>상점</th><th>보유</th><th>지분율</th></tr></thead>
+              <thead>
+                <tr><th>상점명</th><th>주가</th><th>매매</th></tr>
+              </thead>
+              <tbody id="stock-list"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Column 3: 은행 (Bank) -->
+        <div class="vertical-column-card">
+          <h2 class="column-header-title">은행</h2>
+          
+          <div style="margin-bottom: 1.25rem;">
+            <h4 style="color:var(--primary); margin-bottom:0.5rem;"><i class="fa-solid fa-paper-plane"></i> 계좌 송금</h4>
+            <form onsubmit="handleTransfer(event)">
+              <div class="form-group">
+                <input type="text" id="trans-acc" class="form-control" placeholder="받는 계좌번호" required>
+              </div>
+              <div class="form-group">
+                <input type="number" id="trans-amt" class="form-control" placeholder="금액 (G)" min="1" required>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">송금하기</button>
+            </form>
+          </div>
+
+          <div>
+            <h4 style="color:var(--primary); margin-bottom:0.5rem;"><i class="fa-solid fa-chart-pie"></i> 나의 주식 지분율</h4>
+            <table style="width:100%;">
+              <thead><tr><th>종목</th><th>보유</th><th>지분율</th></tr></thead>
               <tbody id="portfolio-list"></tbody>
             </table>
           </div>
         </div>
 
-        <!-- Vertical Card 3: 상점 바로가기 & 빠른 이용 -->
-        <div class="vertical-glass-card">
-          <h3 class="card-title"><i class="fa-solid fa-store"></i> 상점 Quick Menu</h3>
-          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom: 1rem;">최근 개설된 상점을 탐색하고 상품을 바로 구매하세요.</p>
-          <div id="dash-store-preview" style="flex-grow: 1; overflow-y: auto;"></div>
-          <button class="btn btn-outline" style="width:100%; justify-content:center; margin-top:1rem;" onclick="switchTab('stores')">모든 상점 보기</button>
-        </div>
-
       </div>
 
-    </div>
-
-    <!-- STORES VIEW -->
-    <div id="view-stores" class="hidden">
-      <div class="vertical-glass-card" style="min-height: auto;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-          <h2 class="card-title"><i class="fa-solid fa-store"></i> 등록된 상점 목록</h2>
-          <button class="btn btn-primary" onclick="openModal('modal-create-store')"><i class="fa-solid fa-plus"></i> 상점 개설 (1,000 G)</button>
-        </div>
-        <div class="dashboard-bottom-grid" id="store-list-grid"></div>
-      </div>
-    </div>
-
-    <!-- STOCK MARKET -->
-    <div id="view-stock" class="hidden">
-      <div class="vertical-glass-card" style="min-height: auto;">
-        <h2 class="card-title"><i class="fa-solid fa-arrow-trend-up"></i> 주식 거래소</h2>
-        <table>
-          <thead>
-            <tr><th>상점명</th><th>현재 주가</th><th>남은 수량</th><th>주식 매매</th></tr>
-          </thead>
-          <tbody id="stock-list"></tbody>
-        </table>
-      </div>
     </div>
 
     <!-- ADMIN VIEW -->
     <div id="view-admin" class="hidden">
-      <div class="vertical-glass-card" style="min-height: auto;">
+      <div class="vertical-column-card" style="min-height: auto;">
         <div style="display:flex; justify-content:space-between; align-items:center;">
-          <h2 class="card-title"><i class="fa-solid fa-user-gear"></i> 관리자 대시보드</h2>
+          <h2 class="column-header-title" style="margin:0; border:none;">관리자 대시보드</h2>
           <button class="btn btn-outline" onclick="logout()">관리자 종료</button>
         </div>
 
-        <div style="margin: 1rem 0; background: var(--input-bg); padding: 1rem; border-radius: 16px; border:1px solid var(--card-border);">
+        <div style="margin: 1.5rem 0; background: var(--input-bg); padding: 1rem; border-radius: 16px; border:1px solid var(--card-border);">
           <h4>신규 계좌 생성</h4>
           <form onsubmit="adminCreateAcc(event)" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
             <input type="text" id="adm-name" class="form-control" placeholder="이름" style="flex:1" required>
@@ -394,7 +376,7 @@
   <div id="modal-store-detail" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-        <h3 id="modal-store-title" class="card-title">상점 상세보기</h3>
+        <h3 id="modal-store-title" style="font-size:1.4rem; color:var(--primary); font-weight:800;">상점 상세보기</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-store-detail')">&times;</button>
       </div>
 
@@ -412,11 +394,11 @@
   <div id="modal-product-popup" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-        <h3 id="pop-product-title" class="card-title">상품 상세 정보</h3>
+        <h3 id="pop-product-title" style="font-size:1.3rem; color:var(--primary); font-weight:800;">상품 상세 정보</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-product-popup')">&times;</button>
       </div>
 
-      <img id="pop-product-img" src="" style="width:100%; height:200px; object-fit:cover; border-radius:14px; margin-bottom:1rem; background:var(--input-bg);">
+      <img id="pop-product-img" src="" style="width:100%; height:200px; object-fit:cover; border-radius:16px; margin-bottom:1rem; background:var(--input-bg);">
 
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h2 id="pop-product-price" style="color:var(--primary);">0 G</h2>
@@ -454,7 +436,7 @@
   <div id="modal-avatar" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-        <h3 class="card-title">프로필 사진 변경</h3>
+        <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;">프로필 사진 변경</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-avatar')">&times;</button>
       </div>
       <form onsubmit="handleUpdateAvatar(event)">
@@ -471,7 +453,7 @@
   <div id="modal-create-store" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-        <h3 class="card-title">신규 상점 개설 (1,000 G)</h3>
+        <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;">신규 상점 개설 (1,000 G)</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-create-store')">&times;</button>
       </div>
       <form onsubmit="handleCreateStore(event)">
@@ -496,7 +478,7 @@
   <div id="modal-add-item" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-        <h3 class="card-title">상품 등록</h3>
+        <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;">상품 등록</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-add-item')">&times;</button>
       </div>
       <form onsubmit="handleAddItem(event)">
@@ -521,7 +503,7 @@
   <div id="modal-settings" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-        <h3 class="card-title"><i class="fa-solid fa-palette"></i> 테마 설정</h3>
+        <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;"><i class="fa-solid fa-palette"></i> 테마 설정</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-settings')">&times;</button>
       </div>
       <div class="form-group">
@@ -537,7 +519,7 @@
   <div id="modal-admin" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-        <h3 class="card-title">관리자 로그인</h3>
+        <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;">관리자 로그인</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-admin')">&times;</button>
       </div>
       <form onsubmit="handleAdminAuth(event)">
@@ -553,12 +535,12 @@
   <script>
     const defaultAvatar = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150";
 
-    let accounts = JSON.parse(localStorage.getItem('ag_accs_v7')) || [
+    let accounts = JSON.parse(localStorage.getItem('ag_accs_v8')) || [
       { name: "민수", account: "101-001", pin: "1234", balance: 5000, avatar: defaultAvatar, shares: {} },
       { name: "지아", account: "101-002", pin: "1234", balance: 12000, avatar: defaultAvatar, shares: {} }
     ];
 
-    let stores = JSON.parse(localStorage.getItem('ag_stores_v7')) || [
+    let stores = JSON.parse(localStorage.getItem('ag_stores_v8')) || [
       { id: "S1", name: "아고라 메인 상점", owner: "101-001", totalShares: 100, price: 50, totalSales: 0, items: [] }
     ];
 
@@ -568,27 +550,12 @@
     let isAdmin = false;
 
     function save() {
-      localStorage.setItem('ag_accs_v7', JSON.stringify(accounts));
-      localStorage.setItem('ag_stores_v7', JSON.stringify(stores));
+      localStorage.setItem('ag_accs_v8', JSON.stringify(accounts));
+      localStorage.setItem('ag_stores_v8', JSON.stringify(stores));
     }
 
     function openModal(id) { document.getElementById(id).classList.add('active'); }
     function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-
-    function switchTab(tab) {
-      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-      event.target.classList.add('active');
-
-      document.getElementById('view-dashboard').classList.add('hidden');
-      document.getElementById('view-stores').classList.add('hidden');
-      document.getElementById('view-stock').classList.add('hidden');
-
-      document.getElementById(`view-${tab}`).classList.remove('hidden');
-
-      if (tab === 'stores') renderStores();
-      if (tab === 'stock') renderStock();
-      if (tab === 'dashboard') updateDash();
-    }
 
     function handleLogin(e) {
       e.preventDefault();
@@ -600,7 +567,6 @@
         currentUser = user;
         isAdmin = false;
         document.getElementById('view-login').classList.add('hidden');
-        document.getElementById('nav-menu').classList.remove('hidden');
         document.getElementById('logout-btn').classList.remove('hidden');
         document.getElementById('admin-login-btn').classList.add('hidden');
         updateDash();
@@ -618,6 +584,48 @@
       document.getElementById('dash-balance').innerText = `${currentUser.balance.toLocaleString()} G`;
       document.getElementById('dash-avatar').src = userImg;
 
+      renderMarketStores();
+      renderStockList();
+      renderPortfolio();
+    }
+
+    function renderMarketStores() {
+      const box = document.getElementById('market-store-list');
+      box.innerHTML = '';
+
+      if (stores.length === 0) {
+        box.innerHTML = '<p style="color:var(--text-muted); text-align:center;">등록된 상점이 없습니다.</p>';
+        return;
+      }
+
+      stores.forEach(s => {
+        box.innerHTML += `
+          <div class="store-item-card" onclick="openStoreDetail('${s.id}')">
+            <h4 style="color:var(--primary); font-size:1.1rem;">${s.name}</h4>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.2rem;">상품: ${s.items.length}개 | 주가: ${s.price} G</p>
+          </div>
+        `;
+      });
+    }
+
+    function renderStockList() {
+      const tbody = document.getElementById('stock-list');
+      tbody.innerHTML = '';
+      stores.forEach(s => {
+        tbody.innerHTML += `
+          <tr>
+            <td><strong>${s.name}</strong></td>
+            <td style="color:var(--primary); font-weight:700;">${s.price} G</td>
+            <td>
+              <button class="btn btn-primary" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="tradeStock('${s.id}', 'buy')">매수</button>
+              <button class="btn btn-outline" style="padding:0.2rem 0.5rem; font-size:0.75rem;" onclick="tradeStock('${s.id}', 'sell')">매도</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function renderPortfolio() {
       const tbody = document.getElementById('portfolio-list');
       tbody.innerHTML = '';
       let count = 0;
@@ -627,23 +635,11 @@
         if (owned > 0) {
           count++;
           const pct = ((owned / s.totalShares) * 100).toFixed(1);
-          tbody.innerHTML += `<tr><td><strong>${s.name}</strong></td><td>${owned} 주</td><td><span style="color:var(--primary); font-weight:700;">${pct}%</span></td></tr>`;
+          tbody.innerHTML += `<tr><td>${s.name}</td><td>${owned}주</td><td><strong style="color:var(--primary);">${pct}%</strong></td></tr>`;
         }
       });
 
-      if (count === 0) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: var(--text-muted);">보유 주식이 없습니다.</td></tr>';
-
-      // Preview Store in Dashboard Card 3
-      const previewBox = document.getElementById('dash-store-preview');
-      previewBox.innerHTML = '';
-      stores.slice(0, 2).forEach(s => {
-        previewBox.innerHTML += `
-          <div style="background:var(--input-bg); border:1px solid var(--card-border); border-radius:12px; padding:0.75rem; margin-bottom:0.5rem; cursor:pointer;" onclick="openStoreDetail('${s.id}')">
-            <strong>${s.name}</strong>
-            <p style="font-size:0.8rem; color:var(--text-muted);">주가: ${s.price} G</p>
-          </div>
-        `;
-      });
+      if (count === 0) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: var(--text-muted);">보유 주식 없음</td></tr>';
     }
 
     function handleUpdateAvatar(e) {
@@ -672,7 +668,7 @@
       alert("송금 완료!");
     }
 
-    // Stores & Item Handling
+    // Store & Items Logic
     function handleCreateStore(e) {
       e.preventDefault();
       if (currentUser.balance < 1000) return alert("개설 비용 (1,000 G)이 부족합니다.");
@@ -697,26 +693,8 @@
 
       save();
       closeModal('modal-create-store');
-      renderStores();
       updateDash();
       alert("상점이 개설되었습니다!");
-    }
-
-    function renderStores() {
-      const grid = document.getElementById('store-list-grid');
-      grid.innerHTML = '';
-      stores.forEach(s => {
-        grid.innerHTML += `
-          <div class="vertical-glass-card" style="min-height:auto; cursor:pointer;" onclick="openStoreDetail('${s.id}')">
-            <h3 style="color:var(--primary);">${s.name}</h3>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem;">소유자 계좌: ${s.owner}</p>
-            <div style="display:flex; justify-content:space-between; margin-top:1rem; font-weight:600;">
-              <span>등록 상품: ${s.items.length}개</span>
-              <span style="color:var(--primary);">${s.price} G / 주</span>
-            </div>
-          </div>
-        `;
-      });
     }
 
     function openStoreDetail(storeId) {
@@ -747,11 +725,11 @@
 
       store.items.forEach(item => {
         grid.innerHTML += `
-          <div class="product-card" onclick="openProductPopup('${item.id}')">
-            <img src="${item.img || 'https://via.placeholder.com/300'}" class="product-img">
-            <div style="padding:0.75rem;">
+          <div style="background:var(--input-bg); border:1px solid var(--card-border); border-radius:14px; overflow:hidden; cursor:pointer;" onclick="openProductPopup('${item.id}')">
+            <img src="${item.img || 'https://via.placeholder.com/300'}" style="width:100%; height:120px; object-fit:cover;">
+            <div style="padding:0.6rem;">
               <h4>${item.name}</h4>
-              <p style="color:var(--primary); font-weight:700; margin-top:0.25rem;">${item.price.toLocaleString()} G</p>
+              <p style="color:var(--primary); font-weight:700;">${item.price.toLocaleString()} G</p>
             </div>
           </div>
         `;
@@ -775,7 +753,7 @@
       save();
       closeModal('modal-add-item');
       renderStoreProducts();
-      renderStores();
+      updateDash();
     }
 
     function openProductPopup(itemId) {
@@ -837,7 +815,7 @@
         save();
         closeModal('modal-product-popup');
         renderStoreProducts();
-        renderStores();
+        updateDash();
       }
     }
 
@@ -888,33 +866,11 @@
         stores = stores.filter(s => s.id !== activeStoreId);
         save();
         closeModal('modal-store-detail');
-        renderStores();
+        updateDash();
       }
     }
 
-    // Stock Market
-    function renderStock() {
-      const list = document.getElementById('stock-list');
-      list.innerHTML = '';
-      stores.forEach(s => {
-        let allocatedShares = 0;
-        accounts.forEach(a => { if (a.shares && a.shares[s.id]) allocatedShares += a.shares[s.id]; });
-        const unissuedShares = s.totalShares - allocatedShares;
-
-        list.innerHTML += `
-          <tr>
-            <td><strong>${s.name}</strong></td>
-            <td><strong style="color:var(--primary);">${s.price} G</strong></td>
-            <td>${unissuedShares} / ${s.totalShares} 주</td>
-            <td>
-              <button class="btn btn-primary" onclick="tradeStock('${s.id}', 'buy')">매수</button>
-              <button class="btn btn-outline" onclick="tradeStock('${s.id}', 'sell')">매도</button>
-            </td>
-          </tr>
-        `;
-      });
-    }
-
+    // Stock Market Logic
     function tradeStock(storeId, type) {
       const store = stores.find(s => s.id === storeId);
       if (!currentUser.shares) currentUser.shares = {};
@@ -933,7 +889,6 @@
 
       save();
       updateDash();
-      renderStock();
     }
 
     // Admin Controls
@@ -959,8 +914,8 @@
             <td>${a.pin}</td>
             <td>${a.balance} G</td>
             <td>
-              <button class="btn btn-outline" onclick="editAccBal('${a.account}')">수정</button>
-              <button class="btn btn-danger" onclick="eraseAcc('${a.account}')">삭제</button>
+              <button class="btn btn-outline" style="padding:0.2rem 0.5rem;" onclick="editAccBal('${a.account}')">수정</button>
+              <button class="btn btn-danger" style="padding:0.2rem 0.5rem;" onclick="eraseAcc('${a.account}')">삭제</button>
             </td>
           </tr>
         `;

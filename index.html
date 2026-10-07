@@ -500,7 +500,7 @@
     </div>
   </div>
 
-  <!-- FULL-SCREEN APP 2: STOCK (WITH PRICE GRAPH) -->
+  <!-- FULL-SCREEN APP 2: STOCK (WITH CLEAN LINE PRICE GRAPH) -->
   <div id="screen-stock" class="fullscreen-app-overlay hidden">
     <div class="app-header-bar">
       <button class="btn btn-outline" onclick="closeAppScreen('screen-stock')"><i class="fa-solid fa-arrow-left"></i> 메인으로</button>
@@ -639,7 +639,7 @@
 
       <form onsubmit="handleUpdateAvatar(event)">
         <div class="form-group">
-          <input type="url" id="avatar-url-input" class="form-control" placeholder="또는 이미지 URL 입력 (https://...)">
+          <input type="url" id="avatar-url-input" class="form-control" placeholder="또는 이미지 URL 입력 (https...)">
         </div>
         <button type="submit" class="btn btn-primary" style="width: 100%;">프로필 저장</button>
       </form>
@@ -816,12 +816,12 @@
     const defaultAvatar = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150";
     const defaultStoreLogo = "https://images.unsplash.com/photo-1534723452862-4c874018d66d?w=150";
 
-    let accounts = JSON.parse(localStorage.getItem('ag_accs_v13')) || [
+    let accounts = JSON.parse(localStorage.getItem('ag_accs_v14')) || [
       { name: "민수", account: "101-001", pin: "1234", balance: 5000, loan: 0, avatar: defaultAvatar, shares: {} },
       { name: "지아", account: "101-002", pin: "1234", balance: 12000, loan: 0, avatar: defaultAvatar, shares: {} }
     ];
 
-    let stores = JSON.parse(localStorage.getItem('ag_stores_v13')) || [
+    let stores = JSON.parse(localStorage.getItem('ag_stores_v14')) || [
       { id: "S1", name: "아고라 메인 상점", logo: defaultStoreLogo, owner: "101-001", totalShares: 100, price: 50, priceHistory: [30, 35, 40, 45, 50], totalSales: 0, items: [] }
     ];
 
@@ -836,8 +836,8 @@
     let tempItemImgBase64 = "";
 
     function save() {
-      localStorage.setItem('ag_accs_v13', JSON.stringify(accounts));
-      localStorage.setItem('ag_stores_v13', JSON.stringify(stores));
+      localStorage.setItem('ag_accs_v14', JSON.stringify(accounts));
+      localStorage.setItem('ag_stores_v14', JSON.stringify(stores));
     }
 
     function changeTheme(themeName) {
@@ -1039,8 +1039,10 @@
       const canvas = document.getElementById('stockCanvasChart');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      const storeId = document.getElementById('chart-store-select').value;
-      const store = stores.find(s => s.id === storeId);
+      const storeSelect = document.getElementById('chart-store-select');
+      if (!storeSelect.value) return;
+
+      const store = stores.find(s => s.id === storeSelect.value);
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -1051,17 +1053,20 @@
         return;
       }
 
-      const history = store.priceHistory;
-      const maxVal = Math.max(...history) * 1.2;
-      const minVal = Math.min(0, Math.min(...history));
+      // Smooth & Clean Window: Show max last 15 updates
+      const rawHistory = store.priceHistory;
+      const history = rawHistory.slice(-15);
+
+      const maxVal = Math.max(...history) * 1.15;
+      const minVal = Math.min(...history) * 0.85;
       const range = maxVal - minVal || 1;
 
-      const padding = 30;
+      const padding = 35;
       const chartWidth = canvas.width - padding * 2;
       const chartHeight = canvas.height - padding * 2;
 
-      // Draw Grid Lines
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+      // Draw Grid Background
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
       ctx.lineWidth = 1;
       for (let i = 0; i <= 4; i++) {
         const y = padding + (chartHeight / 4) * i;
@@ -1071,7 +1076,7 @@
         ctx.stroke();
       }
 
-      // Draw Price Line Chart
+      // Draw Clean Solid Line Graph (No dots)
       ctx.strokeStyle = '#38bdf8';
       ctx.lineWidth = 3;
       ctx.beginPath();
@@ -1084,20 +1089,6 @@
         else ctx.lineTo(x, y);
       });
       ctx.stroke();
-
-      // Draw Data Points
-      ctx.fillStyle = '#ffffff';
-      history.forEach((val, idx) => {
-        const x = padding + (chartWidth / Math.max(1, history.length - 1)) * idx;
-        const y = canvas.height - padding - ((val - minVal) / range) * chartHeight;
-        
-        ctx.beginPath();
-        ctx.arc(x, y, 4, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.font = '11px Inter';
-        ctx.fillText(`${val}G`, x - 8, y - 8);
-      });
     }
 
     function renderPortfolio() {
@@ -1186,9 +1177,11 @@
       const store = stores.find(s => s.id === storeId);
       document.getElementById('modal-store-title').innerText = store.name;
 
-      // Protection: Only Show Store Owner Controls to Creator or Admin
+      // Strict Ownership Check: ONLY show management/erase buttons if logged in user is the owner OR admin
       const actions = document.getElementById('store-owner-actions');
-      if (currentUser && (currentUser.account === store.owner || isAdmin)) {
+      const isOwner = currentUser && (currentUser.account === store.owner || isAdmin);
+
+      if (isOwner) {
         actions.classList.remove('hidden');
       } else {
         actions.classList.add('hidden');
@@ -1302,8 +1295,12 @@
     }
 
     function eraseActiveProduct() {
+      const store = stores.find(s => s.id === activeStoreId);
+      if (!currentUser || (currentUser.account !== store.owner && !isAdmin)) {
+        return alert("상점 소유자만 상품을 삭제할 수 있습니다.");
+      }
+
       if (confirm("이 상품을 정말 삭제하시겠습니까?")) {
-        const store = stores.find(s => s.id === activeStoreId);
         store.items = store.items.filter(i => i.id !== activeItemId);
         save();
         closeModal('modal-product-popup');
@@ -1357,7 +1354,7 @@
     function eraseCurrentStore() {
       const store = stores.find(s => s.id === activeStoreId);
       if (!currentUser || (currentUser.account !== store.owner && !isAdmin)) {
-        return alert("상점 소유자만 이 상점을 삭제할 수 있습니다.");
+        return alert("권한이 없습니다. 상점 개설자만 상점을 폐업할 수 있습니다.");
       }
 
       if (confirm("이 상점을 영구 삭제하시겠습니까?")) {

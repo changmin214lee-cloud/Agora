@@ -138,35 +138,47 @@
       box-shadow: 0 0 18px rgba(163, 243, 69, 0.45);
     }
 
-    /* 3 Large Vertical Columns Grid */
+    /* 3 Large App Cards Grid */
     .dashboard-bottom-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 1.25rem;
     }
 
-    .vertical-column-card {
+    .app-card {
       background: var(--card-bg);
       -webkit-backdrop-filter: blur(20px);
       backdrop-filter: blur(20px);
       border: 1px solid var(--card-border);
       border-top: 1px solid rgba(255, 255, 255, 0.45);
       border-radius: 32px;
-      padding: 1.5rem;
-      min-height: 480px;
+      padding: 2.5rem 1.5rem;
+      min-height: 420px;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
       box-shadow: var(--glass-glow);
+      cursor: pointer;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .app-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--primary);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .app-card-icon {
+      font-size: 3.5rem;
+      color: var(--primary);
+      margin-bottom: 1.25rem;
     }
 
     .column-header-title {
-      font-size: 2rem;
+      font-size: 2.4rem;
       font-weight: 900;
       color: #ffffff;
-      margin-bottom: 1.25rem;
       text-align: center;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-      padding-bottom: 0.75rem;
     }
 
     .form-group { margin-bottom: 1rem; }
@@ -181,7 +193,6 @@
       outline: none;
     }
 
-    /* Stores List inside Column */
     .store-item-card {
       background: var(--input-bg);
       border: 1px solid var(--card-border);
@@ -247,9 +258,9 @@
   <div class="container">
 
     <!-- LOGIN VIEW -->
-    <div id="view-login" class="vertical-column-card" style="max-width: 400px; margin: 3rem auto; min-height: auto;">
-      <h2 class="column-header-title">계좌 로그인</h2>
-      <form onsubmit="handleLogin(event)">
+    <div id="view-login" class="app-card" style="max-width: 400px; margin: 3rem auto; min-height: auto; cursor: default;">
+      <h2 class="column-header-title" style="margin-bottom: 1rem;">계좌 로그인</h2>
+      <form onsubmit="handleLogin(event)" style="width: 100%;">
         <div class="form-group">
           <label>계좌번호</label>
           <input type="text" id="login-acc" class="form-control" placeholder="예: 101-001" required>
@@ -262,7 +273,7 @@
       </form>
     </div>
 
-    <!-- MAIN HOME DASHBOARD VIEW -->
+    <!-- MAIN HOME APP LAUNCHER VIEW -->
     <div id="view-dashboard" class="hidden">
       
       <!-- Top Banner: 아고라 메인 + Profile Box -->
@@ -270,71 +281,33 @@
         <div class="top-banner-card">
           <div>
             <h1 class="banner-main-title">아고라 메인</h1>
-            <p style="font-size: 1rem; color: var(--text-muted); margin-top: 0.2rem;">
-              <span id="dash-name" style="color:#fff; font-weight:700;">-</span> (<span id="dash-acc">-</span>)
-            </p>
-          </div>
-          <div style="text-align: right;">
-            <p style="font-size: 0.85rem; color: var(--text-muted);">현재 잔액</p>
-            <h1 id="dash-balance" style="font-size: 2.2rem; color: var(--primary);">0 G</h1>
           </div>
         </div>
 
-        <div class="top-profile-box" onclick="openModal('modal-avatar')" title="프로필 사진 변경">
+        <div class="top-profile-box" onclick="openModal('modal-profile')" title="프로필 상세보기">
           <img id="dash-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" class="user-avatar-lg">
-          <span style="font-size:0.75rem; color: var(--text-muted); margin-top:0.4rem; font-weight:600;">프로필 변경</span>
         </div>
       </div>
 
-      <!-- 3 Main Columns: 마켓 / 주식 / 은행 -->
+      <!-- 3 Main Apps: 마켓 / 주식 / 은행 -->
       <div class="dashboard-bottom-grid">
         
-        <!-- Column 1: 마켓 (Market) -->
-        <div class="vertical-column-card">
+        <!-- App 1: 마켓 -->
+        <div class="app-card" onclick="openModal('modal-market')">
+          <i class="fa-solid fa-store app-card-icon"></i>
           <h2 class="column-header-title">마켓</h2>
-          <button class="btn btn-primary" style="width:100%; justify-content:center; margin-bottom:1rem;" onclick="openModal('modal-create-store')">
-            <i class="fa-solid fa-plus"></i> 상점 개설 (1,000 G)
-          </button>
-          <div id="market-store-list" style="flex-grow: 1; overflow-y: auto;"></div>
         </div>
 
-        <!-- Column 2: 주식 (Stock) -->
-        <div class="vertical-column-card">
+        <!-- App 2: 주식 -->
+        <div class="app-card" onclick="openModal('modal-stock')">
+          <i class="fa-solid fa-chart-line app-card-icon"></i>
           <h2 class="column-header-title">주식</h2>
-          <div style="flex-grow: 1; overflow-y: auto;">
-            <table>
-              <thead>
-                <tr><th>상점명</th><th>주가</th><th>매매</th></tr>
-              </thead>
-              <tbody id="stock-list"></tbody>
-            </table>
-          </div>
         </div>
 
-        <!-- Column 3: 은행 (Bank) -->
-        <div class="vertical-column-card">
+        <!-- App 3: 은행 -->
+        <div class="app-card" onclick="openModal('modal-bank')">
+          <i class="fa-solid fa-building-columns app-card-icon"></i>
           <h2 class="column-header-title">은행</h2>
-          
-          <div style="margin-bottom: 1.25rem;">
-            <h4 style="color:var(--primary); margin-bottom:0.5rem;"><i class="fa-solid fa-paper-plane"></i> 계좌 송금</h4>
-            <form onsubmit="handleTransfer(event)">
-              <div class="form-group">
-                <input type="text" id="trans-acc" class="form-control" placeholder="받는 계좌번호" required>
-              </div>
-              <div class="form-group">
-                <input type="number" id="trans-amt" class="form-control" placeholder="금액 (G)" min="1" required>
-              </div>
-              <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">송금하기</button>
-            </form>
-          </div>
-
-          <div>
-            <h4 style="color:var(--primary); margin-bottom:0.5rem;"><i class="fa-solid fa-chart-pie"></i> 나의 주식 지분율</h4>
-            <table style="width:100%;">
-              <thead><tr><th>종목</th><th>보유</th><th>지분율</th></tr></thead>
-              <tbody id="portfolio-list"></tbody>
-            </table>
-          </div>
         </div>
 
       </div>
@@ -343,9 +316,9 @@
 
     <!-- ADMIN VIEW -->
     <div id="view-admin" class="hidden">
-      <div class="vertical-column-card" style="min-height: auto;">
+      <div class="app-card" style="min-height: auto; cursor: default; align-items: stretch;">
         <div style="display:flex; justify-content:space-between; align-items:center;">
-          <h2 class="column-header-title" style="margin:0; border:none;">관리자 대시보드</h2>
+          <h2 class="column-header-title" style="margin:0;">관리자 대시보드</h2>
           <button class="btn btn-outline" onclick="logout()">관리자 종료</button>
         </div>
 
@@ -370,6 +343,98 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- PROFILE MODAL (Opens when pressing profile picture) -->
+  <div id="modal-profile" class="modal-overlay">
+    <div class="modal">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <h3 style="font-size:1.5rem; color:var(--primary); font-weight:800;">내 프로필 정보</h3>
+        <button class="btn btn-outline" onclick="closeModal('modal-profile')">&times;</button>
+      </div>
+
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <img id="profile-modal-avatar" src="" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--primary); object-fit: cover; margin-bottom: 0.5rem;">
+        <h2 id="dash-name" style="font-size: 1.8rem; color: #fff;">-</h2>
+        <p style="font-size: 0.95rem; color: var(--text-muted);">계좌번호: <span id="dash-acc">-</span></p>
+        <p style="font-size: 1.2rem; color: var(--primary); font-weight: 800; margin-top: 0.5rem;">현재 잔액: <span id="dash-balance">0 G</span></p>
+      </div>
+
+      <hr style="border: 0; border-top: 1px solid var(--card-border); margin: 1rem 0;">
+
+      <h4 style="margin-bottom: 0.5rem; color: var(--primary);">프로필 사진 변경</h4>
+      <form onsubmit="handleUpdateAvatar(event)">
+        <div class="form-group">
+          <input type="url" id="avatar-url-input" class="form-control" placeholder="이미지 URL 입력 (https://...)" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">프로필 저장</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MARKET APP MODAL -->
+  <div id="modal-market" class="modal-overlay">
+    <div class="modal" style="max-width: 700px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <h2 style="font-size:1.8rem; color:var(--primary); font-weight:900;"><i class="fa-solid fa-store"></i> 마켓</h2>
+        <button class="btn btn-outline" onclick="closeModal('modal-market')">&times;</button>
+      </div>
+
+      <button class="btn btn-primary" style="width:100%; justify-content:center; margin-bottom:1rem;" onclick="openModal('modal-create-store')">
+        <i class="fa-solid fa-plus"></i> 신규 상점 개설 (1,000 G)
+      </button>
+
+      <h4>등록된 상점 목록</h4>
+      <div id="market-store-list" style="margin-top: 0.75rem;"></div>
+    </div>
+  </div>
+
+  <!-- STOCK APP MODAL -->
+  <div id="modal-stock" class="modal-overlay">
+    <div class="modal" style="max-width: 700px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <h2 style="font-size:1.8rem; color:var(--primary); font-weight:900;"><i class="fa-solid fa-chart-line"></i> 주식 거래소</h2>
+        <button class="btn btn-outline" onclick="closeModal('modal-stock')">&times;</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr><th>상점명</th><th>현재 주가</th><th>매매</th></tr>
+        </thead>
+        <tbody id="stock-list"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- BANK APP MODAL -->
+  <div id="modal-bank" class="modal-overlay">
+    <div class="modal" style="max-width: 700px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <h2 style="font-size:1.8rem; color:var(--primary); font-weight:900;"><i class="fa-solid fa-building-columns"></i> 은행</h2>
+        <button class="btn btn-outline" onclick="closeModal('modal-bank')">&times;</button>
+      </div>
+
+      <div style="margin-bottom: 1.5rem; background: var(--input-bg); padding: 1rem; border-radius: 16px; border: 1px solid var(--card-border);">
+        <h4 style="color:var(--primary); margin-bottom:0.5rem;"><i class="fa-solid fa-paper-plane"></i> 계좌 송금</h4>
+        <form onsubmit="handleTransfer(event)">
+          <div class="form-group">
+            <input type="text" id="trans-acc" class="form-control" placeholder="받는 계좌번호" required>
+          </div>
+          <div class="form-group">
+            <input type="number" id="trans-amt" class="form-control" placeholder="송금 금액 (G)" min="1" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">송금하기</button>
+        </form>
+      </div>
+
+      <div>
+        <h4 style="color:var(--primary); margin-bottom:0.5rem;"><i class="fa-solid fa-chart-pie"></i> 나의 주식 포트폴리오</h4>
+        <table>
+          <thead><tr><th>종목</th><th>보유 주식</th><th>지분율</th></tr></thead>
+          <tbody id="portfolio-list"></tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
   <!-- STORE DETAIL MODAL -->
@@ -429,23 +494,6 @@
       </form>
 
       <div id="pop-review-list"></div>
-    </div>
-  </div>
-
-  <!-- PROFILE PICTURE MODAL -->
-  <div id="modal-avatar" class="modal-overlay">
-    <div class="modal">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-        <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;">프로필 사진 변경</h3>
-        <button class="btn btn-outline" onclick="closeModal('modal-avatar')">&times;</button>
-      </div>
-      <form onsubmit="handleUpdateAvatar(event)">
-        <div class="form-group">
-          <label>이미지 URL</label>
-          <input type="url" id="avatar-url-input" class="form-control" placeholder="https://example.com/avatar.jpg" required>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%;">프로필 저장</button>
-      </form>
     </div>
   </div>
 
@@ -535,12 +583,12 @@
   <script>
     const defaultAvatar = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150";
 
-    let accounts = JSON.parse(localStorage.getItem('ag_accs_v8')) || [
+    let accounts = JSON.parse(localStorage.getItem('ag_accs_v9')) || [
       { name: "민수", account: "101-001", pin: "1234", balance: 5000, avatar: defaultAvatar, shares: {} },
       { name: "지아", account: "101-002", pin: "1234", balance: 12000, avatar: defaultAvatar, shares: {} }
     ];
 
-    let stores = JSON.parse(localStorage.getItem('ag_stores_v8')) || [
+    let stores = JSON.parse(localStorage.getItem('ag_stores_v9')) || [
       { id: "S1", name: "아고라 메인 상점", owner: "101-001", totalShares: 100, price: 50, totalSales: 0, items: [] }
     ];
 
@@ -550,8 +598,8 @@
     let isAdmin = false;
 
     function save() {
-      localStorage.setItem('ag_accs_v8', JSON.stringify(accounts));
-      localStorage.setItem('ag_stores_v8', JSON.stringify(stores));
+      localStorage.setItem('ag_accs_v9', JSON.stringify(accounts));
+      localStorage.setItem('ag_stores_v9', JSON.stringify(stores));
     }
 
     function openModal(id) { document.getElementById(id).classList.add('active'); }
@@ -579,10 +627,12 @@
     function updateDash() {
       const userImg = currentUser.avatar || defaultAvatar;
 
-      document.getElementById('dash-name').innerText = currentUser.name;
-      document.getElementById('dash-acc').innerText = currentUser.account;
-      document.getElementById('dash-balance').innerText = `${currentUser.balance.toLocaleString()} G`;
+      document.querySelectorAll('#dash-name').forEach(el => el.innerText = currentUser.name);
+      document.querySelectorAll('#dash-acc').forEach(el => el.innerText = currentUser.account);
+      document.querySelectorAll('#dash-balance').forEach(el => el.innerText = `${currentUser.balance.toLocaleString()} G`);
+      
       document.getElementById('dash-avatar').src = userImg;
+      document.getElementById('profile-modal-avatar').src = userImg;
 
       renderMarketStores();
       renderStockList();
@@ -648,7 +698,7 @@
       currentUser.avatar = newUrl;
       save();
       updateDash();
-      closeModal('modal-avatar');
+      closeModal('modal-profile');
       alert("프로필 사진이 변경되었습니다!");
     }
 

@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    /* Theme Definitions */
+    /* Themes Configuration */
     :root[data-theme="dark"] {
       --bg: #0f172a; --card-bg: #1e293b; --card-border: #334155; --text: #f8fafc;
       --text-muted: #94a3b8; --primary: #38bdf8; --primary-hover: #0284c7;
@@ -79,7 +79,7 @@
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
 
-    /* Store Cards */
+    /* Store & Product Cards */
     .store-card {
       background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px;
       padding: 1.25rem; cursor: pointer; transition: transform 0.2s, border-color 0.2s;
@@ -88,9 +88,10 @@
 
     .product-card {
       background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 10px; overflow: hidden;
-      display: flex; flex-direction: column;
+      display: flex; flex-direction: column; cursor: pointer; transition: transform 0.2s;
     }
-    .product-img { width: 100%; height: 150px; object-fit: cover; background: var(--card-bg); }
+    .product-card:hover { transform: translateY(-2px); }
+    .product-img { width: 100%; height: 160px; object-fit: cover; background: var(--card-bg); }
     .product-body { padding: 1rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
 
     /* Modal */
@@ -107,7 +108,8 @@
     th { background: rgba(0,0,0,0.1); color: var(--text-muted); }
 
     .review-box { background: var(--input-bg); border-radius: 8px; padding: 0.75rem; margin-top: 0.5rem; border: 1px solid var(--card-border); }
-    .stars { color: var(--warning); }
+    .reaction-btn { background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text); padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; }
+    .reaction-btn:hover { border-color: var(--primary); }
 
     .hidden { display: none !important; }
   </style>
@@ -136,7 +138,7 @@
 
   <div class="container">
 
-    <!-- LOGIN VIEW -->
+    <!-- LOGIN -->
     <div id="view-login" class="card" style="max-width: 400px; margin: 3rem auto;">
       <div class="card-header">
         <h2 class="card-title"><i class="fa-solid fa-key"></i> 계좌 로그인</h2>
@@ -154,7 +156,7 @@
       </form>
     </div>
 
-    <!-- DASHBOARD VIEW -->
+    <!-- DASHBOARD -->
     <div id="view-dashboard" class="hidden">
       <div class="card" style="background: var(--header-bg); color: white;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -211,7 +213,7 @@
       </div>
     </div>
 
-    <!-- STOCK MARKET VIEW -->
+    <!-- STOCK MARKET -->
     <div id="view-stock" class="hidden">
       <div class="card">
         <div class="card-header">
@@ -275,35 +277,46 @@
     </div>
   </div>
 
-  <!-- PRODUCT REVIEWS MODAL -->
-  <div id="modal-reviews" class="modal-overlay">
+  <!-- PRODUCT POPUP MODAL (REVIEWS, LIKES, BUY, ERASE) -->
+  <div id="modal-product-popup" class="modal-overlay">
     <div class="modal">
       <div class="card-header">
-        <h3 id="review-product-title" class="card-title">상품 리뷰</h3>
-        <button class="btn btn-outline" onclick="closeModal('modal-reviews')">&times;</button>
+        <h3 id="pop-product-title" class="card-title">상품 상세 정보</h3>
+        <button class="btn btn-outline" onclick="closeModal('modal-product-popup')">&times;</button>
       </div>
 
-      <!-- Write Review Form -->
-      <form onsubmit="handlePostReview(event)" style="margin-bottom: 1.5rem; background: var(--input-bg); padding: 1rem; border-radius: 8px;">
-        <div class="form-group">
-          <label>별점 평가</label>
-          <select id="review-rating" class="form-control">
-            <option value="5">⭐⭐⭐⭐⭐ (5점)</option>
-            <option value="4">⭐⭐⭐⭐ (4점)</option>
-            <option value="3">⭐⭐⭐ (3점)</option>
-            <option value="2">⭐⭐ (2점)</option>
-            <option value="1">⭐ (1점)</option>
+      <img id="pop-product-img" src="" style="width:100%; height:200px; object-fit:cover; border-radius:8px; margin-bottom:1rem; background:var(--input-bg);">
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <h2 id="pop-product-price" style="color:var(--primary);">0 G</h2>
+        <div style="display:flex; gap:0.5rem;">
+          <button class="reaction-btn" onclick="reactProduct('like')"><i class="fa-solid fa-thumbs-up"></i> <span id="pop-likes">0</span></button>
+          <button class="reaction-btn" onclick="reactProduct('dislike')"><i class="fa-solid fa-thumbs-down"></i> <span id="pop-dislikes">0</span></button>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:0.5rem; margin-bottom:1.5rem;">
+        <button class="btn btn-primary" style="flex:1; justify-content:center; font-size:1rem;" onclick="buyActiveProduct()"><i class="fa-solid fa-cart-shopping"></i> 구매하기</button>
+        <button id="pop-erase-btn" class="btn btn-danger hidden" onclick="eraseActiveProduct()"><i class="fa-solid fa-trash"></i> 삭제하기</button>
+      </div>
+
+      <!-- Reviews Section -->
+      <h4 style="margin-bottom:0.5rem;">상품 리뷰</h4>
+      <form onsubmit="handlePostReview(event)" style="margin-bottom:1rem;">
+        <div style="display:flex; gap:0.5rem; margin-bottom:0.5rem;">
+          <select id="review-rating" class="form-control" style="width:130px;">
+            <option value="5">⭐⭐⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="1">⭐</option>
           </select>
+          <input type="text" id="review-text" class="form-control" placeholder="리뷰 작성..." required>
         </div>
-        <div class="form-group">
-          <label>리뷰 내용</label>
-          <input type="text" id="review-text" class="form-control" placeholder="리뷰를 작성하세요..." required>
-        </div>
-        <button type="submit" class="btn btn-primary">리뷰 등록</button>
+        <button type="submit" class="btn btn-outline" style="width:100%; justify-content:center;">리뷰 등록</button>
       </form>
 
-      <h4>작성된 리뷰 목록</h4>
-      <div id="review-list" style="margin-top: 0.75rem;"></div>
+      <div id="pop-review-list"></div>
     </div>
   </div>
 
@@ -395,18 +408,14 @@
   </div>
 
   <script>
-    // App State Persistence
-    let accounts = JSON.parse(localStorage.getItem('ag_accs_v2')) || [
+    // State Persistence
+    let accounts = JSON.parse(localStorage.getItem('ag_accs_v3')) || [
       { name: "민수", account: "101-001", pin: "1234", balance: 5000, shares: {} },
       { name: "지아", account: "101-002", pin: "1234", balance: 12000, shares: {} }
     ];
 
-    let stores = JSON.parse(localStorage.getItem('ag_stores_v2')) || [
-      { id: "S1", name: "테크 이노베이션", owner: "101-001", totalShares: 100, price: 50, totalSales: 0, items: [
-        { id: "I1", name: "블루투스 헤드셋", price: 400, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300", reviews: [
-          { author: "지아", rating: 5, text: "음질이 정말 훌륭합니다!" }
-        ]}
-      ]}
+    let stores = JSON.parse(localStorage.getItem('ag_stores_v3')) || [
+      { id: "S1", name: "테크 이노베이션", owner: "101-001", totalShares: 100, price: 50, totalSales: 0, items: [] }
     ];
 
     let currentUser = null;
@@ -415,8 +424,8 @@
     let isAdmin = false;
 
     function save() {
-      localStorage.setItem('ag_accs_v2', JSON.stringify(accounts));
-      localStorage.setItem('ag_stores_v2', JSON.stringify(stores));
+      localStorage.setItem('ag_accs_v3', JSON.stringify(accounts));
+      localStorage.setItem('ag_stores_v3', JSON.stringify(stores));
     }
 
     function setTheme(theme) {
@@ -500,7 +509,7 @@
       alert("송금 완료!");
     }
 
-    // Stores & Item Management
+    // Store & Item Handling
     function handleCreateStore(e) {
       e.preventDefault();
       if (currentUser.balance < 1000) return alert("개설 비용 (1,000 G)이 부족합니다.");
@@ -574,24 +583,12 @@
       }
 
       store.items.forEach(item => {
-        const isOwner = currentUser && (currentUser.account === store.owner || isAdmin);
-        const reviewCount = item.reviews ? item.reviews.length : 0;
-
         grid.innerHTML += `
-          <div class="product-card">
+          <div class="product-card" onclick="openProductPopup('${item.id}')">
             <img src="${item.img || 'https://via.placeholder.com/300'}" class="product-img">
             <div class="product-body">
-              <div>
-                <h4>${item.name}</h4>
-                <p style="color:var(--primary); font-weight:700;">${item.price.toLocaleString()} G</p>
-                <small class="stars" onclick="openReviewsModal('${item.id}')" style="cursor:pointer;">
-                  ⭐ 리뷰 (${reviewCount}개) 보기/작성
-                </small>
-              </div>
-              <div style="margin-top:0.75rem; display:flex; gap:0.4rem;">
-                <button class="btn btn-primary" style="flex:1;" onclick="buyItem('${item.id}')">구매</button>
-                ${isOwner ? `<button class="btn btn-danger" onclick="eraseItem('${item.id}')">삭제</button>` : ''}
-              </div>
+              <h4>${item.name}</h4>
+              <p style="color:var(--primary); font-weight:700; margin-top:0.25rem;">${item.price.toLocaleString()} G</p>
             </div>
           </div>
         `;
@@ -607,6 +604,8 @@
         name: document.getElementById('item-name').value,
         price: parseInt(document.getElementById('item-price').value),
         img: document.getElementById('item-img').value || "https://via.placeholder.com/300",
+        likes: 0,
+        dislikes: 0,
         reviews: []
       });
 
@@ -616,9 +615,45 @@
       renderStores();
     }
 
-    function buyItem(itemId) {
+    // Product Popup Details
+    function openProductPopup(itemId) {
+      activeItemId = itemId;
       const store = stores.find(s => s.id === activeStoreId);
       const item = store.items.find(i => i.id === itemId);
+
+      document.getElementById('pop-product-title').innerText = item.name;
+      document.getElementById('pop-product-img').src = item.img || 'https://via.placeholder.com/300';
+      document.getElementById('pop-product-price').innerText = `${item.price.toLocaleString()} G`;
+      document.getElementById('pop-likes').innerText = item.likes || 0;
+      document.getElementById('pop-dislikes').innerText = item.dislikes || 0;
+
+      // Owner Only Delete Button
+      const eraseBtn = document.getElementById('pop-erase-btn');
+      if (currentUser && (currentUser.account === store.owner || isAdmin)) {
+        eraseBtn.classList.remove('hidden');
+      } else {
+        eraseBtn.classList.add('hidden');
+      }
+
+      renderPopupReviews();
+      openModal('modal-product-popup');
+    }
+
+    function reactProduct(type) {
+      const store = stores.find(s => s.id === activeStoreId);
+      const item = store.items.find(i => i.id === activeItemId);
+
+      if (type === 'like') item.likes = (item.likes || 0) + 1;
+      if (type === 'dislike') item.dislikes = (item.dislikes || 0) + 1;
+
+      save();
+      document.getElementById('pop-likes').innerText = item.likes;
+      document.getElementById('pop-dislikes').innerText = item.dislikes;
+    }
+
+    function buyActiveProduct() {
+      const store = stores.find(s => s.id === activeStoreId);
+      const item = store.items.find(i => i.id === activeItemId);
 
       if (currentUser.balance < item.price) return alert("잔액이 부족합니다.");
 
@@ -631,62 +666,18 @@
 
       save();
       updateDash();
-      renderStoreProducts();
       alert(`[${item.name}] 구매가 완료되었습니다!`);
     }
 
-    function eraseItem(itemId) {
+    function eraseActiveProduct() {
       if (confirm("이 상품을 정말 삭제하시겠습니까?")) {
         const store = stores.find(s => s.id === activeStoreId);
-        store.items = store.items.filter(i => i.id !== itemId);
+        store.items = store.items.filter(i => i.id !== activeItemId);
         save();
+        closeModal('modal-product-popup');
         renderStoreProducts();
         renderStores();
       }
-    }
-
-    function eraseCurrentStore() {
-      if (confirm("이 상점을 폐업하고 영구 삭제하시겠습니까?")) {
-        stores = stores.filter(s => s.id !== activeStoreId);
-        save();
-        closeModal('modal-store-detail');
-        renderStores();
-      }
-    }
-
-    // Review System
-    function openReviewsModal(itemId) {
-      activeItemId = itemId;
-      const store = stores.find(s => s.id === activeStoreId);
-      const item = store.items.find(i => i.id === itemId);
-
-      document.getElementById('review-product-title').innerText = `${item.name} - 리뷰 목록`;
-      renderReviews();
-      openModal('modal-reviews');
-    }
-
-    function renderReviews() {
-      const store = stores.find(s => s.id === activeStoreId);
-      const item = store.items.find(i => i.id === activeItemId);
-      const list = document.getElementById('review-list');
-      list.innerHTML = '';
-
-      if (!item.reviews || item.reviews.length === 0) {
-        list.innerHTML = '<p style="color:var(--text-muted);">작성된 리뷰가 없습니다.</p>';
-        return;
-      }
-
-      item.reviews.forEach(r => {
-        list.innerHTML += `
-          <div class="review-box">
-            <div style="display:flex; justify-content:space-between; font-weight:600;">
-              <span>${r.author}</span>
-              <span class="stars">${'⭐'.repeat(r.rating)}</span>
-            </div>
-            <p style="margin-top:0.25rem; font-size:0.9rem;">${r.text}</p>
-          </div>
-        `;
-      });
     }
 
     function handlePostReview(e) {
@@ -704,8 +695,40 @@
 
       save();
       document.getElementById('review-text').value = '';
-      renderReviews();
-      renderStoreProducts();
+      renderPopupReviews();
+    }
+
+    function renderPopupReviews() {
+      const store = stores.find(s => s.id === activeStoreId);
+      const item = store.items.find(i => i.id === activeItemId);
+      const list = document.getElementById('pop-review-list');
+      list.innerHTML = '';
+
+      if (!item.reviews || item.reviews.length === 0) {
+        list.innerHTML = '<p style="color:var(--text-muted);">작성된 리뷰가 없습니다.</p>';
+        return;
+      }
+
+      item.reviews.forEach(r => {
+        list.innerHTML += `
+          <div class="review-box">
+            <div style="display:flex; justify-content:space-between; font-weight:600;">
+              <span>${r.author}</span>
+              <span>${'⭐'.repeat(r.rating)}</span>
+            </div>
+            <p style="margin-top:0.25rem; font-size:0.9rem;">${r.text}</p>
+          </div>
+        `;
+      });
+    }
+
+    function eraseCurrentStore() {
+      if (confirm("이 상점을 폐업하고 영구 삭제하시겠습니까?")) {
+        stores = stores.filter(s => s.id !== activeStoreId);
+        save();
+        closeModal('modal-store-detail');
+        renderStores();
+      }
     }
 
     // Stock Market

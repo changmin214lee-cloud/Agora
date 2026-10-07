@@ -1,435 +1,684 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>아고라 케피털 - 학급용 경제 시스템</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Agora Capital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700&display=swap');
-    body { font-family: 'Pretendard', sans-serif; }
-    .glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); }
+    :root[data-theme="dark"] {
+      --bg: #0f172a; --card-bg: #1e293b; --card-border: #334155; --text: #f8fafc;
+      --text-muted: #94a3b8; --primary: #38bdf8; --primary-hover: #0284c7;
+      --accent: #6366f1; --danger: #ef4444; --success: #10b981;
+      --header-bg: linear-gradient(135deg, #0284c7 0%, #1e1b4b 100%); --input-bg: #0f172a;
+    }
+    :root[data-theme="light"] {
+      --bg: #f8fafc; --card-bg: #ffffff; --card-border: #e2e8f0; --text: #0f172a;
+      --text-muted: #64748b; --primary: #2563eb; --primary-hover: #1d4ed8;
+      --accent: #4f46e5; --danger: #ef4444; --success: #10b981;
+      --header-bg: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); --input-bg: #ffffff;
+    }
+    :root[data-theme="ocean"] {
+      --bg: #041c32; --card-bg: #06283d; --card-border: #1363df; --text: #ecf2ff;
+      --text-muted: #47b5ff; --primary: #47b5ff; --primary-hover: #1363df;
+      --accent: #00e676; --danger: #ff5252; --success: #00e676;
+      --header-bg: linear-gradient(135deg, #041c32 0%, #1363df 100%); --input-bg: #041c32;
+    }
+    :root[data-theme="emerald"] {
+      --bg: #064e3b; --card-bg: #047857; --card-border: #059669; --text: #ecfdf5;
+      --text-muted: #a7f3d0; --primary: #34d399; --primary-hover: #059669;
+      --accent: #f59e0b; --danger: #f87171; --success: #34d399;
+      --header-bg: linear-gradient(135deg, #022c22 0%, #047857 100%); --input-bg: #022c22;
+    }
+    :root[data-theme="gold"] {
+      --bg: #18181b; --card-bg: #27272a; --card-border: #3f3f46; --text: #fafafa;
+      --text-muted: #a1a1aa; --primary: #eab308; --primary-hover: #ca8a04;
+      --accent: #f97316; --danger: #ef4444; --success: #22c55e;
+      --header-bg: linear-gradient(135deg, #27272a 0%, #713f12 100%); --input-bg: #18181b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding-bottom: 50px; }
+
+    header {
+      background: var(--header-bg); color: white; padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 1.4rem; font-weight: 800; }
+    .nav-tabs { display: flex; gap: 8px; }
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.1); border: none; color: white;
+      padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600;
+    }
+    .nav-btn.active { background: rgba(255, 255, 255, 0.25); }
+
+    .btn {
+      padding: 0.5rem 1rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem;
+      cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn-primary { background-color: var(--primary); color: #0f172a; }
+    .btn-danger { background-color: var(--danger); color: white; }
+    .btn-outline { background: transparent; border: 1px solid var(--card-border); color: var(--text); }
+
+    .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--card-border); }
+    .card-title { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
+
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-muted); }
+    .form-control { width: 100%; padding: 0.6rem 0.8rem; background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text); border-radius: 8px; outline: none; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+
+    .market-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+    .market-img { width: 100%; height: 160px; object-fit: cover; background: var(--input-bg); }
+    .market-body { padding: 1rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7);
+      display: flex; align-items: center; justify-content: center; z-index: 1000;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; width: 100%; max-width: 450px; padding: 1.5rem; }
+
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: 0.75rem; border-bottom: 1px solid var(--card-border); }
+    th { background: rgba(0,0,0,0.1); color: var(--text-muted); }
+
+    .hidden { display: none !important; }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+<body>
 
-  <!-- Navigation Bar -->
-  <header class="sticky top-0 z-50 glass border-b border-slate-200">
-    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-3 cursor-pointer" onclick="showSection('home')">
-        <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md shadow-indigo-200">
-          A
-        </div>
-        <div>
-          <span class="font-bold text-lg tracking-tight text-slate-900 block leading-tight">아고라 케피털</span>
-          <span class="text-xs text-slate-500 font-medium">AGORA CAPITAL</span>
-        </div>
-      </div>
+  <header>
+    <div class="brand">
+      <i class="fa-solid fa-chart-line"></i>
+      <span>AGORA CAPITAL</span>
+    </div>
 
-      <nav class="hidden md:flex items-center gap-1 text-sm font-semibold text-slate-600">
-        <button onclick="showSection('bank')" class="px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-indigo-600 transition">아고라 은행</button>
-        <button onclick="showSection('market')" class="px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-indigo-600 transition">아고라 시장</button>
-        <button onclick="showSection('stock')" class="px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-indigo-600 transition">아고라 주식</button>
-        <button onclick="showSection('mail')" class="px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-indigo-600 transition">아고라 메일</button>
-      </nav>
+    <div id="nav-menu" class="nav-tabs hidden">
+      <button class="nav-btn active" onclick="switchTab('dashboard')"><i class="fa-solid fa-wallet"></i> 계좌</button>
+      <button class="nav-btn" onclick="switchTab('stores')"><i class="fa-solid fa-store"></i> 상점 목록</button>
+      <button class="nav-btn" onclick="switchTab('stock')"><i class="fa-solid fa-arrow-trend-up"></i> 주식 시장</button>
+    </div>
 
-      <div class="flex items-center gap-2">
-        <div id="userBadge" class="hidden items-center gap-2 bg-indigo-50 text-indigo-700 px-3 py-1.5 rounded-full text-xs font-bold border border-indigo-100">
-          <i class="fa-solid fa-user-check"></i>
-          <span id="badgeName">김민수</span>
-          <span id="badgeBalance" class="bg-indigo-600 text-white px-2 py-0.5 rounded-full ml-1">1,200 공</span>
-        </div>
-        <button onclick="showSection('login')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition shadow-sm">
-          로그인 / 내 계좌
-        </button>
-        <button onclick="showSection('admin')" class="text-xs text-slate-500 hover:text-slate-800 px-2 py-2">
-          <i class="fa-solid fa-lock"></i>
-        </button>
-      </div>
+    <div class="header-actions">
+      <button class="btn btn-outline" onclick="openModal('modal-settings')"><i class="fa-solid fa-gear"></i> 설정</button>
+      <button id="admin-login-btn" class="btn btn-outline" onclick="openModal('modal-admin')"><i class="fa-solid fa-user-shield"></i> 관리자</button>
+      <button id="logout-btn" class="btn btn-danger hidden" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</button>
     </div>
   </header>
 
-  <main class="flex-1 max-w-6xl w-full mx-auto p-4 md:p-6">
+  <div class="container">
 
-    <!-- HOME SECTION -->
-    <section id="sec-home" class="space-y-8">
-      <div class="bg-gradient-to-br from-indigo-900 via-indigo-800 to-slate-900 rounded-3xl p-8 md:p-12 text-white shadow-xl relative overflow-hidden">
-        <div class="relative z-10 max-w-2xl">
-          <span class="inline-block px-3 py-1 bg-indigo-500/30 text-indigo-200 border border-indigo-400/30 rounded-full text-xs font-semibold uppercase tracking-wider mb-4">
-            AGORA CAPITAL PLATFORM
-          </span>
-          <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
-            우리 반의 금융과<br>경제활동을 한곳에서
-          </h1>
-          <p class="text-indigo-200 text-base md:text-lg mb-8">
-            은행 계좌 조회, 회원 간 송금, 디지털 장터 거래, 가상 주식 투자까지 완벽하게 연동되는 학급 전용 경제 포털입니다.
-          </p>
-          <div class="flex flex-wrap gap-3">
-            <button onclick="showSection('bank')" class="bg-white text-indigo-900 hover:bg-indigo-50 px-6 py-3 rounded-xl font-bold text-sm transition shadow-lg">
-              은행 바로가기
-            </button>
-            <button onclick="showSection('market')" class="bg-indigo-700/50 hover:bg-indigo-700 text-white border border-indigo-500/40 px-6 py-3 rounded-xl font-bold text-sm transition">
-              장터 둘러보기
-            </button>
-          </div>
-        </div>
+    <!-- LOGIN -->
+    <div id="view-login" class="card" style="max-width: 400px; margin: 3rem auto;">
+      <div class="card-header">
+        <h2 class="card-title"><i class="fa-solid fa-key"></i> 로그인</h2>
       </div>
-
-      <!-- Quick Modules Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div onclick="showSection('bank')" class="bg-white p-6 rounded-2xl border border-slate-200 hover:shadow-lg transition cursor-pointer group">
-          <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-building-columns"></i>
-          </div>
-          <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">BANKING</span>
-          <h2 class="text-xl font-bold text-slate-800 mt-1 mb-2">아고라 은행</h2>
-          <p class="text-slate-500 text-sm">계좌 조회, 입·출금, 회원 간 송금과 송금 받기를 이용합니다.</p>
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label>계좌번호</label>
+          <input type="text" id="login-acc" class="form-control" placeholder="예: 101-001" required>
         </div>
-
-        <div onclick="showSection('market')" class="bg-white p-6 rounded-2xl border border-slate-200 hover:shadow-lg transition cursor-pointer group">
-          <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-store"></i>
-          </div>
-          <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">MARKET</span>
-          <h2 class="text-xl font-bold text-slate-800 mt-1 mb-2">아고라 시장</h2>
-          <p class="text-slate-500 text-sm">회원이 만든 템플릿과 자료를 등록하고 공으로 사고팔 수 있습니다.</p>
+        <div class="form-group">
+          <label>비밀번호 (PIN)</label>
+          <input type="password" id="login-pin" class="form-control" placeholder="비밀번호" required>
         </div>
-
-        <div onclick="showSection('stock')" class="bg-white p-6 rounded-2xl border border-slate-200 hover:shadow-lg transition cursor-pointer group">
-          <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-chart-line"></i>
-          </div>
-          <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">STOCK MARKET</span>
-          <h2 class="text-xl font-bold text-slate-800 mt-1 mb-2">아고라 주식</h2>
-          <p class="text-slate-500 text-sm">실제 학급 가게의 주식을 사고팔고 주가 변동 손익을 확인합니다.</p>
-        </div>
-
-        <div onclick="showSection('mail')" class="bg-white p-6 rounded-2xl border border-slate-200 hover:shadow-lg transition cursor-pointer group">
-          <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-envelope"></i>
-          </div>
-          <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">AGORA MAIL</span>
-          <h2 class="text-xl font-bold text-slate-800 mt-1 mb-2">아고라 메일</h2>
-          <p class="text-slate-500 text-sm">반 친구들과 메시지와 자료를 주고받는 전용 이메일입니다.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- BANK SECTION -->
-    <section id="sec-bank" class="hidden space-y-6">
-      <div class="flex items-center justify-between">
-        <div>
-          <span class="text-xs font-bold text-indigo-600 uppercase">BANKING SYSTEM</span>
-          <h1 class="text-2xl font-extrabold text-slate-900">아고라 은행</h1>
-        </div>
-        <button onclick="openTransferModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm px-4 py-2 rounded-xl transition shadow-md">
-          <i class="fa-solid fa-paper-plane mr-2"></i>송금하기
-        </button>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-gradient-to-br from-indigo-600 to-indigo-800 rounded-2xl p-6 text-white shadow-lg md:col-span-1 flex flex-col justify-between">
-          <div>
-            <div class="flex justify-between items-center mb-6">
-              <span class="text-indigo-200 text-xs font-bold uppercase tracking-wider">내 계좌 정보</span>
-              <span class="bg-indigo-500/40 border border-indigo-400/30 text-xs px-2.5 py-1 rounded-full">주계좌</span>
-            </div>
-            <div id="bankAccountNum" class="text-indigo-100 font-mono text-sm mb-1">1002-602-8819</div>
-            <div id="bankAccountOwner" class="text-xl font-extrabold mb-6">김민수 님</div>
-          </div>
-          <div>
-            <div class="text-indigo-200 text-xs mb-1">현재 잔액</div>
-            <div id="bankBalanceDisplay" class="text-3xl font-extrabold tracking-tight">1,200 <span class="text-lg font-normal">공</span></div>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 md:col-span-2 shadow-sm">
-          <h3 class="font-bold text-slate-800 text-lg mb-4 flex items-center justify-between">
-            <span>최근 거래 내역</span>
-            <span class="text-xs font-normal text-slate-500">실시간 동기화</span>
-          </h3>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm">
-              <thead class="bg-slate-50 text-slate-500 uppercase text-xs">
-                <tr>
-                  <th class="p-3 rounded-l-lg">일시</th>
-                  <th class="p-3">구분</th>
-                  <th class="p-3">내용</th>
-                  <th class="p-3 text-right rounded-r-lg">금액</th>
-                </tr>
-              </thead>
-              <tbody id="bankTxTable" class="divide-y divide-slate-100">
-                <tr>
-                  <td class="p-3 text-slate-400 text-xs">10-07 14:20</td>
-                  <td class="p-3"><span class="px-2 py-0.5 bg-emerald-50 text-emerald-600 rounded font-bold text-xs">입금</span></td>
-                  <td class="p-3 font-semibold text-slate-700">이서준 (주식 정산)</td>
-                  <td class="p-3 text-right font-bold text-emerald-600">+150 공</td>
-                </tr>
-                <tr>
-                  <td class="p-3 text-slate-400 text-xs">10-07 11:05</td>
-                  <td class="p-3"><span class="px-2 py-0.5 bg-rose-50 text-rose-600 rounded font-bold text-xs">출금</span></td>
-                  <td class="p-3 font-semibold text-slate-700">아고라 시장 구매 (노트 템플릿)</td>
-                  <td class="p-3 text-right font-bold text-rose-600">-50 공</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- MARKET SECTION -->
-    <section id="sec-market" class="hidden space-y-6">
-      <div>
-        <span class="text-xs font-bold text-emerald-600 uppercase">DIGITAL MARKET</span>
-        <h1 class="text-2xl font-extrabold text-slate-900">아고라 시장</h1>
-        <p class="text-slate-500 text-sm">학생들이 제작한 템플릿과 학습 자료를 공으로 거래하세요.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="marketGrid">
-        <!-- Market Item 1 -->
-        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition">
-          <div class="h-40 bg-gradient-to-r from-blue-400 to-indigo-500 flex items-center justify-center text-white text-3xl font-bold">
-            <i class="fa-solid fa-file-powerpoint"></i>
-          </div>
-          <div class="p-5">
-            <div class="flex justify-between items-start mb-2">
-              <span class="text-xs bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-full font-bold">PPT 템플릿</span>
-              <span class="text-xs text-slate-400">판매자: 박지민</span>
-            </div>
-            <h3 class="font-bold text-slate-800 text-lg mb-2">깔끔한 모던 발표 PPT</h3>
-            <p class="text-slate-500 text-xs mb-4 line-clamp-2">학급 발표 및 수행평가용 고품질 PPT 서식 모음입니다.</p>
-            <div class="flex items-center justify-between pt-3 border-t border-slate-100">
-              <span class="text-lg font-extrabold text-slate-900">50 <span class="text-xs font-normal">공</span></span>
-              <button onclick="buyItem('깔끔한 모던 발표 PPT', 50)" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition">구매하기</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Market Item 2 -->
-        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-md transition">
-          <div class="h-40 bg-gradient-to-r from-emerald-400 to-teal-500 flex items-center justify-center text-white text-3xl font-bold">
-            <i class="fa-solid fa-note-sticky"></i>
-          </div>
-          <p class="p-5">
-            <div class="flex justify-between items-start mb-2">
-              <span class="text-xs bg-emerald-50 text-emerald-600 px-2.5 py-1 rounded-full font-bold">노트 요약</span>
-              <span class="text-xs text-slate-400">판매자: 최수아</span>
-            </div>
-            <h3 class="font-bold text-slate-800 text-lg mb-2">중간고사 과학 핵심요약</h3>
-            <p class="text-slate-500 text-xs mb-4 line-clamp-2">과학 1~3단원 중요 개념 요약 및 단원별 족집게 Quiz.</p>
-            <div class="flex items-center justify-between pt-3 border-t border-slate-100">
-              <span class="text-lg font-extrabold text-slate-900">80 <span class="text-xs font-normal">공</span></span>
-              <button onclick="buyItem('중간고사 과학 핵심요약', 80)" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition">구매하기</button>
-            </div>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- STOCK SECTION -->
-    <section id="sec-stock" class="hidden space-y-6">
-      <div>
-        <span class="text-xs font-bold text-purple-600 uppercase">VIRTUAL STOCK MARKET</span>
-        <h1 class="text-2xl font-extrabold text-slate-900">아고라 주식</h1>
-        <p class="text-slate-500 text-sm">학급 가게의 일일 실적과 평가에 따라 달라지는 주가에 투자해보세요.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h3 class="font-bold text-slate-800 mb-4 flex items-center justify-between">
-            <span>아고라 학급 종목 시세</span>
-            <span class="text-xs font-normal text-slate-400">실시간 변동</span>
-          </h3>
-          <div class="space-y-3">
-            <div class="p-4 bg-slate-50 rounded-xl flex items-center justify-between">
-              <div>
-                <div class="font-bold text-slate-800">문구 문방구 (가게 A)</div>
-                <div class="text-xs text-slate-500">시가총액: 12,000 공</div>
-              </div>
-              <div class="text-right">
-                <div class="font-extrabold text-slate-900">350 공</div>
-                <div class="text-xs font-bold text-emerald-600"><i class="fa-solid fa-caret-up"></i> +4.5%</div>
-              </div>
-            </div>
-            <div class="p-4 bg-slate-50 rounded-xl flex items-center justify-between">
-              <div>
-                <div class="font-bold text-slate-800">보드게임 카페 (가게 B)</div>
-                <div class="text-xs text-slate-500">시가총액: 8,500 공</div>
-              </div>
-              <div class="text-right">
-                <div class="font-extrabold text-slate-900">210 공</div>
-                <div class="text-xs font-bold text-rose-600"><i class="fa-solid fa-caret-down"></i> -1.2%</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
-          <div>
-            <h3 class="font-bold text-slate-800 mb-4">내 주식 포트폴리오</h3>
-            <div class="space-y-2 text-sm">
-              <div class="flex justify-between py-2 border-b border-slate-100">
-                <span class="text-slate-600">보유 종목</span>
-                <span class="font-bold text-slate-800">문구 문방구 5주</span>
-              </div>
-              <div class="flex justify-between py-2 border-b border-slate-100">
-                <span class="text-slate-600">평가 금액</span>
-                <span class="font-bold text-slate-800">1,750 공</span>
-              </div>
-              <div class="flex justify-between py-2">
-                <span class="text-slate-600">누적 수익률</span>
-                <span class="font-bold text-emerald-600">+12.5%</span>
-              </div>
-            </div>
-          </div>
-          <button onclick="alert('주식 매매 기능이 활성화되었습니다.')" class="w-full mt-4 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 rounded-xl text-xs transition">
-            주식 주문하기
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- MAIL SECTION -->
-    <section id="sec-mail" class="hidden space-y-6">
-      <div>
-        <span class="text-xs font-bold text-amber-600 uppercase">MESSAGING SYSTEM</span>
-        <h1 class="text-2xl font-extrabold text-slate-900">아고라 메일</h1>
-      </div>
-
-      <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm grid grid-cols-1 md:grid-cols-3 min-h-[350px]">
-        <div class="border-r border-slate-100 p-4 space-y-2">
-          <button class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs py-2.5 rounded-xl transition mb-4">
-            <i class="fa-solid fa-pen mr-1"></i> 메일 쓰기
-          </button>
-          <div class="bg-slate-100 p-3 rounded-xl font-bold text-xs text-slate-800 flex justify-between">
-            <span><span><i class="fa-solid fa-inbox mr-2"></i> 받은메일함</span></span>
-            <span class="bg-amber-500 text-white px-2 py-0.5 rounded-full text-[10px]">2</span>
-          </div>
-          <div class="p-3 font-semibold text-xs text-slate-500 hover:bg-slate-50 rounded-xl cursor-pointer">
-            <i class="fa-solid fa-paper-plane mr-2"></i> 보낸메일함
-          </div>
-        </div>
-
-        <div class="md:col-span-2 p-6 flex flex-col justify-center items-center text-slate-400">
-          <i class="fa-solid fa-envelope-open text-4xl mb-3 text-slate-300"></i>
-          <p class="text-sm">조회할 메일을 왼쪽 목록에서 선택하세요.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- LOGIN MODAL / SECTION -->
-    <section id="sec-login" class="hidden max-w-md mx-auto my-12 bg-white p-8 rounded-3xl border border-slate-200 shadow-xl">
-      <div class="text-center mb-6">
-        <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-2xl mx-auto flex items-center justify-center text-xl font-bold mb-3">
-          <i class="fa-solid fa-key"></i>
-        </div>
-        <h2 class="text-2xl font-bold text-slate-900">본인 계좌 인증</h2>
-        <p class="text-xs text-slate-500 mt-1">계좌번호, 이름, 고유번호를 입력하세요.</p>
-      </div>
-
-      <form onsubmit="handleLogin(event)" class="space-y-4">
-        <div>
-          <label class="text-xs font-bold text-slate-600 mb-1 block">이름</label>
-          <input type="text" id="loginName" required placeholder="예: 김민수" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
-        </div>
-        <div>
-          <label class="text-xs font-bold text-slate-600 mb-1 block">계좌번호</label>
-          <input type="text" id="loginAccount" required placeholder="1002-602-XXXX" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
-        </div>
-        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl text-sm transition shadow-md">
-          인증 및 접속하기
-        </button>
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">로그인</button>
       </form>
-    </section>
+    </div>
 
-    <!-- ADMIN SECTION -->
-    <section id="sec-admin" class="hidden max-w-md mx-auto my-12 bg-white p-8 rounded-3xl border border-slate-200 shadow-xl">
-      <div class="text-center mb-6">
-        <h2 class="text-2xl font-bold text-slate-900">관리자 통합뷰어</h2>
-        <p class="text-xs text-slate-500 mt-1">학급 관리자 전용 인증 코드</p>
+    <!-- DASHBOARD -->
+    <div id="view-dashboard" class="hidden">
+      <div class="card" style="background: var(--header-bg); color: white;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <h2 id="dash-name" style="font-size: 1.8rem;">-</h2>
+            <p>계좌번호: <span id="dash-acc">-</span></p>
+          </div>
+          <div style="text-align: right;">
+            <p style="font-size: 0.85rem; opacity: 0.8;">현재 현금 잔액</p>
+            <h1 id="dash-balance" style="font-size: 2.2rem;">0 G</h1>
+          </div>
+        </div>
       </div>
-      <div class="space-y-4">
-        <input type="password" placeholder="관리자 암호" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
-        <button onclick="alert('관리자 인증에 성공하였습니다.')" class="w-full bg-slate-800 text-white font-bold py-3 rounded-xl text-sm hover:bg-slate-900 transition">
-          관리자 접속
-        </button>
-      </div>
-    </section>
-  </main>
 
-  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-400 mt-auto">
-    <p>아고라 케피털 · 학급용 통합 경제 시스템</p>
-  </footer>
+      <div class="grid-2">
+        <!-- Stock Ownership Portfolio -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title"><i class="fa-solid fa-chart-pie"></i> 나의 주식 포트폴리오</h3>
+          </div>
+          <table>
+            <thead>
+              <tr><th>상점 (종목)</th><th>보유 주식</th><th>지분율 (%)</th></tr>
+            </thead>
+            <tbody id="portfolio-list">
+              <tr><td colspan="3" style="text-align:center; color: var(--text-muted);">보유 주식이 없습니다.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Transfer & History -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title"><i class="fa-solid fa-paper-plane"></i> 계좌 송금</h3>
+          </div>
+          <form onsubmit="handleTransfer(event)">
+            <div class="form-group">
+              <label>받는 계좌번호</label>
+              <input type="text" id="trans-acc" class="form-control" placeholder="상대 계좌" required>
+            </div>
+            <div class="form-group">
+              <label>송금 금액 (G)</label>
+              <input type="number" id="trans-amt" class="form-control" min="1" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">송금하기</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- STORES & ITEMS -->
+    <div id="view-stores" class="hidden">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title"><i class="fa-solid fa-store"></i> 전체 상점 & 상품</h2>
+          <button class="btn btn-primary" onclick="openModal('modal-create-store')"><i class="fa-solid fa-plus"></i> 상점 개설 (1,000 G)</button>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <label style="font-size: 0.85rem; color: var(--text-muted);">상품 추가 (상점 소유자 전용)</label>
+          <button class="btn btn-outline" style="margin-left: 10px;" onclick="openModal('modal-add-item')">상품 등록</button>
+        </div>
+
+        <div class="grid-3" id="market-items-grid"></div>
+      </div>
+    </div>
+
+    <!-- STOCK MARKET -->
+    <div id="view-stock" class="hidden">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title"><i class="fa-solid fa-arrow-trend-up"></i> 상점 주식 거래소</h2>
+        </div>
+        <table>
+          <thead>
+            <tr><th>상점명</th><th>현재 주가</th><th>남은 주식</th><th>거래하기</th></tr>
+          </thead>
+          <tbody id="stock-list"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ADMIN VIEW -->
+    <div id="view-admin" class="hidden">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title"><i class="fa-solid fa-user-gear"></i> 관리자 패널</h2>
+          <button class="btn btn-outline" onclick="logout()">관리자 종료</button>
+        </div>
+
+        <div style="margin-bottom: 1.5rem; background: var(--input-bg); padding: 1rem; border-radius: 8px;">
+          <h4>신규 계좌 생성</h4>
+          <form onsubmit="adminCreateAcc(event)" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+            <input type="text" id="adm-name" class="form-control" placeholder="이름" style="flex:1" required>
+            <input type="text" id="adm-acc" class="form-control" placeholder="계좌번호" style="flex:1" required>
+            <input type="text" id="adm-pin" class="form-control" placeholder="비밀번호" style="flex:1" required>
+            <input type="number" id="adm-bal" class="form-control" placeholder="잔액" style="flex:1" value="1000" required>
+            <button type="submit" class="btn btn-primary">생성</button>
+          </form>
+        </div>
+
+        <h3>전체 계좌 목록</h3>
+        <table>
+          <thead>
+            <tr><th>이름</th><th>계좌번호</th><th>비밀번호</th><th>잔액</th><th>관리</th></tr>
+          </thead>
+          <tbody id="admin-acc-list"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Settings Modal -->
+  <div id="modal-settings" class="modal-overlay">
+    <div class="modal">
+      <div class="card-header">
+        <h3 class="card-title"><i class="fa-solid fa-palette"></i> 테마 설정</h3>
+        <button class="btn btn-outline" onclick="closeModal('modal-settings')">&times;</button>
+      </div>
+      <div class="form-group">
+        <label>사이트 테마를 선택하세요</label>
+        <select class="form-control" onchange="setTheme(this.value)">
+          <option value="dark">다크 모드 (Dark)</option>
+          <option value="light">라이트 모드 (Light)</option>
+          <option value="ocean">오션 블루 (Ocean Blue)</option>
+          <option value="emerald">에메랄드 (Emerald Green)</option>
+          <option value="gold">모던 골드 (Modern Gold)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Login Modal -->
+  <div id="modal-admin" class="modal-overlay">
+    <div class="modal">
+      <div class="card-header">
+        <h3 class="card-title">관리자 인증</h3>
+        <button class="btn btn-outline" onclick="closeModal('modal-admin')">&times;</button>
+      </div>
+      <form onsubmit="handleAdminAuth(event)">
+        <div class="form-group">
+          <label>비밀번호</label>
+          <input type="password" id="admin-pass" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">로그인</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Create Store Modal -->
+  <div id="modal-create-store" class="modal-overlay">
+    <div class="modal">
+      <div class="card-header">
+        <h3 class="card-title">신규 상점 개설 (비용: 1,000 G)</h3>
+        <button class="btn btn-outline" onclick="closeModal('modal-create-store')">&times;</button>
+      </div>
+      <form onsubmit="handleCreateStore(event)">
+        <div class="form-group">
+          <label>상점 이름</label>
+          <input type="text" id="store-name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>발행할 주식 수량 (주)</label>
+          <input type="number" id="store-shares" class="form-control" min="10" value="100" required>
+        </div>
+        <div class="form-group">
+          <label>주당 초기 가격 (G)</label>
+          <input type="number" id="store-price" class="form-control" min="1" value="10" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">상점 개설 및 주식 발행</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Item Modal -->
+  <div id="modal-add-item" class="modal-overlay">
+    <div class="modal">
+      <div class="card-header">
+        <h3 class="card-title">상품 등록</h3>
+        <button class="btn btn-outline" onclick="closeModal('modal-add-item')">&times;</button>
+      </div>
+      <form onsubmit="handleAddItem(event)">
+        <div class="form-group">
+          <label>내 상점 선택</label>
+          <select id="item-store-select" class="form-control" required></select>
+        </div>
+        <div class="form-group">
+          <label>상품명</label>
+          <input type="text" id="item-name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>가격 (G)</label>
+          <input type="number" id="item-price" class="form-control" min="1" required>
+        </div>
+        <div class="form-group">
+          <label>이미지 URL (선택사항)</label>
+          <input type="url" id="item-img" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">상품 등록</button>
+      </form>
+    </div>
+  </div>
 
   <script>
-    let currentBalance = 1200;
-    let currentUser = "김민수";
+    // System State
+    let accounts = JSON.parse(localStorage.getItem('ag_accs')) || [
+      { name: "민수", account: "101-001", pin: "1234", balance: 5000, shares: {} },
+      { name: "지아", account: "101-002", pin: "1234", balance: 12000, shares: {} }
+    ];
 
-    function showSection(sectionId) {
-      const sections = ['home', 'bank', 'market', 'stock', 'mail', 'login', 'admin'];
-      sections.forEach(sec => {
-        const el = document.getElementById('sec-' + sec);
-        if (el) el.classList.add('hidden');
-      });
-      const target = document.getElementById('sec-' + sectionId);
-      if (target) target.classList.remove('hidden');
+    let stores = JSON.parse(localStorage.getItem('ag_stores')) || [
+      { id: "S1", name: "넥스트 테크", owner: "101-001", totalShares: 100, price: 50, totalSales: 0, items: [
+        { id: "I1", name: "스마트 텀블러", price: 300, img: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=300" }
+      ]}
+    ];
+
+    let currentUser = null;
+    let isAdmin = false;
+
+    function save() {
+      localStorage.setItem('ag_accs', JSON.stringify(accounts));
+      localStorage.setItem('ag_stores', JSON.stringify(stores));
+    }
+
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('ag_theme', theme);
+    }
+    setTheme(localStorage.getItem('ag_theme') || 'dark');
+
+    function openModal(id) {
+      if (id === 'modal-add-item') populateUserStores();
+      document.getElementById(id).classList.add('active');
+    }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+    function switchTab(tab) {
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+
+      document.getElementById('view-dashboard').classList.add('hidden');
+      document.getElementById('view-stores').classList.add('hidden');
+      document.getElementById('view-stock').classList.add('hidden');
+
+      document.getElementById(`view-${tab}`).classList.remove('hidden');
+
+      if (tab === 'stores') renderStores();
+      if (tab === 'stock') renderStock();
+      if (tab === 'dashboard') updateDash();
     }
 
     function handleLogin(e) {
       e.preventDefault();
-      const name = document.getElementById('loginName').value;
-      if (name) {
-        currentUser = name;
-        document.getElementById('badgeName').innerText = currentUser;
-        document.getElementById('bankAccountOwner').innerText = currentUser + " 님";
-        document.getElementById('userBadge').classList.remove('hidden');
-        document.getElementById('userBadge').classList.add('flex');
-        showSection('bank');
-      }
-    }
+      const acc = document.getElementById('login-acc').value;
+      const pin = document.getElementById('login-pin').value;
+      const user = accounts.find(a => a.account === acc && a.pin === pin);
 
-    function buyItem(itemName, price) {
-      if (currentBalance >= price) {
-        currentBalance -= price;
-        updateBalanceUI();
-        alert(`${itemName} 상품을 ${price}공에 성공적으로 구매하였습니다!`);
+      if (user) {
+        currentUser = user;
+        isAdmin = false;
+        document.getElementById('view-login').classList.add('hidden');
+        document.getElementById('nav-menu').classList.remove('hidden');
+        document.getElementById('logout-btn').classList.remove('hidden');
+        document.getElementById('admin-login-btn').classList.add('hidden');
+        updateDash();
+        document.getElementById('view-dashboard').classList.remove('hidden');
       } else {
-        alert("잔액이 부족합니다.");
+        alert("계좌 정보가 틀렸습니다.");
       }
     }
 
-    function updateBalanceUI() {
-      document.getElementById('bankBalanceDisplay').innerHTML = `${currentBalance.toLocaleString()} <span class="text-lg font-normal">공</span>`;
-      document.getElementById('badgeBalance').innerText = `${currentBalance.toLocaleString()} 공`;
+    function updateDash() {
+      document.getElementById('dash-name').innerText = currentUser.name;
+      document.getElementById('dash-acc').innerText = currentUser.account;
+      document.getElementById('dash-balance').innerText = `${currentUser.balance.toLocaleString()} G`;
+
+      // Portfolio
+      const tbody = document.getElementById('portfolio-list');
+      tbody.innerHTML = '';
+      let count = 0;
+
+      stores.forEach(s => {
+        const owned = (currentUser.shares && currentUser.shares[s.id]) || 0;
+        if (owned > 0) {
+          count++;
+          const pct = ((owned / s.totalShares) * 100).toFixed(1);
+          tbody.innerHTML += `
+            <tr>
+              <td><strong>${s.name}</strong></td>
+              <td>${owned} 주</td>
+              <td><span style="color:var(--primary); font-weight:700;">${pct}%</span></td>
+            </tr>
+          `;
+        }
+      });
+
+      if (count === 0) {
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: var(--text-muted);">보유 주식이 없습니다.</td></tr>';
+      }
     }
 
-    function openTransferModal() {
-      const recipient = prompt("송금받을 학생의 이름을 입력하세요:");
-      if (!recipient) return;
-      const amountStr = prompt("송금할 금액(공)을 입력하세요:");
-      const amount = parseInt(amountStr);
-      
-      if (amount && amount > 0 && amount <= currentBalance) {
-        currentBalance -= amount;
-        updateBalanceUI();
-        
-        // Append row to bank transactions
-        const tbody = document.getElementById('bankTxTable');
-        const newRow = document.createElement('tr');
-        newRow.innerHTML = `
-          <td class="p-3 text-slate-400 text-xs">방금 전</td>
-          <td class="p-3"><span class="px-2 py-0.5 bg-rose-50 text-rose-600 rounded font-bold text-xs">출금</span></td>
-          <td class="p-3 font-semibold text-slate-700">${recipient} (송금)</td>
-          <td class="p-3 text-right font-bold text-rose-600">-${amount} 공</td>
+    function handleTransfer(e) {
+      e.preventDefault();
+      const targetAcc = document.getElementById('trans-acc').value;
+      const amt = parseInt(document.getElementById('trans-amt').value);
+
+      const target = accounts.find(a => a.account === targetAcc);
+      if (!target || target.account === currentUser.account) return alert("유효하지 않은 계좌입니다.");
+      if (currentUser.balance < amt) return alert("잔액이 부족합니다.");
+
+      currentUser.balance -= amt;
+      target.balance += amt;
+      save();
+      updateDash();
+      alert("송금 완료!");
+    }
+
+    // Stores & Item Purchase Logic
+    function handleCreateStore(e) {
+      e.preventDefault();
+      if (currentUser.balance < 1000) return alert("개설 비용 (1,000 G)이 부족합니다.");
+
+      currentUser.balance -= 1000;
+      const sharesCount = parseInt(document.getElementById('store-shares').value);
+      const initialPrice = parseInt(document.getElementById('store-price').value);
+      const storeId = "S" + Date.now();
+
+      // Store Creation
+      stores.push({
+        id: storeId,
+        name: document.getElementById('store-name').value,
+        owner: currentUser.account,
+        totalShares: sharesCount,
+        price: initialPrice,
+        totalSales: 0,
+        items: []
+      });
+
+      // Owner gets 100% initial shares
+      if (!currentUser.shares) currentUser.shares = {};
+      currentUser.shares[storeId] = sharesCount;
+
+      save();
+      closeModal('modal-create-store');
+      updateDash();
+      alert("상점 및 주식이 성공적으로 발행되었습니다!");
+    }
+
+    function populateUserStores() {
+      const select = document.getElementById('item-store-select');
+      select.innerHTML = '';
+      const myStores = stores.filter(s => s.owner === currentUser.account);
+      myStores.forEach(s => {
+        select.innerHTML += `<option value="${s.id}">${s.name}</option>`;
+      });
+    }
+
+    function handleAddItem(e) {
+      e.preventDefault();
+      const storeId = document.getElementById('item-store-select').value;
+      const store = stores.find(s => s.id === storeId);
+
+      store.items.push({
+        id: "I" + Date.now(),
+        name: document.getElementById('item-name').value,
+        price: parseInt(document.getElementById('item-price').value),
+        img: document.getElementById('item-img').value || "https://via.placeholder.com/300"
+      });
+
+      save();
+      closeModal('modal-add-item');
+      renderStores();
+    }
+
+    function renderStores() {
+      const grid = document.getElementById('market-items-grid');
+      grid.innerHTML = '';
+      stores.forEach(s => {
+        s.items.forEach(item => {
+          const isOwner = currentUser && (currentUser.account === s.owner || isAdmin);
+          grid.innerHTML += `
+            <div class="market-card">
+              <img src="${item.img}" class="market-img">
+              <div class="market-body">
+                <div>
+                  <small style="color:var(--text-muted);">${s.name}</small>
+                  <h4>${item.name}</h4>
+                  <p style="color:var(--primary); font-weight:700;">${item.price.toLocaleString()} G</p>
+                </div>
+                <div style="margin-top:1rem; display:flex; gap:0.5rem;">
+                  <button class="btn btn-primary" style="flex:1;" onclick="buyItem('${s.id}', '${item.id}')">구매</button>
+                  ${isOwner ? `<button class="btn btn-danger" onclick="eraseItem('${s.id}', '${item.id}')">삭제</button>` : ''}
+                </div>
+              </div>
+            </div>
+          `;
+        });
+      });
+    }
+
+    function buyItem(storeId, itemId) {
+      const store = stores.find(s => s.id === storeId);
+      const item = store.items.find(i => i.id === itemId);
+
+      if (currentUser.balance < item.price) return alert("잔액이 부족합니다.");
+
+      currentUser.balance -= item.price;
+      store.totalSales += item.price;
+
+      // Sales raise stock price proportionally!
+      const priceBump = Math.ceil((item.price / (store.totalSales || 1)) * 5);
+      store.price += Math.max(1, priceBump);
+
+      // Pay owner
+      const ownerAcc = accounts.find(a => a.account === store.owner);
+      if (ownerAcc) ownerAcc.balance += item.price;
+
+      save();
+      updateDash();
+      renderStores();
+      alert(`[${item.name}] 구매 완료! ${store.name}의 주가가 상승했습니다!`);
+    }
+
+    function eraseItem(storeId, itemId) {
+      const store = stores.find(s => s.id === storeId);
+      store.items = store.items.filter(i => i.id !== itemId);
+      save();
+      renderStores();
+    }
+
+    // Stock Market Logic
+    function renderStock() {
+      const list = document.getElementById('stock-list');
+      list.innerHTML = '';
+      stores.forEach(s => {
+        // Calculate total allocated shares
+        let allocatedShares = 0;
+        accounts.forEach(a => { if (a.shares && a.shares[s.id]) allocatedShares += a.shares[s.id]; });
+        const unissuedShares = s.totalShares - allocatedShares;
+
+        list.innerHTML += `
+          <tr>
+            <td><strong>${s.name}</strong></td>
+            <td><strong style="color:var(--primary);">${s.price} G</strong></td>
+            <td>${unissuedShares} / ${s.totalShares} 주</td>
+            <td>
+              <button class="btn btn-primary" onclick="tradeStock('${s.id}', 'buy')">매수</button>
+              <button class="btn btn-outline" onclick="tradeStock('${s.id}', 'sell')">매도</button>
+            </td>
+          </tr>
         `;
-        tbody.prepend(newRow);
-        alert(`${recipient} 님에게 ${amount}공을 송금하였습니다.`);
-      } else if (amount > currentBalance) {
-        alert("계좌 잔액이 부족합니다.");
+      });
+    }
+
+    function tradeStock(storeId, type) {
+      const store = stores.find(s => s.id === storeId);
+      if (!currentUser.shares) currentUser.shares = {};
+
+      if (type === 'buy') {
+        if (currentUser.balance < store.price) return alert("잔액이 부족합니다.");
+        currentUser.balance -= store.price;
+        currentUser.shares[storeId] = (currentUser.shares[storeId] || 0) + 1;
+        store.price += 1; // Buying increases stock price
+      } else {
+        if (!currentUser.shares[storeId] || currentUser.shares[storeId] <= 0) return alert("보유 주식이 없습니다.");
+        currentUser.balance += store.price;
+        currentUser.shares[storeId] -= 1;
+        store.price = Math.max(1, store.price - 1); // Selling decreases stock price
       }
+
+      save();
+      updateDash();
+      renderStock();
+    }
+
+    // Admin Controls
+    function handleAdminAuth(e) {
+      e.preventDefault();
+      if (document.getElementById('admin-pass').value === "20140204") {
+        isAdmin = true;
+        closeModal('modal-admin');
+        document.getElementById('view-login').classList.add('hidden');
+        document.getElementById('view-admin').classList.remove('hidden');
+        renderAdmin();
+      } else alert("비밀번호 불일치");
+    }
+
+    function renderAdmin() {
+      const tbody = document.getElementById('admin-acc-list');
+      tbody.innerHTML = '';
+      accounts.forEach(a => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${a.name}</td>
+            <td>${a.account}</td>
+            <td>${a.pin}</td>
+            <td>${a.balance} G</td>
+            <td>
+              <button class="btn btn-outline" onclick="editAccBal('${a.account}')">수정</button>
+              <button class="btn btn-danger" onclick="eraseAcc('${a.account}')">삭제</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function adminCreateAcc(e) {
+      e.preventDefault();
+      accounts.push({
+        name: document.getElementById('adm-name').value,
+        account: document.getElementById('adm-acc').value,
+        pin: document.getElementById('adm-pin').value,
+        balance: parseInt(document.getElementById('adm-bal').value),
+        shares: {}
+      });
+      save();
+      renderAdmin();
+      alert("계좌 추가 완료");
+    }
+
+    function editAccBal(accNum) {
+      const acc = accounts.find(a => a.account === accNum);
+      const val = prompt("새 잔액 입력:", acc.balance);
+      if (val !== null) {
+        acc.balance = parseInt(val);
+        save();
+        renderAdmin();
+      }
+    }
+
+    function eraseAcc(accNum) {
+      if (confirm("이 계좌를 정말 영구 삭제하시겠습니까?")) {
+        accounts = accounts.filter(a => a.account !== accNum);
+        save();
+        renderAdmin();
+      }
+    }
+
+    function logout() {
+      currentUser = null;
+      isAdmin = false;
+      location.reload();
     }
   </script>
 </body>

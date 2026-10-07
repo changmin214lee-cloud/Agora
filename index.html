@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="glass">
+<html lang="ko" data-theme="liquid-green">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,28 +9,25 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    /* Liquid Glass Theme Configuration */
-    :root[data-theme="glass"] {
-      --bg: radial-gradient(circle at 50% 10%, #112825 0%, #031410 100%);
-      --card-bg: rgba(16, 48, 38, 0.45);
-      --card-border: rgba(52, 211, 153, 0.25);
-      --text: #ecfdf5;
-      --text-muted: #6ee7b7;
-      --primary: #34d399;
-      --primary-hover: #10b981;
-      --accent: #f59e0b;
+    /* Vibrant Liquid Glass Green Theme */
+    :root[data-theme="liquid-green"] {
+      --bg-gradient: linear-gradient(135deg, #70b031 0%, #5d9828 50%, #4a7a1e 100%);
+      --card-bg: rgba(62, 107, 20, 0.75);
+      --card-border: rgba(255, 255, 255, 0.25);
+      --text: #ffffff;
+      --text-muted: #d2f8a6;
+      --primary: #a3f345;
+      --primary-hover: #8ee031;
       --danger: #ef4444;
-      --success: #34d399;
-      --warning: #fbbf24;
-      --header-bg: rgba(6, 44, 34, 0.55);
-      --input-bg: rgba(2, 20, 15, 0.6);
-      --glass-glow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      --header-bg: rgba(45, 80, 14, 0.85);
+      --input-bg: rgba(30, 56, 9, 0.65);
+      --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.25);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
     
     body {
-      background: var(--bg);
+      background: var(--bg-gradient);
       background-attachment: fixed;
       color: var(--text);
       padding-bottom: 50px;
@@ -40,10 +37,9 @@
     /* Glass Header */
     header {
       background: var(--header-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--card-border);
-      color: white;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
@@ -61,47 +57,30 @@
       font-size: 1.4rem;
       font-weight: 800;
       color: var(--primary);
-      text-shadow: 0 0 10px rgba(52, 211, 153, 0.3);
     }
     
     .nav-tabs { display: flex; gap: 8px; }
     
     .nav-btn {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.12);
       border: 1px solid var(--card-border);
       color: white;
       padding: 0.5rem 1rem;
       border-radius: 12px;
       cursor: pointer;
       font-weight: 600;
-      transition: all 0.25s ease;
-      backdrop-filter: blur(8px);
+      transition: all 0.2s ease;
     }
     .nav-btn:hover, .nav-btn.active {
       background: var(--primary);
-      color: #022c22;
-      box-shadow: 0 0 15px rgba(52, 211, 153, 0.4);
+      color: #1e3a05;
+      box-shadow: 0 0 15px rgba(163, 243, 69, 0.5);
     }
 
     .header-actions { display: flex; gap: 10px; align-items: center; }
 
-    .user-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--primary);
-      box-shadow: 0 0 12px rgba(52, 211, 153, 0.5);
-      cursor: pointer;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .user-avatar:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px rgba(52, 211, 153, 0.8);
-    }
-
     .btn {
-      padding: 0.5rem 1rem;
+      padding: 0.50rem 1rem;
       border-radius: 10px;
       font-weight: 600;
       font-size: 0.875rem;
@@ -112,34 +91,84 @@
       gap: 6px;
       transition: all 0.2s;
     }
-    .btn-primary { background-color: var(--primary); color: #022c22; }
-    .btn-primary:hover { background-color: var(--primary-hover); color: white; box-shadow: 0 0 12px rgba(52, 211, 153, 0.4); }
+    .btn-primary { background-color: var(--primary); color: #1e3a05; }
+    .btn-primary:hover { background-color: var(--primary-hover); color: #000; }
     .btn-danger { background-color: var(--danger); color: white; }
-    .btn-outline { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: var(--text); }
-    .btn-outline:hover { background: rgba(255, 255, 255, 0.15); }
+    .btn-outline { background: rgba(255, 255, 255, 0.1); border: 1px solid var(--card-border); color: var(--text); }
+    .btn-outline:hover { background: rgba(255, 255, 255, 0.2); }
 
     .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
-    
-    /* Liquid Glass Cards */
-    .card {
+
+    /* Custom Home Dashboard Layout matching your image */
+    .dashboard-top-row {
+      display: grid;
+      grid-template-columns: 1fr 140px;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .top-banner-card {
       background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
       border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 28px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       box-shadow: var(--glass-glow);
     }
-    .card-header {
+
+    .top-profile-box {
+      background: var(--card-bg);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-top: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 28px;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
-      margin-bottom: 1rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid var(--card-border);
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--glass-glow);
+      transition: transform 0.2s ease;
     }
-    .card-title { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
+    .top-profile-box:hover { transform: scale(1.03); }
+
+    .user-avatar-lg {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary);
+      box-shadow: 0 0 15px rgba(163, 243, 69, 0.4);
+    }
+
+    /* 3 Large Vertical Cards Grid */
+    .dashboard-bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .vertical-glass-card {
+      background: var(--card-bg);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-top: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 28px;
+      padding: 1.5rem;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--glass-glow);
+    }
+
+    .card-title { font-size: 1.15rem; font-weight: 700; color: var(--primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
 
     .form-group { margin-bottom: 1rem; }
     .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-muted); }
@@ -149,72 +178,52 @@
       background: var(--input-bg);
       border: 1px solid var(--card-border);
       color: var(--text);
-      border-radius: 10px;
+      border-radius: 12px;
       outline: none;
-      backdrop-filter: blur(8px);
     }
 
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
-
-    /* Store & Product Liquid Cards */
-    .store-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 1.25rem;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-    .store-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--primary);
-      box-shadow: 0 0 20px rgba(52, 211, 153, 0.25);
-    }
-
+    /* Store & Product Cards */
     .product-card {
       background: var(--input-bg);
       border: 1px solid var(--card-border);
-      border-radius: 12px;
+      border-radius: 14px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: transform 0.2s;
     }
-    .product-card:hover { transform: translateY(-3px); border-color: var(--primary); }
-    .product-img { width: 100%; height: 160px; object-fit: cover; background: rgba(0,0,0,0.3); }
-    .product-body { padding: 1rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    .product-card:hover { transform: translateY(-3px); }
+    .product-img { width: 100%; height: 140px; object-fit: cover; }
 
     /* Modals */
     .modal-overlay {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(2, 10, 8, 0.85);
+      background: rgba(10, 20, 5, 0.8);
+      -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       display: flex; align-items: center; justify-content: center; z-index: 1000;
-      opacity: 0; pointer-events: none; transition: opacity 0.25s;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
     }
     .modal-overlay.active { opacity: 1; pointer-events: auto; }
     .modal {
-      background: var(--card-bg);
+      background: rgba(45, 80, 14, 0.95);
       border: 1px solid var(--card-border);
-      border-radius: 20px;
+      border-radius: 24px;
       width: 100%;
       max-width: 600px;
       padding: 1.5rem;
       max-height: 90vh;
       overflow-y: auto;
-      box-shadow: 0 0 35px rgba(0, 0, 0, 0.6);
+      box-shadow: var(--glass-glow);
     }
 
     table { width: 100%; border-collapse: collapse; text-align: left; }
-    th, td { padding: 0.75rem; border-bottom: 1px solid var(--card-border); }
-    th { background: rgba(0,0,0,0.3); color: var(--text-muted); }
+    th, td { padding: 0.65rem 0.5rem; border-bottom: 1px solid var(--card-border); font-size: 0.9rem; }
+    th { color: var(--text-muted); }
 
     .review-box { background: var(--input-bg); border-radius: 10px; padding: 0.75rem; margin-top: 0.5rem; border: 1px solid var(--card-border); }
     .reaction-btn { background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text); padding: 0.4rem 0.8rem; border-radius: 8px; cursor: pointer; }
-    .reaction-btn:hover { border-color: var(--primary); }
 
     .hidden { display: none !important; }
   </style>
@@ -224,18 +233,17 @@
   <!-- Header -->
   <header>
     <div class="brand">
-      <i class="fa-solid fa-droplet"></i>
+      <i class="fa-solid fa-leaf"></i>
       <span>AGORA CAPITAL</span>
     </div>
 
     <div id="nav-menu" class="nav-tabs hidden">
-      <button class="nav-btn active" onclick="switchTab('dashboard')"><i class="fa-solid fa-wallet"></i> 계좌</button>
+      <button class="nav-btn active" onclick="switchTab('dashboard')"><i class="fa-solid fa-house"></i> 홈</button>
       <button class="nav-btn" onclick="switchTab('stores')"><i class="fa-solid fa-store"></i> 상점 탐색</button>
-      <button class="nav-btn" onclick="switchTab('stock')"><i class="fa-solid fa-arrow-trend-up"></i> 주식 거래소</button>
+      <button class="nav-btn" onclick="switchTab('stock')"><i class="fa-solid fa-chart-line"></i> 주식 거래소</button>
     </div>
 
     <div class="header-actions">
-      <img id="nav-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" class="user-avatar hidden" onclick="openModal('modal-avatar')" title="프로필 사진 변경">
       <button class="btn btn-outline" onclick="openModal('modal-settings')"><i class="fa-solid fa-gear"></i> 설정</button>
       <button id="admin-login-btn" class="btn btn-outline" onclick="openModal('modal-admin')"><i class="fa-solid fa-user-shield"></i> 관리자</button>
       <button id="logout-btn" class="btn btn-danger hidden" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</button>
@@ -245,10 +253,8 @@
   <div class="container">
 
     <!-- LOGIN -->
-    <div id="view-login" class="card" style="max-width: 400px; margin: 3rem auto;">
-      <div class="card-header">
-        <h2 class="card-title"><i class="fa-solid fa-key"></i> 계좌 로그인</h2>
-      </div>
+    <div id="view-login" class="vertical-glass-card" style="max-width: 400px; margin: 3rem auto; min-height: auto;">
+      <h2 class="card-title"><i class="fa-solid fa-key"></i> 계좌 로그인</h2>
       <form onsubmit="handleLogin(event)">
         <div class="form-group">
           <label>계좌번호</label>
@@ -258,77 +264,92 @@
           <label>비밀번호 (PIN)</label>
           <input type="password" id="login-pin" class="form-control" placeholder="비밀번호" required>
         </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">로그인</button>
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem;">로그인</button>
       </form>
     </div>
 
-    <!-- DASHBOARD -->
+    <!-- DASHBOARD (LAYOUT MATCHING YOUR IMAGE) -->
     <div id="view-dashboard" class="hidden">
-      <!-- User Profile Glass Header -->
-      <div class="card" style="background: rgba(6, 44, 34, 0.65);">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div style="display: flex; align-items: center; gap: 1.25rem;">
-            <img id="dash-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" class="user-avatar" style="width: 76px; height: 76px;" onclick="openModal('modal-avatar')">
-            <div>
-              <h2 id="dash-name" style="font-size: 1.8rem;">-</h2>
-              <p style="color:var(--text-muted); font-size:0.9rem;">계좌번호: <span id="dash-acc">-</span></p>
-            </div>
+      
+      <!-- Top Section: Long Banner Card + Right Profile Container -->
+      <div class="dashboard-top-row">
+        <div class="top-banner-card">
+          <div>
+            <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">환영합니다!</span>
+            <h1 id="dash-name" style="font-size: 1.8rem;">-</h1>
+            <p style="font-size: 0.9rem; opacity: 0.9;">계좌번호: <span id="dash-acc">-</span></p>
           </div>
           <div style="text-align: right;">
-            <p style="font-size: 0.85rem; opacity: 0.8;">현재 현금 잔액</p>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">총 현금 잔액</p>
             <h1 id="dash-balance" style="font-size: 2.2rem; color: var(--primary);">0 G</h1>
           </div>
         </div>
+
+        <div class="top-profile-box" onclick="openModal('modal-avatar')" title="프로필 사진 변경">
+          <img id="dash-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" class="user-avatar-lg">
+          <span style="font-size:0.75rem; color: var(--text-muted); margin-top:0.4rem;">프로필 수정</span>
+        </div>
       </div>
 
-      <div class="grid-2">
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title"><i class="fa-solid fa-chart-pie"></i> 나의 주식 지분율</h3>
-          </div>
-          <table>
-            <thead><tr><th>상점 (종목)</th><th>보유 주식</th><th>지분율 (%)</th></tr></thead>
-            <tbody id="portfolio-list"></tbody>
-          </table>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title"><i class="fa-solid fa-paper-plane"></i> 계좌 송금</h3>
-          </div>
-          <form onsubmit="handleTransfer(event)">
-            <div class="form-group">
-              <label>받는 계좌번호</label>
-              <input type="text" id="trans-acc" class="form-control" placeholder="상대 계좌" required>
-            </div>
-            <div class="form-group">
-              <label>송금 금액 (G)</label>
-              <input type="number" id="trans-amt" class="form-control" min="1" required>
+      <!-- Bottom Section: 3 Large Vertical Glass Cards -->
+      <div class="dashboard-bottom-grid">
+        
+        <!-- Vertical Card 1: 송금 & 계좌 정보 -->
+        <div class="vertical-glass-card">
+          <h3 class="card-title"><i class="fa-solid fa-paper-plane"></i> 계좌 송금</h3>
+          <form onsubmit="handleTransfer(event)" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div class="form-group">
+                <label>받는 계좌번호</label>
+                <input type="text" id="trans-acc" class="form-control" placeholder="상대 계좌" required>
+              </div>
+              <div class="form-group">
+                <label>송금 금액 (G)</label>
+                <input type="number" id="trans-amt" class="form-control" min="1" required>
+              </div>
             </div>
             <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">송금하기</button>
           </form>
         </div>
+
+        <!-- Vertical Card 2: 주식 지분율 -->
+        <div class="vertical-glass-card">
+          <h3 class="card-title"><i class="fa-solid fa-chart-pie"></i> 나의 주식 포트폴리오</h3>
+          <div style="flex-grow: 1; overflow-y: auto;">
+            <table>
+              <thead><tr><th>상점</th><th>보유</th><th>지분율</th></tr></thead>
+              <tbody id="portfolio-list"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Vertical Card 3: 상점 바로가기 & 빠른 이용 -->
+        <div class="vertical-glass-card">
+          <h3 class="card-title"><i class="fa-solid fa-store"></i> 상점 Quick Menu</h3>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom: 1rem;">최근 개설된 상점을 탐색하고 상품을 바로 구매하세요.</p>
+          <div id="dash-store-preview" style="flex-grow: 1; overflow-y: auto;"></div>
+          <button class="btn btn-outline" style="width:100%; justify-content:center; margin-top:1rem;" onclick="switchTab('stores')">모든 상점 보기</button>
+        </div>
+
       </div>
+
     </div>
 
     <!-- STORES VIEW -->
     <div id="view-stores" class="hidden">
-      <div class="card">
-        <div class="card-header">
+      <div class="vertical-glass-card" style="min-height: auto;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
           <h2 class="card-title"><i class="fa-solid fa-store"></i> 등록된 상점 목록</h2>
           <button class="btn btn-primary" onclick="openModal('modal-create-store')"><i class="fa-solid fa-plus"></i> 상점 개설 (1,000 G)</button>
         </div>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">상점을 클릭하면 해당 상점의 상품 목록을 확인하고 구매 및 리뷰할 수 있습니다.</p>
-        <div class="grid-3" id="store-list-grid"></div>
+        <div class="dashboard-bottom-grid" id="store-list-grid"></div>
       </div>
     </div>
 
     <!-- STOCK MARKET -->
     <div id="view-stock" class="hidden">
-      <div class="card">
-        <div class="card-header">
-          <h2 class="card-title"><i class="fa-solid fa-arrow-trend-up"></i> 주식 거래소</h2>
-        </div>
+      <div class="vertical-glass-card" style="min-height: auto;">
+        <h2 class="card-title"><i class="fa-solid fa-arrow-trend-up"></i> 주식 거래소</h2>
         <table>
           <thead>
             <tr><th>상점명</th><th>현재 주가</th><th>남은 수량</th><th>주식 매매</th></tr>
@@ -340,13 +361,13 @@
 
     <!-- ADMIN VIEW -->
     <div id="view-admin" class="hidden">
-      <div class="card">
-        <div class="card-header">
+      <div class="vertical-glass-card" style="min-height: auto;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
           <h2 class="card-title"><i class="fa-solid fa-user-gear"></i> 관리자 대시보드</h2>
           <button class="btn btn-outline" onclick="logout()">관리자 종료</button>
         </div>
 
-        <div style="margin-bottom: 1.5rem; background: var(--input-bg); padding: 1rem; border-radius: 12px; border:1px solid var(--card-border);">
+        <div style="margin: 1rem 0; background: var(--input-bg); padding: 1rem; border-radius: 16px; border:1px solid var(--card-border);">
           <h4>신규 계좌 생성</h4>
           <form onsubmit="adminCreateAcc(event)" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
             <input type="text" id="adm-name" class="form-control" placeholder="이름" style="flex:1" required>
@@ -372,7 +393,7 @@
   <!-- STORE DETAIL MODAL -->
   <div id="modal-store-detail" class="modal-overlay">
     <div class="modal">
-      <div class="card-header">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h3 id="modal-store-title" class="card-title">상점 상세보기</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-store-detail')">&times;</button>
       </div>
@@ -383,19 +404,19 @@
       </div>
 
       <h4>판매 상품 목록</h4>
-      <div id="store-products-grid" class="grid-2" style="margin-top: 0.75rem;"></div>
+      <div id="store-products-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:0.75rem;"></div>
     </div>
   </div>
 
   <!-- PRODUCT POPUP MODAL -->
   <div id="modal-product-popup" class="modal-overlay">
     <div class="modal">
-      <div class="card-header">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h3 id="pop-product-title" class="card-title">상품 상세 정보</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-product-popup')">&times;</button>
       </div>
 
-      <img id="pop-product-img" src="" style="width:100%; height:200px; object-fit:cover; border-radius:12px; margin-bottom:1rem; background:var(--input-bg);">
+      <img id="pop-product-img" src="" style="width:100%; height:200px; object-fit:cover; border-radius:14px; margin-bottom:1rem; background:var(--input-bg);">
 
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h2 id="pop-product-price" style="color:var(--primary);">0 G</h2>
@@ -432,7 +453,7 @@
   <!-- PROFILE PICTURE MODAL -->
   <div id="modal-avatar" class="modal-overlay">
     <div class="modal">
-      <div class="card-header">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h3 class="card-title">프로필 사진 변경</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-avatar')">&times;</button>
       </div>
@@ -449,7 +470,7 @@
   <!-- CREATE STORE MODAL -->
   <div id="modal-create-store" class="modal-overlay">
     <div class="modal">
-      <div class="card-header">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h3 class="card-title">신규 상점 개설 (1,000 G)</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-create-store')">&times;</button>
       </div>
@@ -474,7 +495,7 @@
   <!-- ADD ITEM MODAL -->
   <div id="modal-add-item" class="modal-overlay">
     <div class="modal">
-      <div class="card-header">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h3 class="card-title">상품 등록</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-add-item')">&times;</button>
       </div>
@@ -499,14 +520,14 @@
   <!-- SETTINGS MODAL -->
   <div id="modal-settings" class="modal-overlay">
     <div class="modal">
-      <div class="card-header">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h3 class="card-title"><i class="fa-solid fa-palette"></i> 테마 설정</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-settings')">&times;</button>
       </div>
       <div class="form-group">
         <label>테마 선택</label>
-        <select class="form-control" onchange="setTheme(this.value)">
-          <option value="glass">리퀴드 글래스 (Liquid Glass)</option>
+        <select class="form-control">
+          <option value="liquid-green">리퀴드 그린 (Liquid Green)</option>
         </select>
       </div>
     </div>
@@ -515,7 +536,7 @@
   <!-- ADMIN AUTH MODAL -->
   <div id="modal-admin" class="modal-overlay">
     <div class="modal">
-      <div class="card-header">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h3 class="card-title">관리자 로그인</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-admin')">&times;</button>
       </div>
@@ -530,16 +551,15 @@
   </div>
 
   <script>
-    // State Persistence
     const defaultAvatar = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150";
 
-    let accounts = JSON.parse(localStorage.getItem('ag_accs_v5')) || [
+    let accounts = JSON.parse(localStorage.getItem('ag_accs_v7')) || [
       { name: "민수", account: "101-001", pin: "1234", balance: 5000, avatar: defaultAvatar, shares: {} },
       { name: "지아", account: "101-002", pin: "1234", balance: 12000, avatar: defaultAvatar, shares: {} }
     ];
 
-    let stores = JSON.parse(localStorage.getItem('ag_stores_v5')) || [
-      { id: "S1", name: "리퀴드 파이낸스 상점", owner: "101-001", totalShares: 100, price: 50, totalSales: 0, items: [] }
+    let stores = JSON.parse(localStorage.getItem('ag_stores_v7')) || [
+      { id: "S1", name: "아고라 메인 상점", owner: "101-001", totalShares: 100, price: 50, totalSales: 0, items: [] }
     ];
 
     let currentUser = null;
@@ -548,15 +568,9 @@
     let isAdmin = false;
 
     function save() {
-      localStorage.setItem('ag_accs_v5', JSON.stringify(accounts));
-      localStorage.setItem('ag_stores_v5', JSON.stringify(stores));
+      localStorage.setItem('ag_accs_v7', JSON.stringify(accounts));
+      localStorage.setItem('ag_stores_v7', JSON.stringify(stores));
     }
-
-    function setTheme(theme) {
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('ag_theme', theme);
-    }
-    setTheme(localStorage.getItem('ag_theme') || 'glass');
 
     function openModal(id) { document.getElementById(id).classList.add('active'); }
     function closeModal(id) { document.getElementById(id).classList.remove('active'); }
@@ -587,7 +601,6 @@
         isAdmin = false;
         document.getElementById('view-login').classList.add('hidden');
         document.getElementById('nav-menu').classList.remove('hidden');
-        document.getElementById('nav-avatar').classList.remove('hidden');
         document.getElementById('logout-btn').classList.remove('hidden');
         document.getElementById('admin-login-btn').classList.add('hidden');
         updateDash();
@@ -604,7 +617,6 @@
       document.getElementById('dash-acc').innerText = currentUser.account;
       document.getElementById('dash-balance').innerText = `${currentUser.balance.toLocaleString()} G`;
       document.getElementById('dash-avatar').src = userImg;
-      document.getElementById('nav-avatar').src = userImg;
 
       const tbody = document.getElementById('portfolio-list');
       tbody.innerHTML = '';
@@ -620,6 +632,18 @@
       });
 
       if (count === 0) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: var(--text-muted);">보유 주식이 없습니다.</td></tr>';
+
+      // Preview Store in Dashboard Card 3
+      const previewBox = document.getElementById('dash-store-preview');
+      previewBox.innerHTML = '';
+      stores.slice(0, 2).forEach(s => {
+        previewBox.innerHTML += `
+          <div style="background:var(--input-bg); border:1px solid var(--card-border); border-radius:12px; padding:0.75rem; margin-bottom:0.5rem; cursor:pointer;" onclick="openStoreDetail('${s.id}')">
+            <strong>${s.name}</strong>
+            <p style="font-size:0.8rem; color:var(--text-muted);">주가: ${s.price} G</p>
+          </div>
+        `;
+      });
     }
 
     function handleUpdateAvatar(e) {
@@ -683,12 +707,12 @@
       grid.innerHTML = '';
       stores.forEach(s => {
         grid.innerHTML += `
-          <div class="store-card" onclick="openStoreDetail('${s.id}')">
+          <div class="vertical-glass-card" style="min-height:auto; cursor:pointer;" onclick="openStoreDetail('${s.id}')">
             <h3 style="color:var(--primary);">${s.name}</h3>
             <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem;">소유자 계좌: ${s.owner}</p>
             <div style="display:flex; justify-content:space-between; margin-top:1rem; font-weight:600;">
               <span>등록 상품: ${s.items.length}개</span>
-              <span style="color:var(--success);">${s.price} G / 주</span>
+              <span style="color:var(--primary);">${s.price} G / 주</span>
             </div>
           </div>
         `;
@@ -725,7 +749,7 @@
         grid.innerHTML += `
           <div class="product-card" onclick="openProductPopup('${item.id}')">
             <img src="${item.img || 'https://via.placeholder.com/300'}" class="product-img">
-            <div class="product-body">
+            <div style="padding:0.75rem;">
               <h4>${item.name}</h4>
               <p style="color:var(--primary); font-weight:700; margin-top:0.25rem;">${item.price.toLocaleString()} G</p>
             </div>

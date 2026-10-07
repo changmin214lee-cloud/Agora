@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="emerald">
+<html lang="ko" data-theme="glass">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,111 +9,211 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
-    /* Themes Configuration */
-    :root[data-theme="emerald"] {
-      --bg: #06231a;
-      --card-bg: #0d382c;
-      --card-border: #185243;
+    /* Liquid Glass Theme Configuration */
+    :root[data-theme="glass"] {
+      --bg: radial-gradient(circle at 50% 10%, #112825 0%, #031410 100%);
+      --card-bg: rgba(16, 48, 38, 0.45);
+      --card-border: rgba(52, 211, 153, 0.25);
       --text: #ecfdf5;
       --text-muted: #6ee7b7;
-      --primary: #10b981;
-      --primary-hover: #059669;
+      --primary: #34d399;
+      --primary-hover: #10b981;
       --accent: #f59e0b;
       --danger: #ef4444;
       --success: #34d399;
       --warning: #fbbf24;
-      --header-bg: linear-gradient(135deg, #022c22 0%, #064e3b 100%);
-      --input-bg: #031912;
-    }
-    :root[data-theme="dark"] {
-      --bg: #0f172a; --card-bg: #1e293b; --card-border: #334155; --text: #f8fafc;
-      --text-muted: #94a3b8; --primary: #38bdf8; --primary-hover: #0284c7;
-      --accent: #6366f1; --danger: #ef4444; --success: #10b981; --warning: #f59e0b;
-      --header-bg: linear-gradient(135deg, #0284c7 0%, #1e1b4b 100%); --input-bg: #0f172a;
-    }
-    :root[data-theme="light"] {
-      --bg: #f8fafc; --card-bg: #ffffff; --card-border: #e2e8f0; --text: #0f172a;
-      --text-muted: #64748b; --primary: #2563eb; --primary-hover: #1d4ed8;
-      --accent: #4f46e5; --danger: #ef4444; --success: #10b981; --warning: #f59e0b;
-      --header-bg: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); --input-bg: #ffffff;
+      --header-bg: rgba(6, 44, 34, 0.55);
+      --input-bg: rgba(2, 20, 15, 0.6);
+      --glass-glow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-    body { background-color: var(--bg); color: var(--text); padding-bottom: 50px; }
+    
+    body {
+      background: var(--bg);
+      background-attachment: fixed;
+      color: var(--text);
+      padding-bottom: 50px;
+      min-height: 100vh;
+    }
 
+    /* Glass Header */
     header {
-      background: var(--header-bg); color: white; padding: 1rem 2rem;
-      display: flex; justify-content: space-between; align-items: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      background: var(--header-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--card-border);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--glass-glow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    .brand { display: flex; align-items: center; gap: 10px; font-size: 1.4rem; font-weight: 800; color: var(--primary); }
+    
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-shadow: 0 0 10px rgba(52, 211, 153, 0.3);
+    }
+    
     .nav-tabs { display: flex; gap: 8px; }
+    
     .nav-btn {
-      background: rgba(255, 255, 255, 0.08); border: none; color: white;
-      padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.2s;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(8px);
     }
-    .nav-btn:hover, .nav-btn.active { background: var(--primary); color: #022c22; }
+    .nav-btn:hover, .nav-btn.active {
+      background: var(--primary);
+      color: #022c22;
+      box-shadow: 0 0 15px rgba(52, 211, 153, 0.4);
+    }
 
     .header-actions { display: flex; gap: 10px; align-items: center; }
 
     .user-avatar {
-      width: 40px; height: 40px; border-radius: 50%; object-fit: cover;
-      border: 2px solid var(--primary); cursor: pointer; transition: transform 0.2s;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--primary);
+      box-shadow: 0 0 12px rgba(52, 211, 153, 0.5);
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
-    .user-avatar:hover { transform: scale(1.08); }
+    .user-avatar:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(52, 211, 153, 0.8);
+    }
 
     .btn {
-      padding: 0.5rem 1rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem;
-      cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 6px; transition: 0.2s;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
     }
     .btn-primary { background-color: var(--primary); color: #022c22; }
-    .btn-primary:hover { background-color: var(--primary-hover); color: white; }
+    .btn-primary:hover { background-color: var(--primary-hover); color: white; box-shadow: 0 0 12px rgba(52, 211, 153, 0.4); }
     .btn-danger { background-color: var(--danger); color: white; }
-    .btn-outline { background: transparent; border: 1px solid var(--card-border); color: var(--text); }
-    .btn-outline:hover { background: var(--card-border); }
+    .btn-outline { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: var(--text); }
+    .btn-outline:hover { background: rgba(255, 255, 255, 0.15); }
 
     .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
-    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
-    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--card-border); }
+    
+    /* Liquid Glass Cards */
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--glass-glow);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--card-border);
+    }
     .card-title { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
 
     .form-group { margin-bottom: 1rem; }
     .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--text-muted); }
-    .form-control { width: 100%; padding: 0.6rem 0.8rem; background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text); border-radius: 8px; outline: none; }
+    .form-control {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      border-radius: 10px;
+      outline: none;
+      backdrop-filter: blur(8px);
+    }
 
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
 
-    /* Store & Product Cards */
+    /* Store & Product Liquid Cards */
     .store-card {
-      background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px;
-      padding: 1.25rem; cursor: pointer; transition: transform 0.2s, border-color 0.2s;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
     }
-    .store-card:hover { transform: translateY(-3px); border-color: var(--primary); }
+    .store-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+      box-shadow: 0 0 20px rgba(52, 211, 153, 0.25);
+    }
 
     .product-card {
-      background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 10px; overflow: hidden;
-      display: flex; flex-direction: column; cursor: pointer; transition: transform 0.2s;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: all 0.25s ease;
     }
-    .product-card:hover { transform: translateY(-2px); border-color: var(--primary); }
-    .product-img { width: 100%; height: 160px; object-fit: cover; background: var(--card-bg); }
+    .product-card:hover { transform: translateY(-3px); border-color: var(--primary); }
+    .product-img { width: 100%; height: 160px; object-fit: cover; background: rgba(0,0,0,0.3); }
     .product-body { padding: 1rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
 
     /* Modals */
     .modal-overlay {
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8);
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(2, 10, 8, 0.85);
+      backdrop-filter: blur(12px);
       display: flex; align-items: center; justify-content: center; z-index: 1000;
-      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+      opacity: 0; pointer-events: none; transition: opacity 0.25s;
     }
     .modal-overlay.active { opacity: 1; pointer-events: auto; }
-    .modal { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; width: 100%; max-width: 600px; padding: 1.5rem; max-height: 90vh; overflow-y: auto; }
+    .modal {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 600px;
+      padding: 1.5rem;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.6);
+    }
 
     table { width: 100%; border-collapse: collapse; text-align: left; }
     th, td { padding: 0.75rem; border-bottom: 1px solid var(--card-border); }
-    th { background: rgba(0,0,0,0.2); color: var(--text-muted); }
+    th { background: rgba(0,0,0,0.3); color: var(--text-muted); }
 
-    .review-box { background: var(--input-bg); border-radius: 8px; padding: 0.75rem; margin-top: 0.5rem; border: 1px solid var(--card-border); }
-    .reaction-btn { background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text); padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; }
+    .review-box { background: var(--input-bg); border-radius: 10px; padding: 0.75rem; margin-top: 0.5rem; border: 1px solid var(--card-border); }
+    .reaction-btn { background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text); padding: 0.4rem 0.8rem; border-radius: 8px; cursor: pointer; }
     .reaction-btn:hover { border-color: var(--primary); }
 
     .hidden { display: none !important; }
@@ -124,7 +224,7 @@
   <!-- Header -->
   <header>
     <div class="brand">
-      <i class="fa-solid fa-leaf"></i>
+      <i class="fa-solid fa-droplet"></i>
       <span>AGORA CAPITAL</span>
     </div>
 
@@ -135,7 +235,7 @@
     </div>
 
     <div class="header-actions">
-      <img id="nav-avatar" src="https://via.placeholder.com/150" class="user-avatar hidden" onclick="openModal('modal-avatar')" title="프로필 사진 변경">
+      <img id="nav-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" class="user-avatar hidden" onclick="openModal('modal-avatar')" title="프로필 사진 변경">
       <button class="btn btn-outline" onclick="openModal('modal-settings')"><i class="fa-solid fa-gear"></i> 설정</button>
       <button id="admin-login-btn" class="btn btn-outline" onclick="openModal('modal-admin')"><i class="fa-solid fa-user-shield"></i> 관리자</button>
       <button id="logout-btn" class="btn btn-danger hidden" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</button>
@@ -164,14 +264,14 @@
 
     <!-- DASHBOARD -->
     <div id="view-dashboard" class="hidden">
-      <!-- User Profile Header Card -->
-      <div class="card" style="background: var(--header-bg); color: white;">
+      <!-- User Profile Glass Header -->
+      <div class="card" style="background: rgba(6, 44, 34, 0.65);">
         <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div style="display: flex; align-items: center; gap: 1rem;">
-            <img id="dash-avatar" src="https://via.placeholder.com/150" class="user-avatar" style="width: 70px; height: 70px;" onclick="openModal('modal-avatar')">
+          <div style="display: flex; align-items: center; gap: 1.25rem;">
+            <img id="dash-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" class="user-avatar" style="width: 76px; height: 76px;" onclick="openModal('modal-avatar')">
             <div>
               <h2 id="dash-name" style="font-size: 1.8rem;">-</h2>
-              <p>계좌번호: <span id="dash-acc">-</span></p>
+              <p style="color:var(--text-muted); font-size:0.9rem;">계좌번호: <span id="dash-acc">-</span></p>
             </div>
           </div>
           <div style="text-align: right;">
@@ -246,7 +346,7 @@
           <button class="btn btn-outline" onclick="logout()">관리자 종료</button>
         </div>
 
-        <div style="margin-bottom: 1.5rem; background: var(--input-bg); padding: 1rem; border-radius: 8px;">
+        <div style="margin-bottom: 1.5rem; background: var(--input-bg); padding: 1rem; border-radius: 12px; border:1px solid var(--card-border);">
           <h4>신규 계좌 생성</h4>
           <form onsubmit="adminCreateAcc(event)" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
             <input type="text" id="adm-name" class="form-control" placeholder="이름" style="flex:1" required>
@@ -287,7 +387,7 @@
     </div>
   </div>
 
-  <!-- PRODUCT POPUP MODAL (REVIEWS, LIKES, BUY, ERASE) -->
+  <!-- PRODUCT POPUP MODAL -->
   <div id="modal-product-popup" class="modal-overlay">
     <div class="modal">
       <div class="card-header">
@@ -295,7 +395,7 @@
         <button class="btn btn-outline" onclick="closeModal('modal-product-popup')">&times;</button>
       </div>
 
-      <img id="pop-product-img" src="" style="width:100%; height:200px; object-fit:cover; border-radius:8px; margin-bottom:1rem; background:var(--input-bg);">
+      <img id="pop-product-img" src="" style="width:100%; height:200px; object-fit:cover; border-radius:12px; margin-bottom:1rem; background:var(--input-bg);">
 
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h2 id="pop-product-price" style="color:var(--primary);">0 G</h2>
@@ -406,9 +506,7 @@
       <div class="form-group">
         <label>테마 선택</label>
         <select class="form-control" onchange="setTheme(this.value)">
-          <option value="emerald">에메랄드 (Emerald Green)</option>
-          <option value="dark">다크 모드 (Dark)</option>
-          <option value="light">라이트 모드 (Light)</option>
+          <option value="glass">리퀴드 글래스 (Liquid Glass)</option>
         </select>
       </div>
     </div>
@@ -433,13 +531,15 @@
 
   <script>
     // State Persistence
-    let accounts = JSON.parse(localStorage.getItem('ag_accs_v4')) || [
-      { name: "민수", account: "101-001", pin: "1234", balance: 5000, avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150", shares: {} },
-      { name: "지아", account: "101-002", pin: "1234", balance: 12000, avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", shares: {} }
+    const defaultAvatar = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150";
+
+    let accounts = JSON.parse(localStorage.getItem('ag_accs_v5')) || [
+      { name: "민수", account: "101-001", pin: "1234", balance: 5000, avatar: defaultAvatar, shares: {} },
+      { name: "지아", account: "101-002", pin: "1234", balance: 12000, avatar: defaultAvatar, shares: {} }
     ];
 
-    let stores = JSON.parse(localStorage.getItem('ag_stores_v4')) || [
-      { id: "S1", name: "에코 그린 상점", owner: "101-001", totalShares: 100, price: 50, totalSales: 0, items: [] }
+    let stores = JSON.parse(localStorage.getItem('ag_stores_v5')) || [
+      { id: "S1", name: "리퀴드 파이낸스 상점", owner: "101-001", totalShares: 100, price: 50, totalSales: 0, items: [] }
     ];
 
     let currentUser = null;
@@ -448,15 +548,15 @@
     let isAdmin = false;
 
     function save() {
-      localStorage.setItem('ag_accs_v4', JSON.stringify(accounts));
-      localStorage.setItem('ag_stores_v4', JSON.stringify(stores));
+      localStorage.setItem('ag_accs_v5', JSON.stringify(accounts));
+      localStorage.setItem('ag_stores_v5', JSON.stringify(stores));
     }
 
     function setTheme(theme) {
       document.documentElement.setAttribute('data-theme', theme);
       localStorage.setItem('ag_theme', theme);
     }
-    setTheme(localStorage.getItem('ag_theme') || 'emerald');
+    setTheme(localStorage.getItem('ag_theme') || 'glass');
 
     function openModal(id) { document.getElementById(id).classList.add('active'); }
     function closeModal(id) { document.getElementById(id).classList.remove('active'); }
@@ -498,7 +598,6 @@
     }
 
     function updateDash() {
-      const defaultAvatar = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150";
       const userImg = currentUser.avatar || defaultAvatar;
 
       document.getElementById('dash-name').innerText = currentUser.name;

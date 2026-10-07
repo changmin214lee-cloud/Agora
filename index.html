@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="dark">
+<html lang="ko" data-theme="emerald">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,21 @@
   
   <style>
     /* Themes Configuration */
+    :root[data-theme="emerald"] {
+      --bg: #06231a;
+      --card-bg: #0d382c;
+      --card-border: #185243;
+      --text: #ecfdf5;
+      --text-muted: #6ee7b7;
+      --primary: #10b981;
+      --primary-hover: #059669;
+      --accent: #f59e0b;
+      --danger: #ef4444;
+      --success: #34d399;
+      --warning: #fbbf24;
+      --header-bg: linear-gradient(135deg, #022c22 0%, #064e3b 100%);
+      --input-bg: #031912;
+    }
     :root[data-theme="dark"] {
       --bg: #0f172a; --card-bg: #1e293b; --card-border: #334155; --text: #f8fafc;
       --text-muted: #94a3b8; --primary: #38bdf8; --primary-hover: #0284c7;
@@ -22,24 +37,6 @@
       --accent: #4f46e5; --danger: #ef4444; --success: #10b981; --warning: #f59e0b;
       --header-bg: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); --input-bg: #ffffff;
     }
-    :root[data-theme="ocean"] {
-      --bg: #041c32; --card-bg: #06283d; --card-border: #1363df; --text: #ecf2ff;
-      --text-muted: #47b5ff; --primary: #47b5ff; --primary-hover: #1363df;
-      --accent: #00e676; --danger: #ff5252; --success: #00e676; --warning: #ffb300;
-      --header-bg: linear-gradient(135deg, #041c32 0%, #1363df 100%); --input-bg: #041c32;
-    }
-    :root[data-theme="emerald"] {
-      --bg: #064e3b; --card-bg: #047857; --card-border: #059669; --text: #ecfdf5;
-      --text-muted: #a7f3d0; --primary: #34d399; --primary-hover: #059669;
-      --accent: #f59e0b; --danger: #f87171; --success: #34d399; --warning: #fbbf24;
-      --header-bg: linear-gradient(135deg, #022c22 0%, #047857 100%); --input-bg: #022c22;
-    }
-    :root[data-theme="gold"] {
-      --bg: #18181b; --card-bg: #27272a; --card-border: #3f3f46; --text: #fafafa;
-      --text-muted: #a1a1aa; --primary: #eab308; --primary-hover: #ca8a04;
-      --accent: #f97316; --danger: #ef4444; --success: #22c55e; --warning: #f59e0b;
-      --header-bg: linear-gradient(135deg, #27272a 0%, #713f12 100%); --input-bg: #18181b;
-    }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
     body { background-color: var(--bg); color: var(--text); padding-bottom: 50px; }
@@ -47,21 +44,29 @@
     header {
       background: var(--header-bg); color: white; padding: 1rem 2rem;
       display: flex; justify-content: space-between; align-items: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     }
-    .brand { display: flex; align-items: center; gap: 10px; font-size: 1.4rem; font-weight: 800; }
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 1.4rem; font-weight: 800; color: var(--primary); }
     .nav-tabs { display: flex; gap: 8px; }
     .nav-btn {
-      background: rgba(255, 255, 255, 0.1); border: none; color: white;
-      padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600;
+      background: rgba(255, 255, 255, 0.08); border: none; color: white;
+      padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.2s;
     }
-    .nav-btn.active { background: rgba(255, 255, 255, 0.25); }
+    .nav-btn:hover, .nav-btn.active { background: var(--primary); color: #022c22; }
+
+    .header-actions { display: flex; gap: 10px; align-items: center; }
+
+    .user-avatar {
+      width: 40px; height: 40px; border-radius: 50%; object-fit: cover;
+      border: 2px solid var(--primary); cursor: pointer; transition: transform 0.2s;
+    }
+    .user-avatar:hover { transform: scale(1.08); }
 
     .btn {
       padding: 0.5rem 1rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem;
       cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 6px; transition: 0.2s;
     }
-    .btn-primary { background-color: var(--primary); color: #0f172a; }
+    .btn-primary { background-color: var(--primary); color: #022c22; }
     .btn-primary:hover { background-color: var(--primary-hover); color: white; }
     .btn-danger { background-color: var(--danger); color: white; }
     .btn-outline { background: transparent; border: 1px solid var(--card-border); color: var(--text); }
@@ -90,13 +95,13 @@
       background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 10px; overflow: hidden;
       display: flex; flex-direction: column; cursor: pointer; transition: transform 0.2s;
     }
-    .product-card:hover { transform: translateY(-2px); }
+    .product-card:hover { transform: translateY(-2px); border-color: var(--primary); }
     .product-img { width: 100%; height: 160px; object-fit: cover; background: var(--card-bg); }
     .product-body { padding: 1rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
 
-    /* Modal */
+    /* Modals */
     .modal-overlay {
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.75);
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8);
       display: flex; align-items: center; justify-content: center; z-index: 1000;
       opacity: 0; pointer-events: none; transition: opacity 0.2s;
     }
@@ -105,7 +110,7 @@
 
     table { width: 100%; border-collapse: collapse; text-align: left; }
     th, td { padding: 0.75rem; border-bottom: 1px solid var(--card-border); }
-    th { background: rgba(0,0,0,0.1); color: var(--text-muted); }
+    th { background: rgba(0,0,0,0.2); color: var(--text-muted); }
 
     .review-box { background: var(--input-bg); border-radius: 8px; padding: 0.75rem; margin-top: 0.5rem; border: 1px solid var(--card-border); }
     .reaction-btn { background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text); padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; }
@@ -119,7 +124,7 @@
   <!-- Header -->
   <header>
     <div class="brand">
-      <i class="fa-solid fa-chart-line"></i>
+      <i class="fa-solid fa-leaf"></i>
       <span>AGORA CAPITAL</span>
     </div>
 
@@ -130,6 +135,7 @@
     </div>
 
     <div class="header-actions">
+      <img id="nav-avatar" src="https://via.placeholder.com/150" class="user-avatar hidden" onclick="openModal('modal-avatar')" title="프로필 사진 변경">
       <button class="btn btn-outline" onclick="openModal('modal-settings')"><i class="fa-solid fa-gear"></i> 설정</button>
       <button id="admin-login-btn" class="btn btn-outline" onclick="openModal('modal-admin')"><i class="fa-solid fa-user-shield"></i> 관리자</button>
       <button id="logout-btn" class="btn btn-danger hidden" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</button>
@@ -158,15 +164,19 @@
 
     <!-- DASHBOARD -->
     <div id="view-dashboard" class="hidden">
+      <!-- User Profile Header Card -->
       <div class="card" style="background: var(--header-bg); color: white;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div>
-            <h2 id="dash-name" style="font-size: 1.8rem;">-</h2>
-            <p>계좌번호: <span id="dash-acc">-</span></p>
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <img id="dash-avatar" src="https://via.placeholder.com/150" class="user-avatar" style="width: 70px; height: 70px;" onclick="openModal('modal-avatar')">
+            <div>
+              <h2 id="dash-name" style="font-size: 1.8rem;">-</h2>
+              <p>계좌번호: <span id="dash-acc">-</span></p>
+            </div>
           </div>
           <div style="text-align: right;">
             <p style="font-size: 0.85rem; opacity: 0.8;">현재 현금 잔액</p>
-            <h1 id="dash-balance" style="font-size: 2.2rem;">0 G</h1>
+            <h1 id="dash-balance" style="font-size: 2.2rem; color: var(--primary);">0 G</h1>
           </div>
         </div>
       </div>
@@ -208,7 +218,7 @@
           <h2 class="card-title"><i class="fa-solid fa-store"></i> 등록된 상점 목록</h2>
           <button class="btn btn-primary" onclick="openModal('modal-create-store')"><i class="fa-solid fa-plus"></i> 상점 개설 (1,000 G)</button>
         </div>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">상점을 클릭하면 해당 상점의 상품 목록 및 리뷰를 확인하고 구매할 수 있습니다.</p>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">상점을 클릭하면 해당 상점의 상품 목록을 확인하고 구매 및 리뷰할 수 있습니다.</p>
         <div class="grid-3" id="store-list-grid"></div>
       </div>
     </div>
@@ -300,7 +310,6 @@
         <button id="pop-erase-btn" class="btn btn-danger hidden" onclick="eraseActiveProduct()"><i class="fa-solid fa-trash"></i> 삭제하기</button>
       </div>
 
-      <!-- Reviews Section -->
       <h4 style="margin-bottom:0.5rem;">상품 리뷰</h4>
       <form onsubmit="handlePostReview(event)" style="margin-bottom:1rem;">
         <div style="display:flex; gap:0.5rem; margin-bottom:0.5rem;">
@@ -317,6 +326,23 @@
       </form>
 
       <div id="pop-review-list"></div>
+    </div>
+  </div>
+
+  <!-- PROFILE PICTURE MODAL -->
+  <div id="modal-avatar" class="modal-overlay">
+    <div class="modal">
+      <div class="card-header">
+        <h3 class="card-title">프로필 사진 변경</h3>
+        <button class="btn btn-outline" onclick="closeModal('modal-avatar')">&times;</button>
+      </div>
+      <form onsubmit="handleUpdateAvatar(event)">
+        <div class="form-group">
+          <label>이미지 URL</label>
+          <input type="url" id="avatar-url-input" class="form-control" placeholder="https://example.com/avatar.jpg" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">프로필 저장</button>
+      </form>
     </div>
   </div>
 
@@ -380,11 +406,9 @@
       <div class="form-group">
         <label>테마 선택</label>
         <select class="form-control" onchange="setTheme(this.value)">
+          <option value="emerald">에메랄드 (Emerald Green)</option>
           <option value="dark">다크 모드 (Dark)</option>
           <option value="light">라이트 모드 (Light)</option>
-          <option value="ocean">오션 블루 (Ocean Blue)</option>
-          <option value="emerald">에메랄드 (Emerald Green)</option>
-          <option value="gold">모던 골드 (Modern Gold)</option>
         </select>
       </div>
     </div>
@@ -409,13 +433,13 @@
 
   <script>
     // State Persistence
-    let accounts = JSON.parse(localStorage.getItem('ag_accs_v3')) || [
-      { name: "민수", account: "101-001", pin: "1234", balance: 5000, shares: {} },
-      { name: "지아", account: "101-002", pin: "1234", balance: 12000, shares: {} }
+    let accounts = JSON.parse(localStorage.getItem('ag_accs_v4')) || [
+      { name: "민수", account: "101-001", pin: "1234", balance: 5000, avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150", shares: {} },
+      { name: "지아", account: "101-002", pin: "1234", balance: 12000, avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150", shares: {} }
     ];
 
-    let stores = JSON.parse(localStorage.getItem('ag_stores_v3')) || [
-      { id: "S1", name: "테크 이노베이션", owner: "101-001", totalShares: 100, price: 50, totalSales: 0, items: [] }
+    let stores = JSON.parse(localStorage.getItem('ag_stores_v4')) || [
+      { id: "S1", name: "에코 그린 상점", owner: "101-001", totalShares: 100, price: 50, totalSales: 0, items: [] }
     ];
 
     let currentUser = null;
@@ -424,15 +448,15 @@
     let isAdmin = false;
 
     function save() {
-      localStorage.setItem('ag_accs_v3', JSON.stringify(accounts));
-      localStorage.setItem('ag_stores_v3', JSON.stringify(stores));
+      localStorage.setItem('ag_accs_v4', JSON.stringify(accounts));
+      localStorage.setItem('ag_stores_v4', JSON.stringify(stores));
     }
 
     function setTheme(theme) {
       document.documentElement.setAttribute('data-theme', theme);
       localStorage.setItem('ag_theme', theme);
     }
-    setTheme(localStorage.getItem('ag_theme') || 'dark');
+    setTheme(localStorage.getItem('ag_theme') || 'emerald');
 
     function openModal(id) { document.getElementById(id).classList.add('active'); }
     function closeModal(id) { document.getElementById(id).classList.remove('active'); }
@@ -463,6 +487,7 @@
         isAdmin = false;
         document.getElementById('view-login').classList.add('hidden');
         document.getElementById('nav-menu').classList.remove('hidden');
+        document.getElementById('nav-avatar').classList.remove('hidden');
         document.getElementById('logout-btn').classList.remove('hidden');
         document.getElementById('admin-login-btn').classList.add('hidden');
         updateDash();
@@ -473,9 +498,14 @@
     }
 
     function updateDash() {
+      const defaultAvatar = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150";
+      const userImg = currentUser.avatar || defaultAvatar;
+
       document.getElementById('dash-name').innerText = currentUser.name;
       document.getElementById('dash-acc').innerText = currentUser.account;
       document.getElementById('dash-balance').innerText = `${currentUser.balance.toLocaleString()} G`;
+      document.getElementById('dash-avatar').src = userImg;
+      document.getElementById('nav-avatar').src = userImg;
 
       const tbody = document.getElementById('portfolio-list');
       tbody.innerHTML = '';
@@ -491,6 +521,16 @@
       });
 
       if (count === 0) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: var(--text-muted);">보유 주식이 없습니다.</td></tr>';
+    }
+
+    function handleUpdateAvatar(e) {
+      e.preventDefault();
+      const newUrl = document.getElementById('avatar-url-input').value;
+      currentUser.avatar = newUrl;
+      save();
+      updateDash();
+      closeModal('modal-avatar');
+      alert("프로필 사진이 변경되었습니다!");
     }
 
     function handleTransfer(e) {
@@ -509,7 +549,7 @@
       alert("송금 완료!");
     }
 
-    // Store & Item Handling
+    // Stores & Item Handling
     function handleCreateStore(e) {
       e.preventDefault();
       if (currentUser.balance < 1000) return alert("개설 비용 (1,000 G)이 부족합니다.");
@@ -615,7 +655,6 @@
       renderStores();
     }
 
-    // Product Popup Details
     function openProductPopup(itemId) {
       activeItemId = itemId;
       const store = stores.find(s => s.id === activeStoreId);
@@ -627,7 +666,6 @@
       document.getElementById('pop-likes').innerText = item.likes || 0;
       document.getElementById('pop-dislikes').innerText = item.dislikes || 0;
 
-      // Owner Only Delete Button
       const eraseBtn = document.getElementById('pop-erase-btn');
       if (currentUser && (currentUser.account === store.owner || isAdmin)) {
         eraseBtn.classList.remove('hidden');

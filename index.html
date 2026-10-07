@@ -4,38 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Agora Capital</title>
+  <!-- Google Fonts & Font Awesome -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
+    /* Theme Definitions */
     :root[data-theme="dark"] {
       --bg: #0f172a; --card-bg: #1e293b; --card-border: #334155; --text: #f8fafc;
       --text-muted: #94a3b8; --primary: #38bdf8; --primary-hover: #0284c7;
-      --accent: #6366f1; --danger: #ef4444; --success: #10b981;
+      --accent: #6366f1; --danger: #ef4444; --success: #10b981; --warning: #f59e0b;
       --header-bg: linear-gradient(135deg, #0284c7 0%, #1e1b4b 100%); --input-bg: #0f172a;
     }
     :root[data-theme="light"] {
       --bg: #f8fafc; --card-bg: #ffffff; --card-border: #e2e8f0; --text: #0f172a;
       --text-muted: #64748b; --primary: #2563eb; --primary-hover: #1d4ed8;
-      --accent: #4f46e5; --danger: #ef4444; --success: #10b981;
+      --accent: #4f46e5; --danger: #ef4444; --success: #10b981; --warning: #f59e0b;
       --header-bg: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); --input-bg: #ffffff;
     }
     :root[data-theme="ocean"] {
       --bg: #041c32; --card-bg: #06283d; --card-border: #1363df; --text: #ecf2ff;
       --text-muted: #47b5ff; --primary: #47b5ff; --primary-hover: #1363df;
-      --accent: #00e676; --danger: #ff5252; --success: #00e676;
+      --accent: #00e676; --danger: #ff5252; --success: #00e676; --warning: #ffb300;
       --header-bg: linear-gradient(135deg, #041c32 0%, #1363df 100%); --input-bg: #041c32;
     }
     :root[data-theme="emerald"] {
       --bg: #064e3b; --card-bg: #047857; --card-border: #059669; --text: #ecfdf5;
       --text-muted: #a7f3d0; --primary: #34d399; --primary-hover: #059669;
-      --accent: #f59e0b; --danger: #f87171; --success: #34d399;
+      --accent: #f59e0b; --danger: #f87171; --success: #34d399; --warning: #fbbf24;
       --header-bg: linear-gradient(135deg, #022c22 0%, #047857 100%); --input-bg: #022c22;
     }
     :root[data-theme="gold"] {
       --bg: #18181b; --card-bg: #27272a; --card-border: #3f3f46; --text: #fafafa;
       --text-muted: #a1a1aa; --primary: #eab308; --primary-hover: #ca8a04;
-      --accent: #f97316; --danger: #ef4444; --success: #22c55e;
+      --accent: #f97316; --danger: #ef4444; --success: #22c55e; --warning: #f59e0b;
       --header-bg: linear-gradient(135deg, #27272a 0%, #713f12 100%); --input-bg: #18181b;
     }
 
@@ -57,11 +59,13 @@
 
     .btn {
       padding: 0.5rem 1rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem;
-      cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 6px;
+      cursor: pointer; border: none; display: inline-flex; align-items: center; gap: 6px; transition: 0.2s;
     }
     .btn-primary { background-color: var(--primary); color: #0f172a; }
+    .btn-primary:hover { background-color: var(--primary-hover); color: white; }
     .btn-danger { background-color: var(--danger); color: white; }
     .btn-outline { background: transparent; border: 1px solid var(--card-border); color: var(--text); }
+    .btn-outline:hover { background: var(--card-border); }
 
     .container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
     .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
@@ -75,27 +79,42 @@
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
 
-    .market-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
-    .market-img { width: 100%; height: 160px; object-fit: cover; background: var(--input-bg); }
-    .market-body { padding: 1rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    /* Store Cards */
+    .store-card {
+      background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px;
+      padding: 1.25rem; cursor: pointer; transition: transform 0.2s, border-color 0.2s;
+    }
+    .store-card:hover { transform: translateY(-3px); border-color: var(--primary); }
 
+    .product-card {
+      background: var(--input-bg); border: 1px solid var(--card-border); border-radius: 10px; overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .product-img { width: 100%; height: 150px; object-fit: cover; background: var(--card-bg); }
+    .product-body { padding: 1rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+
+    /* Modal */
     .modal-overlay {
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7);
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.75);
       display: flex; align-items: center; justify-content: center; z-index: 1000;
       opacity: 0; pointer-events: none; transition: opacity 0.2s;
     }
     .modal-overlay.active { opacity: 1; pointer-events: auto; }
-    .modal { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; width: 100%; max-width: 450px; padding: 1.5rem; }
+    .modal { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; width: 100%; max-width: 600px; padding: 1.5rem; max-height: 90vh; overflow-y: auto; }
 
     table { width: 100%; border-collapse: collapse; text-align: left; }
     th, td { padding: 0.75rem; border-bottom: 1px solid var(--card-border); }
     th { background: rgba(0,0,0,0.1); color: var(--text-muted); }
+
+    .review-box { background: var(--input-bg); border-radius: 8px; padding: 0.75rem; margin-top: 0.5rem; border: 1px solid var(--card-border); }
+    .stars { color: var(--warning); }
 
     .hidden { display: none !important; }
   </style>
 </head>
 <body>
 
+  <!-- Header -->
   <header>
     <div class="brand">
       <i class="fa-solid fa-chart-line"></i>
@@ -104,8 +123,8 @@
 
     <div id="nav-menu" class="nav-tabs hidden">
       <button class="nav-btn active" onclick="switchTab('dashboard')"><i class="fa-solid fa-wallet"></i> 계좌</button>
-      <button class="nav-btn" onclick="switchTab('stores')"><i class="fa-solid fa-store"></i> 상점 목록</button>
-      <button class="nav-btn" onclick="switchTab('stock')"><i class="fa-solid fa-arrow-trend-up"></i> 주식 시장</button>
+      <button class="nav-btn" onclick="switchTab('stores')"><i class="fa-solid fa-store"></i> 상점 탐색</button>
+      <button class="nav-btn" onclick="switchTab('stock')"><i class="fa-solid fa-arrow-trend-up"></i> 주식 거래소</button>
     </div>
 
     <div class="header-actions">
@@ -117,10 +136,10 @@
 
   <div class="container">
 
-    <!-- LOGIN -->
+    <!-- LOGIN VIEW -->
     <div id="view-login" class="card" style="max-width: 400px; margin: 3rem auto;">
       <div class="card-header">
-        <h2 class="card-title"><i class="fa-solid fa-key"></i> 로그인</h2>
+        <h2 class="card-title"><i class="fa-solid fa-key"></i> 계좌 로그인</h2>
       </div>
       <form onsubmit="handleLogin(event)">
         <div class="form-group">
@@ -135,7 +154,7 @@
       </form>
     </div>
 
-    <!-- DASHBOARD -->
+    <!-- DASHBOARD VIEW -->
     <div id="view-dashboard" class="hidden">
       <div class="card" style="background: var(--header-bg); color: white;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -151,22 +170,16 @@
       </div>
 
       <div class="grid-2">
-        <!-- Stock Ownership Portfolio -->
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title"><i class="fa-solid fa-chart-pie"></i> 나의 주식 포트폴리오</h3>
+            <h3 class="card-title"><i class="fa-solid fa-chart-pie"></i> 나의 주식 지분율</h3>
           </div>
           <table>
-            <thead>
-              <tr><th>상점 (종목)</th><th>보유 주식</th><th>지분율 (%)</th></tr>
-            </thead>
-            <tbody id="portfolio-list">
-              <tr><td colspan="3" style="text-align:center; color: var(--text-muted);">보유 주식이 없습니다.</td></tr>
-            </tbody>
+            <thead><tr><th>상점 (종목)</th><th>보유 주식</th><th>지분율 (%)</th></tr></thead>
+            <tbody id="portfolio-list"></tbody>
           </table>
         </div>
 
-        <!-- Transfer & History -->
         <div class="card">
           <div class="card-header">
             <h3 class="card-title"><i class="fa-solid fa-paper-plane"></i> 계좌 송금</h3>
@@ -186,32 +199,27 @@
       </div>
     </div>
 
-    <!-- STORES & ITEMS -->
+    <!-- STORES VIEW -->
     <div id="view-stores" class="hidden">
       <div class="card">
         <div class="card-header">
-          <h2 class="card-title"><i class="fa-solid fa-store"></i> 전체 상점 & 상품</h2>
+          <h2 class="card-title"><i class="fa-solid fa-store"></i> 등록된 상점 목록</h2>
           <button class="btn btn-primary" onclick="openModal('modal-create-store')"><i class="fa-solid fa-plus"></i> 상점 개설 (1,000 G)</button>
         </div>
-
-        <div style="margin-bottom: 1.5rem;">
-          <label style="font-size: 0.85rem; color: var(--text-muted);">상품 추가 (상점 소유자 전용)</label>
-          <button class="btn btn-outline" style="margin-left: 10px;" onclick="openModal('modal-add-item')">상품 등록</button>
-        </div>
-
-        <div class="grid-3" id="market-items-grid"></div>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">상점을 클릭하면 해당 상점의 상품 목록 및 리뷰를 확인하고 구매할 수 있습니다.</p>
+        <div class="grid-3" id="store-list-grid"></div>
       </div>
     </div>
 
-    <!-- STOCK MARKET -->
+    <!-- STOCK MARKET VIEW -->
     <div id="view-stock" class="hidden">
       <div class="card">
         <div class="card-header">
-          <h2 class="card-title"><i class="fa-solid fa-arrow-trend-up"></i> 상점 주식 거래소</h2>
+          <h2 class="card-title"><i class="fa-solid fa-arrow-trend-up"></i> 주식 거래소</h2>
         </div>
         <table>
           <thead>
-            <tr><th>상점명</th><th>현재 주가</th><th>남은 주식</th><th>거래하기</th></tr>
+            <tr><th>상점명</th><th>현재 주가</th><th>남은 수량</th><th>주식 매매</th></tr>
           </thead>
           <tbody id="stock-list"></tbody>
         </table>
@@ -222,7 +230,7 @@
     <div id="view-admin" class="hidden">
       <div class="card">
         <div class="card-header">
-          <h2 class="card-title"><i class="fa-solid fa-user-gear"></i> 관리자 패널</h2>
+          <h2 class="card-title"><i class="fa-solid fa-user-gear"></i> 관리자 대시보드</h2>
           <button class="btn btn-outline" onclick="logout()">관리자 종료</button>
         </div>
 
@@ -249,7 +257,107 @@
 
   </div>
 
-  <!-- Settings Modal -->
+  <!-- STORE DETAIL MODAL -->
+  <div id="modal-store-detail" class="modal-overlay">
+    <div class="modal">
+      <div class="card-header">
+        <h3 id="modal-store-title" class="card-title">상점 상세보기</h3>
+        <button class="btn btn-outline" onclick="closeModal('modal-store-detail')">&times;</button>
+      </div>
+
+      <div id="store-owner-actions" class="hidden" style="margin-bottom: 1rem; display:flex; gap:0.5rem;">
+        <button class="btn btn-primary" onclick="openModal('modal-add-item')"><i class="fa-solid fa-plus"></i> 상품 추가</button>
+        <button class="btn btn-danger" onclick="eraseCurrentStore()"><i class="fa-solid fa-trash"></i> 상점 폐업 (삭제)</button>
+      </div>
+
+      <h4>판매 상품 목록</h4>
+      <div id="store-products-grid" class="grid-2" style="margin-top: 0.75rem;"></div>
+    </div>
+  </div>
+
+  <!-- PRODUCT REVIEWS MODAL -->
+  <div id="modal-reviews" class="modal-overlay">
+    <div class="modal">
+      <div class="card-header">
+        <h3 id="review-product-title" class="card-title">상품 리뷰</h3>
+        <button class="btn btn-outline" onclick="closeModal('modal-reviews')">&times;</button>
+      </div>
+
+      <!-- Write Review Form -->
+      <form onsubmit="handlePostReview(event)" style="margin-bottom: 1.5rem; background: var(--input-bg); padding: 1rem; border-radius: 8px;">
+        <div class="form-group">
+          <label>별점 평가</label>
+          <select id="review-rating" class="form-control">
+            <option value="5">⭐⭐⭐⭐⭐ (5점)</option>
+            <option value="4">⭐⭐⭐⭐ (4점)</option>
+            <option value="3">⭐⭐⭐ (3점)</option>
+            <option value="2">⭐⭐ (2점)</option>
+            <option value="1">⭐ (1점)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>리뷰 내용</label>
+          <input type="text" id="review-text" class="form-control" placeholder="리뷰를 작성하세요..." required>
+        </div>
+        <button type="submit" class="btn btn-primary">리뷰 등록</button>
+      </form>
+
+      <h4>작성된 리뷰 목록</h4>
+      <div id="review-list" style="margin-top: 0.75rem;"></div>
+    </div>
+  </div>
+
+  <!-- CREATE STORE MODAL -->
+  <div id="modal-create-store" class="modal-overlay">
+    <div class="modal">
+      <div class="card-header">
+        <h3 class="card-title">신규 상점 개설 (1,000 G)</h3>
+        <button class="btn btn-outline" onclick="closeModal('modal-create-store')">&times;</button>
+      </div>
+      <form onsubmit="handleCreateStore(event)">
+        <div class="form-group">
+          <label>상점 이름</label>
+          <input type="text" id="store-name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>발행 주식 수량 (주)</label>
+          <input type="number" id="store-shares" class="form-control" min="10" value="100" required>
+        </div>
+        <div class="form-group">
+          <label>주당 초기 가격 (G)</label>
+          <input type="number" id="store-price" class="form-control" min="1" value="10" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">개설 및 주식 발행</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADD ITEM MODAL -->
+  <div id="modal-add-item" class="modal-overlay">
+    <div class="modal">
+      <div class="card-header">
+        <h3 class="card-title">상품 등록</h3>
+        <button class="btn btn-outline" onclick="closeModal('modal-add-item')">&times;</button>
+      </div>
+      <form onsubmit="handleAddItem(event)">
+        <div class="form-group">
+          <label>상품명</label>
+          <input type="text" id="item-name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>가격 (G)</label>
+          <input type="number" id="item-price" class="form-control" min="1" required>
+        </div>
+        <div class="form-group">
+          <label>이미지 URL (선택사항)</label>
+          <input type="url" id="item-img" class="form-control" placeholder="https://example.com/photo.jpg">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">등록하기</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SETTINGS MODAL -->
   <div id="modal-settings" class="modal-overlay">
     <div class="modal">
       <div class="card-header">
@@ -257,7 +365,7 @@
         <button class="btn btn-outline" onclick="closeModal('modal-settings')">&times;</button>
       </div>
       <div class="form-group">
-        <label>사이트 테마를 선택하세요</label>
+        <label>테마 선택</label>
         <select class="form-control" onchange="setTheme(this.value)">
           <option value="dark">다크 모드 (Dark)</option>
           <option value="light">라이트 모드 (Light)</option>
@@ -269,11 +377,11 @@
     </div>
   </div>
 
-  <!-- Admin Login Modal -->
+  <!-- ADMIN AUTH MODAL -->
   <div id="modal-admin" class="modal-overlay">
     <div class="modal">
       <div class="card-header">
-        <h3 class="card-title">관리자 인증</h3>
+        <h3 class="card-title">관리자 로그인</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-admin')">&times;</button>
       </div>
       <form onsubmit="handleAdminAuth(event)">
@@ -281,84 +389,34 @@
           <label>비밀번호</label>
           <input type="password" id="admin-pass" class="form-control" required>
         </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%;">로그인</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Create Store Modal -->
-  <div id="modal-create-store" class="modal-overlay">
-    <div class="modal">
-      <div class="card-header">
-        <h3 class="card-title">신규 상점 개설 (비용: 1,000 G)</h3>
-        <button class="btn btn-outline" onclick="closeModal('modal-create-store')">&times;</button>
-      </div>
-      <form onsubmit="handleCreateStore(event)">
-        <div class="form-group">
-          <label>상점 이름</label>
-          <input type="text" id="store-name" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label>발행할 주식 수량 (주)</label>
-          <input type="number" id="store-shares" class="form-control" min="10" value="100" required>
-        </div>
-        <div class="form-group">
-          <label>주당 초기 가격 (G)</label>
-          <input type="number" id="store-price" class="form-control" min="1" value="10" required>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%;">상점 개설 및 주식 발행</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Add Item Modal -->
-  <div id="modal-add-item" class="modal-overlay">
-    <div class="modal">
-      <div class="card-header">
-        <h3 class="card-title">상품 등록</h3>
-        <button class="btn btn-outline" onclick="closeModal('modal-add-item')">&times;</button>
-      </div>
-      <form onsubmit="handleAddItem(event)">
-        <div class="form-group">
-          <label>내 상점 선택</label>
-          <select id="item-store-select" class="form-control" required></select>
-        </div>
-        <div class="form-group">
-          <label>상품명</label>
-          <input type="text" id="item-name" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label>가격 (G)</label>
-          <input type="number" id="item-price" class="form-control" min="1" required>
-        </div>
-        <div class="form-group">
-          <label>이미지 URL (선택사항)</label>
-          <input type="url" id="item-img" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%;">상품 등록</button>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">인증</button>
       </form>
     </div>
   </div>
 
   <script>
-    // System State
-    let accounts = JSON.parse(localStorage.getItem('ag_accs')) || [
+    // App State Persistence
+    let accounts = JSON.parse(localStorage.getItem('ag_accs_v2')) || [
       { name: "민수", account: "101-001", pin: "1234", balance: 5000, shares: {} },
       { name: "지아", account: "101-002", pin: "1234", balance: 12000, shares: {} }
     ];
 
-    let stores = JSON.parse(localStorage.getItem('ag_stores')) || [
-      { id: "S1", name: "넥스트 테크", owner: "101-001", totalShares: 100, price: 50, totalSales: 0, items: [
-        { id: "I1", name: "스마트 텀블러", price: 300, img: "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=300" }
+    let stores = JSON.parse(localStorage.getItem('ag_stores_v2')) || [
+      { id: "S1", name: "테크 이노베이션", owner: "101-001", totalShares: 100, price: 50, totalSales: 0, items: [
+        { id: "I1", name: "블루투스 헤드셋", price: 400, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300", reviews: [
+          { author: "지아", rating: 5, text: "음질이 정말 훌륭합니다!" }
+        ]}
       ]}
     ];
 
     let currentUser = null;
+    let activeStoreId = null;
+    let activeItemId = null;
     let isAdmin = false;
 
     function save() {
-      localStorage.setItem('ag_accs', JSON.stringify(accounts));
-      localStorage.setItem('ag_stores', JSON.stringify(stores));
+      localStorage.setItem('ag_accs_v2', JSON.stringify(accounts));
+      localStorage.setItem('ag_stores_v2', JSON.stringify(stores));
     }
 
     function setTheme(theme) {
@@ -367,10 +425,7 @@
     }
     setTheme(localStorage.getItem('ag_theme') || 'dark');
 
-    function openModal(id) {
-      if (id === 'modal-add-item') populateUserStores();
-      document.getElementById(id).classList.add('active');
-    }
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
     function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
     function switchTab(tab) {
@@ -404,7 +459,7 @@
         updateDash();
         document.getElementById('view-dashboard').classList.remove('hidden');
       } else {
-        alert("계좌 정보가 틀렸습니다.");
+        alert("로그인 정보가 틀렸습니다.");
       }
     }
 
@@ -413,7 +468,6 @@
       document.getElementById('dash-acc').innerText = currentUser.account;
       document.getElementById('dash-balance').innerText = `${currentUser.balance.toLocaleString()} G`;
 
-      // Portfolio
       const tbody = document.getElementById('portfolio-list');
       tbody.innerHTML = '';
       let count = 0;
@@ -423,19 +477,11 @@
         if (owned > 0) {
           count++;
           const pct = ((owned / s.totalShares) * 100).toFixed(1);
-          tbody.innerHTML += `
-            <tr>
-              <td><strong>${s.name}</strong></td>
-              <td>${owned} 주</td>
-              <td><span style="color:var(--primary); font-weight:700;">${pct}%</span></td>
-            </tr>
-          `;
+          tbody.innerHTML += `<tr><td><strong>${s.name}</strong></td><td>${owned} 주</td><td><span style="color:var(--primary); font-weight:700;">${pct}%</span></td></tr>`;
         }
       });
 
-      if (count === 0) {
-        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: var(--text-muted);">보유 주식이 없습니다.</td></tr>';
-      }
+      if (count === 0) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: var(--text-muted);">보유 주식이 없습니다.</td></tr>';
     }
 
     function handleTransfer(e) {
@@ -454,7 +500,7 @@
       alert("송금 완료!");
     }
 
-    // Stores & Item Purchase Logic
+    // Stores & Item Management
     function handleCreateStore(e) {
       e.preventDefault();
       if (currentUser.balance < 1000) return alert("개설 비용 (1,000 G)이 부족합니다.");
@@ -464,7 +510,6 @@
       const initialPrice = parseInt(document.getElementById('store-price').value);
       const storeId = "S" + Date.now();
 
-      // Store Creation
       stores.push({
         id: storeId,
         name: document.getElementById('store-name').value,
@@ -475,104 +520,199 @@
         items: []
       });
 
-      // Owner gets 100% initial shares
       if (!currentUser.shares) currentUser.shares = {};
       currentUser.shares[storeId] = sharesCount;
 
       save();
       closeModal('modal-create-store');
+      renderStores();
       updateDash();
-      alert("상점 및 주식이 성공적으로 발행되었습니다!");
+      alert("상점이 개설되었습니다!");
     }
 
-    function populateUserStores() {
-      const select = document.getElementById('item-store-select');
-      select.innerHTML = '';
-      const myStores = stores.filter(s => s.owner === currentUser.account);
-      myStores.forEach(s => {
-        select.innerHTML += `<option value="${s.id}">${s.name}</option>`;
+    function renderStores() {
+      const grid = document.getElementById('store-list-grid');
+      grid.innerHTML = '';
+      stores.forEach(s => {
+        grid.innerHTML += `
+          <div class="store-card" onclick="openStoreDetail('${s.id}')">
+            <h3 style="color:var(--primary);">${s.name}</h3>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem;">소유자 계좌: ${s.owner}</p>
+            <div style="display:flex; justify-content:space-between; margin-top:1rem; font-weight:600;">
+              <span>등록 상품: ${s.items.length}개</span>
+              <span style="color:var(--success);">${s.price} G / 주</span>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function openStoreDetail(storeId) {
+      activeStoreId = storeId;
+      const store = stores.find(s => s.id === storeId);
+      document.getElementById('modal-store-title').innerText = store.name;
+
+      const actions = document.getElementById('store-owner-actions');
+      if (currentUser && (currentUser.account === store.owner || isAdmin)) {
+        actions.classList.remove('hidden');
+      } else {
+        actions.classList.add('hidden');
+      }
+
+      renderStoreProducts();
+      openModal('modal-store-detail');
+    }
+
+    function renderStoreProducts() {
+      const store = stores.find(s => s.id === activeStoreId);
+      const grid = document.getElementById('store-products-grid');
+      grid.innerHTML = '';
+
+      if (!store.items || store.items.length === 0) {
+        grid.innerHTML = '<p style="color:var(--text-muted); grid-column:1/-1;">등록된 상품이 없습니다.</p>';
+        return;
+      }
+
+      store.items.forEach(item => {
+        const isOwner = currentUser && (currentUser.account === store.owner || isAdmin);
+        const reviewCount = item.reviews ? item.reviews.length : 0;
+
+        grid.innerHTML += `
+          <div class="product-card">
+            <img src="${item.img || 'https://via.placeholder.com/300'}" class="product-img">
+            <div class="product-body">
+              <div>
+                <h4>${item.name}</h4>
+                <p style="color:var(--primary); font-weight:700;">${item.price.toLocaleString()} G</p>
+                <small class="stars" onclick="openReviewsModal('${item.id}')" style="cursor:pointer;">
+                  ⭐ 리뷰 (${reviewCount}개) 보기/작성
+                </small>
+              </div>
+              <div style="margin-top:0.75rem; display:flex; gap:0.4rem;">
+                <button class="btn btn-primary" style="flex:1;" onclick="buyItem('${item.id}')">구매</button>
+                ${isOwner ? `<button class="btn btn-danger" onclick="eraseItem('${item.id}')">삭제</button>` : ''}
+              </div>
+            </div>
+          </div>
+        `;
       });
     }
 
     function handleAddItem(e) {
       e.preventDefault();
-      const storeId = document.getElementById('item-store-select').value;
-      const store = stores.find(s => s.id === storeId);
+      const store = stores.find(s => s.id === activeStoreId);
 
       store.items.push({
         id: "I" + Date.now(),
         name: document.getElementById('item-name').value,
         price: parseInt(document.getElementById('item-price').value),
-        img: document.getElementById('item-img').value || "https://via.placeholder.com/300"
+        img: document.getElementById('item-img').value || "https://via.placeholder.com/300",
+        reviews: []
       });
 
       save();
       closeModal('modal-add-item');
+      renderStoreProducts();
       renderStores();
     }
 
-    function renderStores() {
-      const grid = document.getElementById('market-items-grid');
-      grid.innerHTML = '';
-      stores.forEach(s => {
-        s.items.forEach(item => {
-          const isOwner = currentUser && (currentUser.account === s.owner || isAdmin);
-          grid.innerHTML += `
-            <div class="market-card">
-              <img src="${item.img}" class="market-img">
-              <div class="market-body">
-                <div>
-                  <small style="color:var(--text-muted);">${s.name}</small>
-                  <h4>${item.name}</h4>
-                  <p style="color:var(--primary); font-weight:700;">${item.price.toLocaleString()} G</p>
-                </div>
-                <div style="margin-top:1rem; display:flex; gap:0.5rem;">
-                  <button class="btn btn-primary" style="flex:1;" onclick="buyItem('${s.id}', '${item.id}')">구매</button>
-                  ${isOwner ? `<button class="btn btn-danger" onclick="eraseItem('${s.id}', '${item.id}')">삭제</button>` : ''}
-                </div>
-              </div>
-            </div>
-          `;
-        });
-      });
-    }
-
-    function buyItem(storeId, itemId) {
-      const store = stores.find(s => s.id === storeId);
+    function buyItem(itemId) {
+      const store = stores.find(s => s.id === activeStoreId);
       const item = store.items.find(i => i.id === itemId);
 
       if (currentUser.balance < item.price) return alert("잔액이 부족합니다.");
 
       currentUser.balance -= item.price;
       store.totalSales += item.price;
+      store.price += Math.max(1, Math.ceil(item.price / 100));
 
-      // Sales raise stock price proportionally!
-      const priceBump = Math.ceil((item.price / (store.totalSales || 1)) * 5);
-      store.price += Math.max(1, priceBump);
-
-      // Pay owner
       const ownerAcc = accounts.find(a => a.account === store.owner);
       if (ownerAcc) ownerAcc.balance += item.price;
 
       save();
       updateDash();
-      renderStores();
-      alert(`[${item.name}] 구매 완료! ${store.name}의 주가가 상승했습니다!`);
+      renderStoreProducts();
+      alert(`[${item.name}] 구매가 완료되었습니다!`);
     }
 
-    function eraseItem(storeId, itemId) {
-      const store = stores.find(s => s.id === storeId);
-      store.items = store.items.filter(i => i.id !== itemId);
+    function eraseItem(itemId) {
+      if (confirm("이 상품을 정말 삭제하시겠습니까?")) {
+        const store = stores.find(s => s.id === activeStoreId);
+        store.items = store.items.filter(i => i.id !== itemId);
+        save();
+        renderStoreProducts();
+        renderStores();
+      }
+    }
+
+    function eraseCurrentStore() {
+      if (confirm("이 상점을 폐업하고 영구 삭제하시겠습니까?")) {
+        stores = stores.filter(s => s.id !== activeStoreId);
+        save();
+        closeModal('modal-store-detail');
+        renderStores();
+      }
+    }
+
+    // Review System
+    function openReviewsModal(itemId) {
+      activeItemId = itemId;
+      const store = stores.find(s => s.id === activeStoreId);
+      const item = store.items.find(i => i.id === itemId);
+
+      document.getElementById('review-product-title').innerText = `${item.name} - 리뷰 목록`;
+      renderReviews();
+      openModal('modal-reviews');
+    }
+
+    function renderReviews() {
+      const store = stores.find(s => s.id === activeStoreId);
+      const item = store.items.find(i => i.id === activeItemId);
+      const list = document.getElementById('review-list');
+      list.innerHTML = '';
+
+      if (!item.reviews || item.reviews.length === 0) {
+        list.innerHTML = '<p style="color:var(--text-muted);">작성된 리뷰가 없습니다.</p>';
+        return;
+      }
+
+      item.reviews.forEach(r => {
+        list.innerHTML += `
+          <div class="review-box">
+            <div style="display:flex; justify-content:space-between; font-weight:600;">
+              <span>${r.author}</span>
+              <span class="stars">${'⭐'.repeat(r.rating)}</span>
+            </div>
+            <p style="margin-top:0.25rem; font-size:0.9rem;">${r.text}</p>
+          </div>
+        `;
+      });
+    }
+
+    function handlePostReview(e) {
+      e.preventDefault();
+      const store = stores.find(s => s.id === activeStoreId);
+      const item = store.items.find(i => i.id === activeItemId);
+
+      if (!item.reviews) item.reviews = [];
+
+      item.reviews.push({
+        author: currentUser ? currentUser.name : "익명",
+        rating: parseInt(document.getElementById('review-rating').value),
+        text: document.getElementById('review-text').value
+      });
+
       save();
-      renderStores();
+      document.getElementById('review-text').value = '';
+      renderReviews();
+      renderStoreProducts();
     }
 
-    // Stock Market Logic
+    // Stock Market
     function renderStock() {
       const list = document.getElementById('stock-list');
       list.innerHTML = '';
       stores.forEach(s => {
-        // Calculate total allocated shares
         let allocatedShares = 0;
         accounts.forEach(a => { if (a.shares && a.shares[s.id]) allocatedShares += a.shares[s.id]; });
         const unissuedShares = s.totalShares - allocatedShares;
@@ -599,12 +739,12 @@
         if (currentUser.balance < store.price) return alert("잔액이 부족합니다.");
         currentUser.balance -= store.price;
         currentUser.shares[storeId] = (currentUser.shares[storeId] || 0) + 1;
-        store.price += 1; // Buying increases stock price
+        store.price += 1;
       } else {
         if (!currentUser.shares[storeId] || currentUser.shares[storeId] <= 0) return alert("보유 주식이 없습니다.");
         currentUser.balance += store.price;
         currentUser.shares[storeId] -= 1;
-        store.price = Math.max(1, store.price - 1); // Selling decreases stock price
+        store.price = Math.max(1, store.price - 1);
       }
 
       save();

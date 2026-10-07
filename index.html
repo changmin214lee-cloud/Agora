@@ -22,6 +22,7 @@
       --header-bg: rgba(27, 67, 50, 0.85);
       --input-bg: rgba(255, 255, 255, 0.18);
       --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.35);
+      --dropdown-option-bg: #1b4332;
     }
 
     :root[data-theme="skyblue"] {
@@ -36,6 +37,7 @@
       --header-bg: rgba(3, 105, 161, 0.85);
       --input-bg: rgba(255, 255, 255, 0.2);
       --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.3);
+      --dropdown-option-bg: #0369a1;
     }
 
     :root[data-theme="retro"] {
@@ -50,6 +52,7 @@
       --header-bg: rgba(154, 52, 18, 0.85);
       --input-bg: rgba(255, 255, 255, 0.18);
       --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.35);
+      --dropdown-option-bg: #9a3412;
     }
 
     :root[data-theme="lemon"] {
@@ -64,6 +67,7 @@
       --header-bg: rgba(133, 77, 14, 0.85);
       --input-bg: rgba(255, 255, 255, 0.2);
       --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.35);
+      --dropdown-option-bg: #854d0e;
     }
 
     :root[data-theme="dark"] {
@@ -78,6 +82,7 @@
       --header-bg: rgba(15, 23, 42, 0.88);
       --input-bg: rgba(255, 255, 255, 0.12);
       --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.5);
+      --dropdown-option-bg: #0f172a;
     }
 
     :root[data-theme="light"] {
@@ -92,6 +97,7 @@
       --header-bg: rgba(255, 255, 255, 0.7);
       --input-bg: rgba(255, 255, 255, 0.6);
       --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.15);
+      --dropdown-option-bg: #e2e8f0;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
@@ -284,6 +290,12 @@
       color: var(--text);
       border-radius: 12px;
       outline: none;
+    }
+
+    /* Fix Dropdown visibility across all themes */
+    select.form-control option {
+      background-color: var(--dropdown-option-bg);
+      color: var(--text);
     }
 
     /* Paste / File Upload Area */
@@ -488,7 +500,7 @@
     </div>
   </div>
 
-  <!-- FULL-SCREEN APP 2: STOCK -->
+  <!-- FULL-SCREEN APP 2: STOCK (WITH PRICE GRAPH) -->
   <div id="screen-stock" class="fullscreen-app-overlay hidden">
     <div class="app-header-bar">
       <button class="btn btn-outline" onclick="closeAppScreen('screen-stock')"><i class="fa-solid fa-arrow-left"></i> 메인으로</button>
@@ -497,7 +509,16 @@
     </div>
 
     <div class="container" style="max-width:900px; margin:0 auto; width:100%;">
-      <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:2rem; backdrop-filter:blur(20px);">
+      <!-- Visual Stock Price Chart -->
+      <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem; margin-bottom:1.5rem; backdrop-filter:blur(20px);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+          <h3 style="color:var(--primary); font-size:1.2rem;"><i class="fa-solid fa-chart-area"></i> 실시간 주가 추이 그래프</h3>
+          <select id="chart-store-select" class="form-control" style="width:200px;" onchange="renderStockChart()"></select>
+        </div>
+        <canvas id="stockCanvasChart" width="800" height="220" style="width:100%; height:220px; background:rgba(0,0,0,0.2); border-radius:16px; border:1px solid var(--card-border);"></canvas>
+      </div>
+
+      <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem; backdrop-filter:blur(20px);">
         <table>
           <thead>
             <tr><th>상점명</th><th>현재 주가</th><th>매매 액션</th></tr>
@@ -600,9 +621,9 @@
 
       <div style="text-align: center; margin-bottom: 1.5rem;">
         <img id="profile-modal-avatar" src="" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #ffffff; object-fit: cover; margin-bottom: 0.5rem;">
-        <h2 id="dash-name" style="font-size: 1.8rem; color: #fff;">-</h2>
-        <p style="font-size: 0.95rem; color: var(--text-muted);">계좌번호: <span id="dash-acc">-</span></p>
-        <p style="font-size: 1.2rem; color: var(--primary); font-weight: 800; margin-top: 0.5rem;">현재 잔액: <span id="dash-balance">0 G</span></p>
+        <h2 id="profile-modal-name" style="font-size: 1.8rem; color: #fff;">-</h2>
+        <p style="font-size: 0.95rem; color: var(--text-muted);">계좌번호: <span id="profile-modal-acc">-</span></p>
+        <p style="font-size: 1.2rem; color: var(--primary); font-weight: 800; margin-top: 0.5rem;">현재 잔액: <span id="profile-modal-balance">0 G</span></p>
       </div>
 
       <hr style="border: 0; border-top: 1px solid var(--card-border); margin: 1rem 0;">
@@ -795,13 +816,13 @@
     const defaultAvatar = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150";
     const defaultStoreLogo = "https://images.unsplash.com/photo-1534723452862-4c874018d66d?w=150";
 
-    let accounts = JSON.parse(localStorage.getItem('ag_accs_v11')) || [
+    let accounts = JSON.parse(localStorage.getItem('ag_accs_v13')) || [
       { name: "민수", account: "101-001", pin: "1234", balance: 5000, loan: 0, avatar: defaultAvatar, shares: {} },
       { name: "지아", account: "101-002", pin: "1234", balance: 12000, loan: 0, avatar: defaultAvatar, shares: {} }
     ];
 
-    let stores = JSON.parse(localStorage.getItem('ag_stores_v11')) || [
-      { id: "S1", name: "아고라 메인 상점", logo: defaultStoreLogo, owner: "101-001", totalShares: 100, price: 50, totalSales: 0, items: [] }
+    let stores = JSON.parse(localStorage.getItem('ag_stores_v13')) || [
+      { id: "S1", name: "아고라 메인 상점", logo: defaultStoreLogo, owner: "101-001", totalShares: 100, price: 50, priceHistory: [30, 35, 40, 45, 50], totalSales: 0, items: [] }
     ];
 
     let currentUser = null;
@@ -815,8 +836,8 @@
     let tempItemImgBase64 = "";
 
     function save() {
-      localStorage.setItem('ag_accs_v11', JSON.stringify(accounts));
-      localStorage.setItem('ag_stores_v11', JSON.stringify(stores));
+      localStorage.setItem('ag_accs_v13', JSON.stringify(accounts));
+      localStorage.setItem('ag_stores_v13', JSON.stringify(stores));
     }
 
     function changeTheme(themeName) {
@@ -826,13 +847,35 @@
     const savedTheme = localStorage.getItem('ag_theme_choice') || 'emerald';
     changeTheme(savedTheme);
 
-    function openModal(id) { document.getElementById(id).classList.add('active'); }
-    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+    function clearUploadPreviews() {
+      tempAvatarBase64 = "";
+      tempStoreLogoBase64 = "";
+      tempItemImgBase64 = "";
+      document.querySelectorAll('.image-preview').forEach(img => {
+        img.src = '';
+        img.style.display = 'none';
+      });
+    }
 
-    function openAppScreen(id) { document.getElementById(id).classList.remove('hidden'); }
+    function openModal(id) { 
+      clearUploadPreviews();
+      document.getElementById(id).classList.add('active'); 
+    }
+    function closeModal(id) { 
+      clearUploadPreviews();
+      document.getElementById(id).classList.remove('active'); 
+    }
+
+    function openAppScreen(id) { 
+      document.getElementById(id).classList.remove('hidden'); 
+      if (id === 'screen-stock') {
+        populateChartStoreSelect();
+        renderStockChart();
+      }
+    }
     function closeAppScreen(id) { document.getElementById(id).classList.add('hidden'); }
 
-    // Paste & File Helper
+    // Helper for Paste & File Input
     function setupImagePasteAndFile(boxId, fileInputId, previewId, callback) {
       const box = document.getElementById(boxId);
       const fileInput = document.getElementById(fileInputId);
@@ -845,8 +888,7 @@
         if (file) processImageFile(file, preview, callback);
       });
 
-      document.addEventListener('paste', (e) => {
-        if (!document.getElementById(boxId).offsetParent) return; // Check if visible
+      box.addEventListener('paste', (e) => {
         const items = (e.clipboardData || e.originalEvent.clipboardData).items;
         for (let item of items) {
           if (item.kind === 'file' && item.type.startsWith('image/')) {
@@ -894,14 +936,13 @@
     function updateDash() {
       const userImg = currentUser.avatar || defaultAvatar;
 
-      document.querySelectorAll('#dash-name').forEach(el => el.innerText = currentUser.name);
-      document.querySelectorAll('#dash-acc').forEach(el => el.innerText = currentUser.account);
-      document.querySelectorAll('#dash-balance').forEach(el => el.innerText = `${currentUser.balance.toLocaleString()} G`);
-      
       document.getElementById('dash-avatar').src = userImg;
       document.getElementById('profile-modal-avatar').src = userImg;
+      document.getElementById('profile-modal-name').innerText = currentUser.name;
+      document.getElementById('profile-modal-acc').innerText = currentUser.account;
+      document.getElementById('profile-modal-balance').innerText = `${currentUser.balance.toLocaleString()} G`;
 
-      // Update Bank Specific Info
+      // Bank Specific Info
       document.getElementById('bank-user-name').innerText = currentUser.name;
       document.getElementById('bank-user-acc').innerText = currentUser.account;
       document.getElementById('bank-user-balance').innerText = `${currentUser.balance.toLocaleString()} G`;
@@ -986,6 +1027,79 @@
       });
     }
 
+    function populateChartStoreSelect() {
+      const select = document.getElementById('chart-store-select');
+      select.innerHTML = '';
+      stores.forEach(s => {
+        select.innerHTML += `<option value="${s.id}">${s.name}</option>`;
+      });
+    }
+
+    function renderStockChart() {
+      const canvas = document.getElementById('stockCanvasChart');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const storeId = document.getElementById('chart-store-select').value;
+      const store = stores.find(s => s.id === storeId);
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (!store || !store.priceHistory || store.priceHistory.length === 0) {
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '16px Inter';
+        ctx.fillText('주가 데이터가 없습니다.', 20, 30);
+        return;
+      }
+
+      const history = store.priceHistory;
+      const maxVal = Math.max(...history) * 1.2;
+      const minVal = Math.min(0, Math.min(...history));
+      const range = maxVal - minVal || 1;
+
+      const padding = 30;
+      const chartWidth = canvas.width - padding * 2;
+      const chartHeight = canvas.height - padding * 2;
+
+      // Draw Grid Lines
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= 4; i++) {
+        const y = padding + (chartHeight / 4) * i;
+        ctx.beginPath();
+        ctx.moveTo(padding, y);
+        ctx.lineTo(canvas.width - padding, y);
+        ctx.stroke();
+      }
+
+      // Draw Price Line Chart
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+
+      history.forEach((val, idx) => {
+        const x = padding + (chartWidth / Math.max(1, history.length - 1)) * idx;
+        const y = canvas.height - padding - ((val - minVal) / range) * chartHeight;
+
+        if (idx === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+
+      // Draw Data Points
+      ctx.fillStyle = '#ffffff';
+      history.forEach((val, idx) => {
+        const x = padding + (chartWidth / Math.max(1, history.length - 1)) * idx;
+        const y = canvas.height - padding - ((val - minVal) / range) * chartHeight;
+        
+        ctx.beginPath();
+        ctx.arc(x, y, 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.font = '11px Inter';
+        ctx.fillText(`${val}G`, x - 8, y - 8);
+      });
+    }
+
     function renderPortfolio() {
       const tbody = document.getElementById('portfolio-list');
       tbody.innerHTML = '';
@@ -1052,6 +1166,7 @@
         owner: currentUser.account,
         totalShares: sharesCount,
         price: initialPrice,
+        priceHistory: [initialPrice],
         totalSales: 0,
         items: []
       });
@@ -1071,6 +1186,7 @@
       const store = stores.find(s => s.id === storeId);
       document.getElementById('modal-store-title').innerText = store.name;
 
+      // Protection: Only Show Store Owner Controls to Creator or Admin
       const actions = document.getElementById('store-owner-actions');
       if (currentUser && (currentUser.account === store.owner || isAdmin)) {
         actions.classList.remove('hidden');
@@ -1171,13 +1287,17 @@
 
       currentUser.balance -= item.price;
       store.totalSales += item.price;
+      
       store.price += Math.max(1, Math.ceil(item.price / 100));
+      if (!store.priceHistory) store.priceHistory = [];
+      store.priceHistory.push(store.price);
 
       const ownerAcc = accounts.find(a => a.account === store.owner);
       if (ownerAcc) ownerAcc.balance += item.price;
 
       save();
       updateDash();
+      renderStockList();
       alert(`[${item.name}] 구매가 완료되었습니다!`);
     }
 
@@ -1235,7 +1355,12 @@
     }
 
     function eraseCurrentStore() {
-      if (confirm("이 상점을 폐업하고 영구 삭제하시겠습니까?")) {
+      const store = stores.find(s => s.id === activeStoreId);
+      if (!currentUser || (currentUser.account !== store.owner && !isAdmin)) {
+        return alert("상점 소유자만 이 상점을 삭제할 수 있습니다.");
+      }
+
+      if (confirm("이 상점을 영구 삭제하시겠습니까?")) {
         stores = stores.filter(s => s.id !== activeStoreId);
         save();
         closeModal('modal-store-detail');
@@ -1260,8 +1385,13 @@
         store.price = Math.max(1, store.price - 1);
       }
 
+      if (!store.priceHistory) store.priceHistory = [];
+      store.priceHistory.push(store.price);
+
       save();
       updateDash();
+      renderStockList();
+      renderStockChart();
     }
 
     // Admin Controls

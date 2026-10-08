@@ -1,4 +1,54 @@
---danger: #ef4444;
+<!DOCTYPE html>
+<html lang="ko" data-theme="emerald">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agora Capital</title>
+  <!-- Google Fonts & Font Awesome CDN -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <style>
+    /* Global Themes & Color Definitions */
+    :root, :root[data-theme="emerald"] {
+      --bg-gradient: linear-gradient(135deg, #2d6a4f 0%, #1b4332 50%, #081c15 100%);
+      --card-bg: rgba(255, 255, 255, 0.12);
+      --card-border: rgba(255, 255, 255, 0.45);
+      --text: #ffffff;
+      --text-muted: #d8f3dc;
+      --primary: #52b788;
+      --primary-hover: #74c69d;
+      --danger: #ef4444;
+      --header-bg: rgba(27, 67, 50, 0.85);
+      --input-bg: rgba(255, 255, 255, 0.18);
+      --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.35);
+      --dropdown-option-bg: #1b4332;
+    }
+
+    :root[data-theme="skyblue"] {
+      --bg-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #0c4a6e 100%);
+      --card-bg: rgba(255, 255, 255, 0.15);
+      --card-border: rgba(255, 255, 255, 0.5);
+      --text: #ffffff;
+      --text-muted: #e0f2fe;
+      --primary: #38bdf8;
+      --primary-hover: #7dd3fc;
+      --danger: #f87171;
+      --header-bg: rgba(3, 105, 161, 0.85);
+      --input-bg: rgba(255, 255, 255, 0.2);
+      --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.3);
+      --dropdown-option-bg: #0369a1;
+    }
+
+    :root[data-theme="retro"] {
+      --bg-gradient: linear-gradient(135deg, #c2410c 0%, #9a3412 50%, #431407 100%);
+      --card-bg: rgba(255, 255, 255, 0.14);
+      --card-border: rgba(255, 255, 255, 0.45);
+      --text: #ffffff;
+      --text-muted: #ffedd5;
+      --primary: #fb923c;
+      --primary-hover: #fdba74;
+      --danger: #ef4444;
       --header-bg: rgba(154, 52, 18, 0.85);
       --input-bg: rgba(255, 255, 255, 0.18);
       --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.35);
@@ -66,12 +116,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes floatCard {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-6px); }
-    }
-
-    /* Header */
+    /* Header Navigation */
     header {
       background: var(--header-bg);
       -webkit-backdrop-filter: blur(20px);
@@ -118,7 +163,7 @@
 
     .container { max-width: 1150px; margin: 2rem auto; padding: 0 1rem; }
 
-    /* Top Row Layout */
+    /* Dashboard Layout */
     .dashboard-top-row {
       display: grid;
       grid-template-columns: 1fr 160px;
@@ -176,7 +221,7 @@
       box-shadow: 0 0 18px rgba(255, 255, 255, 0.5);
     }
 
-    /* 6 App Cards Grid Layout */
+    /* 6 App Grid Cards */
     .dashboard-bottom-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -222,7 +267,7 @@
       text-align: center;
     }
 
-    /* Full-Screen App Overlay Screens */
+    /* Full-Screen Overlay Views */
     .fullscreen-app-overlay {
       position: fixed;
       top: 0; left: 0; width: 100vw; height: 100vh;
@@ -311,7 +356,7 @@
       background: rgba(0,0,0,0.2);
     }
 
-    /* Modals */
+    /* Modals System */
     .modal-overlay {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(0, 0, 0, 0.75);
@@ -383,10 +428,8 @@
       </form>
     </div>
 
-    <!-- MAIN HOME APP LAUNCHER VIEW -->
+    <!-- MAIN DASHBOARD -->
     <div id="view-dashboard" class="hidden">
-      
-      <!-- Top Banner: 아고라 메인 + Profile Box -->
       <div class="dashboard-top-row">
         <div class="top-banner-card">
           <div>
@@ -400,72 +443,59 @@
         </div>
       </div>
 
-      <!-- 6 Main Apps Grid -->
       <div class="dashboard-bottom-grid">
-        
-        <!-- App 1: 마켓 -->
         <div class="app-card" onclick="openAppScreen('screen-market')">
           <i class="fa-solid fa-store app-card-icon"></i>
           <h2 class="column-header-title">마켓</h2>
         </div>
 
-        <!-- App 2: 주식 -->
         <div class="app-card" onclick="openAppScreen('screen-stock')">
           <i class="fa-solid fa-chart-line app-card-icon"></i>
           <h2 class="column-header-title">주식</h2>
         </div>
 
-        <!-- App 3: 은행 -->
         <div class="app-card" onclick="openAppScreen('screen-bank')">
           <i class="fa-solid fa-building-columns app-card-icon"></i>
           <h2 class="column-header-title">은행</h2>
         </div>
 
-        <!-- App 4: 이메일 -->
         <div class="app-card" onclick="openAppScreen('screen-email')">
           <i class="fa-solid fa-envelope app-card-icon"></i>
           <h2 class="column-header-title">이메일</h2>
         </div>
 
-        <!-- App 5: 아고라 피드 (Pencil Icon) -->
         <div class="app-card" onclick="openAppScreen('screen-feed')">
           <i class="fa-solid fa-pen-to-square app-card-icon"></i>
           <h2 class="column-header-title">아고라 피드</h2>
         </div>
 
-        <!-- App 6: 경매장 -->
         <div class="app-card" onclick="openAppScreen('screen-auction')">
           <i class="fa-solid fa-gavel app-card-icon"></i>
           <h2 class="column-header-title">경매장</h2>
         </div>
-
       </div>
-
     </div>
 
   </div>
 
-  <!-- FULL-SCREEN APP 1: MARKET -->
+  <!-- FULL-SCREEN APPS -->
   <div id="screen-market" class="fullscreen-app-overlay hidden">
     <div class="app-header-bar">
       <button class="btn btn-outline" onclick="closeAppScreen('screen-market')"><i class="fa-solid fa-arrow-left"></i> 메인으로</button>
       <h1 style="font-size:1.8rem; font-weight:900; color:var(--primary);"><i class="fa-solid fa-store"></i> 마켓</h1>
       <button class="btn btn-primary" onclick="openModal('modal-create-store')"><i class="fa-solid fa-plus"></i> 상점 개설 (1,000 G)</button>
     </div>
-
     <div class="container" style="max-width:900px; margin:0 auto; width:100%;">
       <div id="market-store-list"></div>
     </div>
   </div>
 
-  <!-- FULL-SCREEN APP 2: STOCK -->
   <div id="screen-stock" class="fullscreen-app-overlay hidden">
     <div class="app-header-bar">
       <button class="btn btn-outline" onclick="closeAppScreen('screen-stock')"><i class="fa-solid fa-arrow-left"></i> 메인으로</button>
       <h1 style="font-size:1.8rem; font-weight:900; color:var(--primary);"><i class="fa-solid fa-chart-line"></i> 주식 거래소</h1>
       <div></div>
     </div>
-
     <div class="container" style="max-width:900px; margin:0 auto; width:100%;">
       <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem; margin-bottom:1.5rem; backdrop-filter:blur(20px);">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
@@ -474,7 +504,6 @@
         </div>
         <canvas id="stockCanvasChart" width="800" height="220" style="width:100%; height:220px; background:rgba(0,0,0,0.2); border-radius:16px; border:1px solid var(--card-border);"></canvas>
       </div>
-
       <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem; backdrop-filter:blur(20px);">
         <table>
           <thead>
@@ -486,14 +515,12 @@
     </div>
   </div>
 
-  <!-- FULL-SCREEN APP 3: BANK -->
   <div id="screen-bank" class="fullscreen-app-overlay hidden">
     <div class="app-header-bar">
       <button class="btn btn-outline" onclick="closeAppScreen('screen-bank')"><i class="fa-solid fa-arrow-left"></i> 메인으로</button>
       <h1 style="font-size:1.8rem; font-weight:900; color:var(--primary);"><i class="fa-solid fa-building-columns"></i> 은행</h1>
       <div></div>
     </div>
-
     <div class="container" style="max-width:1000px; margin:0 auto; width:100%;">
       <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem 2rem; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center;">
         <div>
@@ -511,7 +538,6 @@
           </div>
         </div>
       </div>
-
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
         <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem;">
           <h3 style="color:var(--primary); margin-bottom:1rem;"><i class="fa-solid fa-paper-plane"></i> 계좌 송금</h3>
@@ -547,7 +573,6 @@
           </div>
         </div>
       </div>
-
       <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem; margin-top:1.5rem;">
         <h3 style="color:var(--primary); margin-bottom:1rem;"><i class="fa-solid fa-chart-pie"></i> 나의 주식 포트폴리오</h3>
         <table>
@@ -558,69 +583,59 @@
     </div>
   </div>
 
-  <!-- FULL-SCREEN APP 4: EMAIL -->
   <div id="screen-email" class="fullscreen-app-overlay hidden">
     <div class="app-header-bar">
       <button class="btn btn-outline" onclick="closeAppScreen('screen-email')"><i class="fa-solid fa-arrow-left"></i> 메인으로</button>
       <h1 style="font-size:1.8rem; font-weight:900; color:var(--primary);"><i class="fa-solid fa-envelope"></i> 이메일 센터</h1>
       <button class="btn btn-primary" onclick="openModal('modal-compose-email')"><i class="fa-solid fa-pen"></i> 메일 작성</button>
     </div>
-
     <div class="container" style="max-width:900px; margin:0 auto; width:100%;">
       <div style="display:flex; gap:1rem; margin-bottom:1rem;">
         <button class="btn btn-primary" onclick="switchMailTab('inbox')">받은 메일함</button>
         <button class="btn btn-outline" onclick="switchMailTab('sent')">보낸 메일함</button>
       </div>
-
       <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem; backdrop-filter:blur(20px);">
         <div id="email-list-container"></div>
       </div>
     </div>
   </div>
 
-  <!-- FULL-SCREEN APP 5: AGORA FEED -->
   <div id="screen-feed" class="fullscreen-app-overlay hidden">
     <div class="app-header-bar">
       <button class="btn btn-outline" onclick="closeAppScreen('screen-feed')"><i class="fa-solid fa-arrow-left"></i> 메인으로</button>
       <h1 style="font-size:1.8rem; font-weight:900; color:var(--primary);"><i class="fa-solid fa-pen-to-square"></i> 아고라 피드</h1>
       <button class="btn btn-primary" onclick="openModal('modal-create-post')"><i class="fa-solid fa-plus"></i> 포스트 작성</button>
     </div>
-
     <div class="container" style="max-width:800px; margin:0 auto; width:100%;">
       <div id="feed-posts-container"></div>
     </div>
   </div>
 
-  <!-- FULL-SCREEN APP 6: AUCTION -->
   <div id="screen-auction" class="fullscreen-app-overlay hidden">
     <div class="app-header-bar">
       <button class="btn btn-outline" onclick="closeAppScreen('screen-auction')"><i class="fa-solid fa-arrow-left"></i> 메인으로</button>
       <h1 style="font-size:1.8rem; font-weight:900; color:var(--primary);"><i class="fa-solid fa-gavel"></i> 경매장</h1>
       <button class="btn btn-primary" onclick="openModal('modal-create-auction')"><i class="fa-solid fa-plus"></i> 경매 물품 등록</button>
     </div>
-
     <div class="container" style="max-width:950px; margin:0 auto; width:100%;">
       <div id="auction-grid-container" style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;"></div>
     </div>
   </div>
 
-  <!-- PROFILE MODAL -->
+  <!-- MODAL WINDOWS -->
   <div id="modal-profile" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
         <h3 style="font-size:1.5rem; color:var(--primary); font-weight:800;">내 프로필 정보</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-profile')">&times;</button>
       </div>
-
       <div style="text-align: center; margin-bottom: 1.5rem;">
         <img id="profile-modal-avatar" src="" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #ffffff; object-fit: cover; margin-bottom: 0.5rem;">
         <h2 id="profile-modal-name" style="font-size: 1.8rem; color: #fff;">-</h2>
         <p style="font-size: 0.95rem; color: var(--text-muted);">계좌번호: <span id="profile-modal-acc">-</span></p>
         <p style="font-size: 1.2rem; color: var(--primary); font-weight: 800; margin-top: 0.5rem;">현재 잔액: <span id="profile-modal-balance">0 G</span></p>
       </div>
-
       <hr style="border: 0; border-top: 1px solid var(--card-border); margin: 1rem 0;">
-
       <h4 style="margin-bottom: 0.5rem; color: var(--primary);">프로필 사진 변경</h4>
       <div class="image-upload-box" id="avatar-paste-area">
         <i class="fa-solid fa-paste" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
@@ -628,7 +643,6 @@
         <input type="file" id="avatar-file-input" accept="image/*" style="display:none;">
         <center><img id="avatar-preview" class="image-preview"></center>
       </div>
-
       <form onsubmit="handleUpdateAvatar(event)">
         <div class="form-group">
           <input type="url" id="avatar-url-input" class="form-control" placeholder="또는 이미지 URL 입력 (https...)">
@@ -638,7 +652,6 @@
     </div>
   </div>
 
-  <!-- COMPOSE EMAIL MODAL WITH DIRECT SEND BUTTON -->
   <div id="modal-compose-email" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
@@ -663,7 +676,6 @@
     </div>
   </div>
 
-  <!-- CREATE POST MODAL -->
   <div id="modal-create-post" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
@@ -693,7 +705,6 @@
     </div>
   </div>
 
-  <!-- CREATE AUCTION MODAL -->
   <div id="modal-create-auction" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
@@ -727,7 +738,6 @@
     </div>
   </div>
 
-  <!-- CREATE STORE MODAL -->
   <div id="modal-create-store" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
@@ -762,7 +772,6 @@
     </div>
   </div>
 
-  <!-- STORE DETAIL MODAL -->
   <div id="modal-store-detail" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
@@ -778,7 +787,6 @@
     </div>
   </div>
 
-  <!-- ADD ITEM MODAL -->
   <div id="modal-add-item" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
@@ -809,7 +817,6 @@
     </div>
   </div>
 
-  <!-- PRODUCT POPUP MODAL -->
   <div id="modal-product-popup" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
@@ -846,7 +853,6 @@
     </div>
   </div>
 
-  <!-- SETTINGS MODAL -->
   <div id="modal-settings" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
@@ -867,7 +873,6 @@
     </div>
   </div>
 
-  <!-- ADMIN AUTH MODAL -->
   <div id="modal-admin" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
@@ -884,14 +889,12 @@
     </div>
   </div>
 
-  <!-- ADMIN ACCOUNT REGULATION PANEL MODAL -->
   <div id="modal-admin-panel" class="modal-overlay">
     <div class="modal" style="max-width:700px;">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;"><i class="fa-solid fa-user-shield"></i> 전체 계좌 정보 관리</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-admin-panel')">&times;</button>
       </div>
-
       <div style="margin-bottom:1rem; background:var(--input-bg); padding:1rem; border-radius:16px;">
         <h4 style="margin-bottom:0.5rem;">신규 계좌 추가</h4>
         <form onsubmit="adminCreateAcc(event)" style="display:flex; gap:0.5rem; flex-wrap:wrap;">
@@ -902,7 +905,6 @@
           <button type="submit" class="btn btn-primary">생성</button>
         </form>
       </div>
-
       <table>
         <thead>
           <tr><th>이름</th><th>계좌번호</th><th>잔액</th><th>관리</th></tr>
@@ -912,28 +914,29 @@
     </div>
   </div>
 
+  <!-- JavaScript App Logic -->
   <script>
     const defaultAvatar = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150";
     const defaultStoreLogo = "https://images.unsplash.com/photo-1534723452862-4c874018d66d?w=150";
 
-    let accounts = JSON.parse(localStorage.getItem('ag_accs_v16')) || [
+    let accounts = JSON.parse(localStorage.getItem('ag_accs_v17')) || [
       { name: "민수", account: "101-001", pin: "1234", balance: 5000, loan: 0, avatar: defaultAvatar, shares: {} },
       { name: "지아", account: "101-002", pin: "1234", balance: 12000, loan: 0, avatar: defaultAvatar, shares: {} }
     ];
 
-    let stores = JSON.parse(localStorage.getItem('ag_stores_v16')) || [
+    let stores = JSON.parse(localStorage.getItem('ag_stores_v17')) || [
       { id: "S1", name: "아고라 메인 상점", logo: defaultStoreLogo, owner: "101-001", totalShares: 100, price: 50, priceHistory: [30, 35, 40, 45, 50], totalSales: 0, items: [] }
     ];
 
-    let emails = JSON.parse(localStorage.getItem('ag_emails_v16')) || [
+    let emails = JSON.parse(localStorage.getItem('ag_emails_v17')) || [
       { id: "E1", from: "101-001", fromName: "민수", to: "101-002", subject: "환영합니다!", body: "아고라 캐피탈에 오신 것을 환영합니다.", time: "방금 전", read: false }
     ];
 
-    let posts = JSON.parse(localStorage.getItem('ag_posts_v16')) || [
+    let posts = JSON.parse(localStorage.getItem('ag_posts_v17')) || [
       { id: "P1", author: "민수", authorAcc: "101-001", title: "첫 번째 게시글입니다!", content: "아고라 피드가 오픈했습니다. 많은 공유 부탁드립니다.", img: "", upvotedBy: [], likes: 0, comments: [] }
     ];
 
-    let auctions = JSON.parse(localStorage.getItem('ag_auctions_v16')) || [
+    let auctions = JSON.parse(localStorage.getItem('ag_auctions_v17')) || [
       { id: "A1", seller: "지아", sellerAcc: "101-002", title: "희귀 카드 컬렉션", currentBid: 500, highestBidder: "민수", buyout: 1500, img: "https://via.placeholder.com/300" }
     ];
 
@@ -943,7 +946,6 @@
     let currentMailTab = "inbox";
     let isAdmin = false;
 
-    // Image Upload Data Buffers
     let tempAvatarBase64 = "";
     let tempStoreLogoBase64 = "";
     let tempItemImgBase64 = "";
@@ -951,11 +953,11 @@
     let tempAucImgBase64 = "";
 
     function save() {
-      localStorage.setItem('ag_accs_v16', JSON.stringify(accounts));
-      localStorage.setItem('ag_stores_v16', JSON.stringify(stores));
-      localStorage.setItem('ag_emails_v16', JSON.stringify(emails));
-      localStorage.setItem('ag_posts_v16', JSON.stringify(posts));
-      localStorage.setItem('ag_auctions_v16', JSON.stringify(auctions));
+      localStorage.setItem('ag_accs_v17', JSON.stringify(accounts));
+      localStorage.setItem('ag_stores_v17', JSON.stringify(stores));
+      localStorage.setItem('ag_emails_v17', JSON.stringify(emails));
+      localStorage.setItem('ag_posts_v17', JSON.stringify(posts));
+      localStorage.setItem('ag_auctions_v17', JSON.stringify(auctions));
     }
 
     function changeTheme(themeName) {
@@ -966,25 +968,12 @@
     changeTheme(savedTheme);
 
     function clearUploadPreviews() {
-      tempAvatarBase64 = "";
-      tempStoreLogoBase64 = "";
-      tempItemImgBase64 = "";
-      tempPostImgBase64 = "";
-      tempAucImgBase64 = "";
-      document.querySelectorAll('.image-preview').forEach(img => {
-        img.src = '';
-        img.style.display = 'none';
-      });
+      tempAvatarBase64 = ""; tempStoreLogoBase64 = ""; tempItemImgBase64 = ""; tempPostImgBase64 = ""; tempAucImgBase64 = "";
+      document.querySelectorAll('.image-preview').forEach(img => { img.src = ''; img.style.display = 'none'; });
     }
 
-    function openModal(id) { 
-      clearUploadPreviews();
-      document.getElementById(id).classList.add('active'); 
-    }
-    function closeModal(id) { 
-      clearUploadPreviews();
-      document.getElementById(id).classList.remove('active'); 
-    }
+    function openModal(id) { clearUploadPreviews(); document.getElementById(id).classList.add('active'); }
+    function closeModal(id) { clearUploadPreviews(); document.getElementById(id).classList.remove('active'); }
 
     function openAppScreen(id) { 
       document.getElementById(id).classList.remove('hidden'); 
@@ -999,20 +988,18 @@
       const box = document.getElementById(boxId);
       const fileInput = document.getElementById(fileInputId);
       const preview = document.getElementById(previewId);
+      if (!box || !fileInput || !preview) return;
 
       box.addEventListener('click', () => fileInput.click());
-
       fileInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (file) processImageFile(file, preview, callback);
       });
-
       box.addEventListener('paste', (e) => {
         const items = (e.clipboardData || e.originalEvent.clipboardData).items;
         for (let item of items) {
           if (item.kind === 'file' && item.type.startsWith('image/')) {
-            const blob = item.getAsFile();
-            processImageFile(blob, preview, callback);
+            processImageFile(item.getAsFile(), preview, callback);
           }
         }
       });
@@ -1029,11 +1016,11 @@
       reader.readAsDataURL(file);
     }
 
-    setupImagePasteAndFile('avatar-paste-area', 'avatar-file-input', 'avatar-preview', (base64) => tempAvatarBase64 = base64);
-    setupImagePasteAndFile('store-logo-paste-area', 'store-logo-file', 'store-logo-preview', (base64) => tempStoreLogoBase64 = base64);
-    setupImagePasteAndFile('item-img-paste-area', 'item-img-file', 'item-img-preview', (base64) => tempItemImgBase64 = base64);
-    setupImagePasteAndFile('post-img-paste-area', 'post-img-file', 'post-img-preview', (base64) => tempPostImgBase64 = base64);
-    setupImagePasteAndFile('auc-img-paste-area', 'auc-img-file', 'auc-img-preview', (base64) => tempAucImgBase64 = base64);
+    setupImagePasteAndFile('avatar-paste-area', 'avatar-file-input', 'avatar-preview', (b) => tempAvatarBase64 = b);
+    setupImagePasteAndFile('store-logo-paste-area', 'store-logo-file', 'store-logo-preview', (b) => tempStoreLogoBase64 = b);
+    setupImagePasteAndFile('item-img-paste-area', 'item-img-file', 'item-img-preview', (b) => tempItemImgBase64 = b);
+    setupImagePasteAndFile('post-img-paste-area', 'post-img-file', 'post-img-preview', (b) => tempPostImgBase64 = b);
+    setupImagePasteAndFile('auc-img-paste-area', 'auc-img-file', 'auc-img-preview', (b) => tempAucImgBase64 = b);
 
     function handleLogin(e) {
       e.preventDefault();
@@ -1042,8 +1029,7 @@
       const user = accounts.find(a => a.account === acc && a.pin === pin);
 
       if (user) {
-        currentUser = user;
-        isAdmin = false;
+        currentUser = user; isAdmin = false;
         document.getElementById('view-login').classList.add('hidden');
         document.getElementById('logout-btn').classList.remove('hidden');
         document.getElementById('admin-login-btn').classList.remove('hidden');
@@ -1051,92 +1037,72 @@
         document.getElementById('dash-admin-tag').classList.add('hidden');
         updateDash();
         document.getElementById('view-dashboard').classList.remove('hidden');
-      } else {
-        alert("로그인 정보가 틀렸습니다.");
-      }
+      } else { alert("로그인 정보가 올바르지 않습니다."); }
     }
 
     function updateDash() {
       const userImg = currentUser.avatar || defaultAvatar;
-
       document.getElementById('dash-avatar').src = userImg;
       document.getElementById('profile-modal-avatar').src = userImg;
       document.getElementById('profile-modal-name').innerText = currentUser.name;
       document.getElementById('profile-modal-acc').innerText = currentUser.account;
       document.getElementById('profile-modal-balance').innerText = `${currentUser.balance.toLocaleString()} G`;
-
       document.getElementById('bank-user-name').innerText = currentUser.name;
       document.getElementById('bank-user-acc').innerText = currentUser.account;
       document.getElementById('bank-user-balance').innerText = `${currentUser.balance.toLocaleString()} G`;
       document.getElementById('bank-user-loan').innerText = `${(currentUser.loan || 0).toLocaleString()} G`;
-
       renderMarketStores();
       renderStockList();
       renderPortfolio();
     }
 
     function handleTakeLoan() {
-      const amtInput = document.getElementById('loan-get-amt');
-      const amt = parseInt(amtInput.value);
-
-      if (!amt || amt <= 0) return alert("유효한 대출 금액을 입력하세요.");
-
-      if (!currentUser.loan) currentUser.loan = 0;
-      currentUser.loan += amt;
+      const amt = parseInt(document.getElementById('loan-get-amt').value);
+      if (!amt || amt <= 0) return alert("금액을 입력하세요.");
+      currentUser.loan = (currentUser.loan || 0) + amt;
       currentUser.balance += amt;
-
-      save();
-      updateDash();
-      amtInput.value = '';
-      alert(`${amt.toLocaleString()} G 대출이 완료되었습니다!`);
+      save(); updateDash();
+      alert(`${amt.toLocaleString()} G 대출 완료!`);
     }
 
     function handlePayLoan() {
-      const amtInput = document.getElementById('loan-pay-amt');
-      const amt = parseInt(amtInput.value);
-
-      if (!amt || amt <= 0) return alert("유효한 상환 금액을 입력하세요.");
-      if ((currentUser.loan || 0) <= 0) return alert("상환할 대출금이 없습니다.");
-      if (amt > currentUser.loan) return alert("상환 금액이 잔여 대출금보다 큽니다.");
-      if (currentUser.balance < amt) return alert("잔액이 부족합니다.");
-
+      const amt = parseInt(document.getElementById('loan-pay-amt').value);
+      if (!amt || amt <= 0 || (currentUser.loan || 0) <= 0 || amt > currentUser.loan || currentUser.balance < amt) return alert("유효하지 않은 상환 요청입니다.");
       currentUser.balance -= amt;
       currentUser.loan -= amt;
-
-      save();
-      updateDash();
-      amtInput.value = '';
-      alert(`${amt.toLocaleString()} G 대출 상환이 완료되었습니다!`);
+      save(); updateDash();
+      alert("대출 상환 완료!");
     }
 
     function renderMarketStores() {
       const box = document.getElementById('market-store-list');
-      box.innerHTML = '';
-
-      if (stores.length === 0) {
-        box.innerHTML = '<p style="color:var(--text-muted); text-align:center;">등록된 상점이 없습니다.</p>';
-        return;
-      }
-
+      box.innerHTML = stores.length === 0 ? '<p style="text-align:center;">상점이 없습니다.</p>' : '';
       stores.forEach(s => {
-        const logo = s.logo || defaultStoreLogo;
         box.innerHTML += `
           <div class="store-item-card" onclick="openStoreDetail('${s.id}')">
-            <img src="${logo}" class="store-logo-img">
+            <img src="${s.logo || defaultStoreLogo}" class="store-logo-img">
             <div style="flex:1;">
               <h4 style="color:var(--primary); font-size:1.3rem;">${s.name}</h4>
-              <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.2rem;">상품 수: ${s.items.length}개 | 현재 주가: ${s.price} G</p>
+              <p style="font-size:0.85rem; color:var(--text-muted);">상품 수: ${s.items.length}개 | 주가: ${s.price} G</p>
             </div>
-            ${isAdmin ? `<button class="btn btn-danger" onclick="event.stopPropagation(); eraseStoreByAdmin('${s.id}')"><i class="fa-solid fa-trash"></i> 삭제</button>` : ''}
-          </div>
-        `;
+            ${isAdmin ? `<button class="btn btn-danger" onclick="event.stopPropagation(); eraseStoreByAdmin('${s.id}')">삭제</button>` : ''}
+          </div>`;
       });
     }
 
     function eraseStoreByAdmin(storeId) {
-      if (confirm("관리자 권한: 이 상점을 영구 삭제하시겠습니까?")) {
+      if (confirm("이 상점을 삭제합니까?")) {
         stores = stores.filter(s => s.id !== storeId);
+        save(); renderMarketStores(); renderStockList();
+      }
+    }
+
+    function eraseCurrentStore() {
+      if (!activeStoreId) return;
+      if (confirm("정말로 이 상점을 폐업(삭제)하시겠습니까?")) {
+        stores = stores.filter(s => s.id !== activeStoreId);
         save();
+        closeModal('modal-store-detail');
         renderMarketStores();
         renderStockList();
       }
@@ -1151,45 +1117,31 @@
             <td><strong>${s.name}</strong></td>
             <td style="color:var(--primary); font-weight:700;">${s.price} G</td>
             <td>
-              <button class="btn btn-primary" style="padding:0.3rem 0.7rem;" onclick="tradeStock('${s.id}', 'buy')">매수</button>
-              <button class="btn btn-outline" style="padding:0.3rem 0.7rem;" onclick="tradeStock('${s.id}', 'sell')">매도</button>
+              <button class="btn btn-primary" onclick="tradeStock('${s.id}', 'buy')">매수</button>
+              <button class="btn btn-outline" onclick="tradeStock('${s.id}', 'sell')">매도</button>
             </td>
-          </tr>
-        `;
+          </tr>`;
       });
     }
 
     function populateChartStoreSelect() {
       const select = document.getElementById('chart-store-select');
-      select.innerHTML = '';
-      stores.forEach(s => {
-        select.innerHTML += `<option value="${s.id}">${s.name}</option>`;
-      });
+      select.innerHTML = stores.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
     }
 
     function renderStockChart() {
       const canvas = document.getElementById('stockCanvasChart');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      const storeSelect = document.getElementById('chart-store-select');
-      if (!storeSelect.value) return;
-
-      const store = stores.find(s => s.id === storeSelect.value);
+      const storeId = document.getElementById('chart-store-select').value;
+      const store = stores.find(s => s.id === storeId);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (!store || !store.priceHistory) return;
 
-      if (!store || !store.priceHistory || store.priceHistory.length === 0) {
-        ctx.fillStyle = '#ffffff';
-        ctx.font = '16px Inter';
-        ctx.fillText('주가 데이터가 없습니다.', 20, 30);
-        return;
-      }
-
-      const rawHistory = store.priceHistory;
-      const history = rawHistory.slice(-15);
+      const history = store.priceHistory.slice(-15);
       const maxVal = Math.max(...history) * 1.15;
       const minVal = Math.min(...history) * 0.85;
       const range = maxVal - minVal || 1;
-
       const padding = 35;
       const chartWidth = canvas.width - padding * 2;
       const chartHeight = canvas.height - padding * 2;
@@ -1198,649 +1150,304 @@
       ctx.lineWidth = 1;
       for (let i = 0; i <= 4; i++) {
         const y = padding + (chartHeight / 4) * i;
-        ctx.beginPath();
-        ctx.moveTo(padding, y);
-        ctx.lineTo(canvas.width - padding, y);
-        ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(padding, y); ctx.lineTo(canvas.width - padding, y); ctx.stroke();
       }
 
       ctx.strokeStyle = '#38bdf8';
       ctx.lineWidth = 3;
       ctx.beginPath();
-
       history.forEach((val, idx) => {
         const x = padding + (chartWidth / Math.max(1, history.length - 1)) * idx;
         const y = canvas.height - padding - ((val - minVal) / range) * chartHeight;
-
-        if (idx === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
+        if (idx === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
       });
       ctx.stroke();
     }
 
-    /* EMAIL LOGIC */
-    function switchMailTab(tab) {
-      currentMailTab = tab;
-      renderEmails();
-    }
-
+    function switchMailTab(tab) { currentMailTab = tab; renderEmails(); }
     function renderEmails() {
       const box = document.getElementById('email-list-container');
-      box.innerHTML = '';
-
       const list = emails.filter(e => currentMailTab === 'inbox' ? e.to === currentUser.account : e.from === currentUser.account);
-
-      if (list.length === 0) {
-        box.innerHTML = '<p style="color:var(--text-muted); text-align:center;">보관된 메일이 없습니다.</p>';
-        return;
-      }
-
+      box.innerHTML = list.length === 0 ? '<p style="text-align:center;">보관된 메일이 없습니다.</p>' : '';
       list.forEach(m => {
         box.innerHTML += `
           <div class="review-box" style="margin-bottom:0.75rem;">
             <div style="display:flex; justify-content:space-between; font-weight:700; color:var(--primary);">
-              <span>${currentMailTab === 'inbox' ? '보낸 사람: ' + m.fromName + ' (' + m.from + ')' : '받는 사람: ' + m.to}</span>
-              <span style="font-size:0.8rem; color:var(--text-muted);">${m.time}</span>
+              <span>${currentMailTab === 'inbox' ? '보낸 사람: ' + m.fromName : '받는 사람: ' + m.to}</span>
+              <span style="font-size:0.8rem;">${m.time}</span>
             </div>
             <h4 style="margin:0.4rem 0;">${m.subject}</h4>
             <p style="font-size:0.9rem;">${m.body}</p>
-          </div>
-        `;
+          </div>`;
       });
     }
 
     function handleSendEmail(e) {
       e.preventDefault();
-      const toAcc = document.getElementById('email-to-acc').value;
-      const subject = document.getElementById('email-subject').value;
-      const body = document.getElementById('email-body').value;
-
-      const target = accounts.find(a => a.account === toAcc);
-      if (!target) return alert("존재하지 않는 계좌번호입니다.");
-
-      emails.unshift({
-        id: "E" + Date.now(),
-        from: currentUser.account,
-        fromName: currentUser.name,
-        to: toAcc,
-        subject: subject,
-        body: body,
-        time: "방금 전",
-        read: false
-      });
-
-      save();
-      closeModal('modal-compose-email');
-      renderEmails();
-      alert("메일이 성공적으로 발송되었습니다!");
+      const to = document.getElementById('email-to-acc').value;
+      if (!accounts.find(a => a.account === to)) return alert("존재하지 않는 계좌입니다.");
+      emails.unshift({ id: "E" + Date.now(), from: currentUser.account, fromName: currentUser.name, to, subject: document.getElementById('email-subject').value, body: document.getElementById('email-body').value, time: "방금 전", read: false });
+      save(); closeModal('modal-compose-email'); renderEmails();
     }
 
-    /* AGORA FEED LOGIC */
     function renderFeedPosts() {
       const box = document.getElementById('feed-posts-container');
-      box.innerHTML = '';
-
-      if (posts.length === 0) {
-        box.innerHTML = '<p style="color:var(--text-muted); text-align:center;">작성된 포스트가 없습니다.</p>';
-        return;
-      }
-
+      box.innerHTML = posts.length === 0 ? '<p style="text-align:center;">포스트가 없습니다.</p>' : '';
       posts.forEach(p => {
         if (!p.upvotedBy) p.upvotedBy = [];
-        const hasUpvoted = p.upvotedBy.includes(currentUser.account);
-
         box.innerHTML += `
           <div class="feed-card">
-            <div style="display:flex; justify-content:space-between; font-weight:600; font-size:0.85rem; color:var(--text-muted); margin-bottom:0.4rem;">
-              <span>작성자: ${p.author} (${p.authorAcc})</span>
-              ${isAdmin ? `<button class="btn btn-danger" style="padding:0.2rem 0.5rem;" onclick="erasePostByAdmin('${p.id}')"><i class="fa-solid fa-trash"></i> 관리자 삭제</button>` : ''}
+            <div style="display:flex; justify-content:space-between; color:var(--text-muted); font-size:0.85rem;">
+              <span>작성자: ${p.author}</span>
+              ${isAdmin ? `<button class="btn btn-danger" onclick="erasePostByAdmin('${p.id}')">삭제</button>` : ''}
             </div>
-            <h3 style="font-size:1.3rem; margin-bottom:0.5rem; color:var(--primary);">${p.title}</h3>
-            <p style="margin-bottom:1rem; font-size:0.95rem;">${p.content}</p>
-            ${p.img ? `<img src="${p.img}" style="width:100%; max-height:300px; object-fit:cover; border-radius:12px; margin-bottom:1rem;">` : ''}
-            
-            <div style="display:flex; gap:1rem; align-items:center;">
-              <button class="reaction-btn" style="${hasUpvoted ? 'background:var(--primary); color:#fff;' : ''}" onclick="toggleUpvotePost('${p.id}')">
-                <i class="fa-solid fa-arrow-up"></i> 추천 ${p.upvotedBy.length}
-              </button>
+            <h3 style="color:var(--primary); font-size:1.3rem; margin:0.4rem 0;">${p.title}</h3>
+            <p>${p.content}</p>
+            ${p.img ? `<img src="${p.img}" style="width:100%; border-radius:12px; margin-top:0.5rem;">` : ''}
+            <div style="margin-top:0.75rem;">
+              <button class="reaction-btn" onclick="toggleUpvotePost('${p.id}')"><i class="fa-solid fa-arrow-up"></i> 추천 ${p.upvotedBy.length}</button>
             </div>
-
-            <div style="margin-top:1rem; border-top:1px solid var(--card-border); padding-top:0.75rem;">
-              <h5 style="margin-bottom:0.5rem;">댓글 (${p.comments ? p.comments.length : 0})</h5>
-              <div id="comments-${p.id}">
-                ${(p.comments || []).map(c => `<p style="font-size:0.85rem; margin-bottom:0.25rem;"><strong>${c.author}:</strong>${c.text}</p>`).join('')}
-              </div>
-              <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
-                <input type="text" id="comment-input-${p.id}" class="form-control" placeholder="댓글 달기...">
-                <button class="btn btn-outline" onclick="addComment('${p.id}')">작성</button>
-              </div>
-            </div>
-          </div>
-        `;
+          </div>`;
       });
     }
 
     function toggleUpvotePost(id) {
       const p = posts.find(post => post.id === id);
       if (!p.upvotedBy) p.upvotedBy = [];
-
-      const index = p.upvotedBy.indexOf(currentUser.account);
-      if (index === -1) {
-        p.upvotedBy.push(currentUser.account);
-      } else {
-        p.upvotedBy.splice(index, 1);
-      }
-
-      save();
-      renderFeedPosts();
+      const idx = p.upvotedBy.indexOf(currentUser.account);
+      if (idx === -1) p.upvotedBy.push(currentUser.account); else p.upvotedBy.splice(idx, 1);
+      save(); renderFeedPosts();
     }
 
-    function erasePostByAdmin(id) {
-      if (confirm("관리자 권한: 이 포스트를 영구 삭제하시겠습니까?")) {
-        posts = posts.filter(p => p.id !== id);
-        save();
-        renderFeedPosts();
-      }
-    }
+    function erasePostByAdmin(id) { posts = posts.filter(p => p.id !== id); save(); renderFeedPosts(); }
 
     function handleCreatePost(e) {
       e.preventDefault();
-      posts.unshift({
-        id: "P" + Date.now(),
-        author: currentUser.name,
-        authorAcc: currentUser.account,
-        title: document.getElementById('post-title').value,
-        content: document.getElementById('post-content').value,
-        img: tempPostImgBase64 || "",
-        upvotedBy: [],
-        likes: 0,
-        comments: []
-      });
-
-      tempPostImgBase64 = "";
-      save();
-      closeModal('modal-create-post');
-      renderFeedPosts();
+      posts.unshift({ id: "P" + Date.now(), author: currentUser.name, authorAcc: currentUser.account, title: document.getElementById('post-title').value, content: document.getElementById('post-content').value, img: tempPostImgBase64, upvotedBy: [], likes: 0, comments: [] });
+      save(); closeModal('modal-create-post'); renderFeedPosts();
     }
 
-    function addComment(id) {
-      const input = document.getElementById(`comment-input-${id}`);
-      if (!input.value.trim()) return;
-
-      const p = posts.find(post => post.id === id);
-      if (!p.comments) p.comments = [];
-
-      p.comments.push({ author: currentUser.name, text: input.value });
-      save();
-      renderFeedPosts();
-    }
-
-    /* AUCTION LOGIC */
     function renderAuctions() {
       const grid = document.getElementById('auction-grid-container');
-      grid.innerHTML = '';
-
-      if (auctions.length === 0) {
-        grid.innerHTML = '<p style="color:var(--text-muted); grid-column:1/-1; text-align:center;">진행 중인 경매가 없습니다.</p>';
-        return;
-      }
-
+      grid.innerHTML = auctions.length === 0 ? '<p style="grid-column:1/-1; text-align:center;">경매 물품이 없습니다.</p>' : '';
       auctions.forEach(a => {
         grid.innerHTML += `
           <div class="feed-card">
-            <img src="${a.img || 'https://via.placeholder.com/300'}" style="width:100%; height:160px; object-fit:cover; border-radius:12px; margin-bottom:0.75rem;">
-            <h3 style="color:var(--primary); font-size:1.2rem;">${a.title}</h3>
-            <p style="font-size:0.85rem; color:var(--text-muted);">판매자: ${a.seller}</p>
-            <p style="font-size:1.1rem; font-weight:800; margin:0.5rem 0;">현재 입찰가: ${a.currentBid.toLocaleString()} G</p>
-            <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">최고 입찰자: ${a.highestBidder || '없음'}</p>
-            
+            <img src="${a.img || 'https://via.placeholder.com/300'}" style="width:100%; height:160px; object-fit:cover; border-radius:12px;">
+            <h3 style="color:var(--primary); font-size:1.2rem; margin-top:0.5rem;">${a.title}</h3>
+            <p style="font-weight:800; font-size:1.1rem; margin:0.4rem 0;">입찰가: ${a.currentBid.toLocaleString()} G</p>
             <div style="display:flex; gap:0.5rem;">
-              <button class="btn btn-primary" style="flex:1;" onclick="placeBid('${a.id}')">입찰하기 (+50G)</button>
-              ${a.buyout ? `<button class="btn btn-danger" onclick="buyoutAuction('${a.id}')">즉시 구매 (${a.buyout.toLocaleString()}G)</button>` : ''}
+              <button class="btn btn-primary" style="flex:1;" onclick="placeBid('${a.id}')">입찰 (+50G)</button>
+              ${a.buyout ? `<button class="btn btn-danger" onclick="buyoutAuction('${a.id}')">즉시 구매</button>` : ''}
             </div>
-          </div>
-        `;
+          </div>`;
       });
     }
 
     function handleCreateAuction(e) {
       e.preventDefault();
-      auctions.unshift({
-        id: "A" + Date.now(),
-        seller: currentUser.name,
-        sellerAcc: currentUser.account,
-        title: document.getElementById('auc-item-name').value,
-        currentBid: parseInt(document.getElementById('auc-start-price').value),
-        buyout: parseInt(document.getElementById('auc-buyout-price').value) || null,
-        highestBidder: null,
-        img: tempAucImgBase64 || "https://via.placeholder.com/300"
-      });
-
-      tempAucImgBase64 = "";
-      save();
-      closeModal('modal-create-auction');
-      renderAuctions();
+      auctions.unshift({ id: "A" + Date.now(), seller: currentUser.name, sellerAcc: currentUser.account, title: document.getElementById('auc-item-name').value, currentBid: parseInt(document.getElementById('auc-start-price').value), buyout: parseInt(document.getElementById('auc-buyout-price').value) || null, img: tempAucImgBase64 || "https://via.placeholder.com/300" });
+      save(); closeModal('modal-create-auction'); renderAuctions();
     }
 
     function placeBid(id) {
       const a = auctions.find(auc => auc.id === id);
-      const nextBid = a.currentBid + 50;
-
-      if (currentUser.balance < nextBid) return alert("잔액이 부족합니다.");
-
-      currentUser.balance -= 50;
-      a.currentBid = nextBid;
-      a.highestBidder = currentUser.name;
-
-      save();
-      updateDash();
-      renderAuctions();
-      alert(`${nextBid.toLocaleString()} G로 입찰 완료!`);
+      const next = a.currentBid + 50;
+      if (currentUser.balance < next) return alert("잔액 부족");
+      currentUser.balance -= 50; a.currentBid = next; a.highestBidder = currentUser.name;
+      save(); updateDash(); renderAuctions();
     }
 
     function buyoutAuction(id) {
       const a = auctions.find(auc => auc.id === id);
-      if (currentUser.balance < a.buyout) return alert("잔액이 부족합니다.");
-
+      if (currentUser.balance < a.buyout) return alert("잔액 부족");
       currentUser.balance -= a.buyout;
-
-      const sellerAcc = accounts.find(acc => acc.account === a.sellerAcc);
-      if (sellerAcc) sellerAcc.balance += a.buyout;
-
       auctions = auctions.filter(auc => auc.id !== id);
-
-      save();
-      updateDash();
-      renderAuctions();
-      alert(`[${a.title}] 물품 즉시 구매가 완료되었습니다!`);
+      save(); updateDash(); renderAuctions();
     }
 
     function renderPortfolio() {
       const tbody = document.getElementById('portfolio-list');
       tbody.innerHTML = '';
-      let count = 0;
-
       stores.forEach(s => {
         const owned = (currentUser.shares && currentUser.shares[s.id]) || 0;
-        if (owned > 0) {
-          count++;
-          const pct = ((owned / s.totalShares) * 100).toFixed(1);
-          tbody.innerHTML += `<tr><td>${s.name}</td><td>${owned}주</td><td><strong style="color:var(--primary);">${pct}%</strong></td></tr>`;
-        }
+        if (owned > 0) tbody.innerHTML += `<tr><td>${s.name}</td><td>${owned}주</td><td>${((owned / s.totalShares) * 100).toFixed(1)}%</td></tr>`;
       });
-
-      if (count === 0) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color: var(--text-muted);">보유 주식 없음</td></tr>';
     }
 
     function handleUpdateAvatar(e) {
       e.preventDefault();
-      const urlInput = document.getElementById('avatar-url-input').value;
-      const finalAvatar = tempAvatarBase64 || urlInput || defaultAvatar;
-
-      currentUser.avatar = finalAvatar;
-      tempAvatarBase64 = "";
-      save();
-      updateDash();
-      closeModal('modal-profile');
-      alert("프로필 사진이 변경되었습니다!");
+      currentUser.avatar = tempAvatarBase64 || document.getElementById('avatar-url-input').value || defaultAvatar;
+      save(); updateDash(); closeModal('modal-profile');
     }
 
     function handleTransfer(e) {
       e.preventDefault();
-      const targetAcc = document.getElementById('trans-acc').value;
+      const target = accounts.find(a => a.account === document.getElementById('trans-acc').value);
       const amt = parseInt(document.getElementById('trans-amt').value);
-
-      const target = accounts.find(a => a.account === targetAcc);
-      if (!target || target.account === currentUser.account) return alert("유효하지 않은 계좌입니다.");
-      if (currentUser.balance < amt) return alert("잔액이 부족합니다.");
-
-      currentUser.balance -= amt;
-      target.balance += amt;
-      save();
-      updateDash();
-      alert("송금 완료!");
+      if (!target || currentUser.balance < amt) return alert("송금 실패");
+      currentUser.balance -= amt; target.balance += amt;
+      save(); updateDash();
     }
 
-    // Store & Items Logic
     function handleCreateStore(e) {
       e.preventDefault();
-      if (currentUser.balance < 1000) return alert("개설 비용 (1,000 G)이 부족합니다.");
-
+      if (currentUser.balance < 1000) return alert("잔액 부족");
       currentUser.balance -= 1000;
-      const sharesCount = parseInt(document.getElementById('store-shares').value);
-      const initialPrice = parseInt(document.getElementById('store-price').value);
-      const logoInput = document.getElementById('store-logo-url').value;
-      const finalLogo = tempStoreLogoBase64 || logoInput || defaultStoreLogo;
-
-      const storeId = "S" + Date.now();
-
-      stores.push({
-        id: storeId,
-        name: document.getElementById('store-name').value,
-        logo: finalLogo,
-        owner: currentUser.account,
-        totalShares: sharesCount,
-        price: initialPrice,
-        priceHistory: [initialPrice],
-        totalSales: 0,
-        items: []
-      });
-
+      const id = "S" + Date.now();
+      const shares = parseInt(document.getElementById('store-shares').value);
+      const price = parseInt(document.getElementById('store-price').value);
+      stores.push({ id, name: document.getElementById('store-name').value, logo: tempStoreLogoBase64 || document.getElementById('store-logo-url').value || defaultStoreLogo, owner: currentUser.account, totalShares: shares, price, priceHistory: [price], totalSales: 0, items: [] });
       if (!currentUser.shares) currentUser.shares = {};
-      currentUser.shares[storeId] = sharesCount;
-
-      tempStoreLogoBase64 = "";
-      save();
-      closeModal('modal-create-store');
-      updateDash();
-      alert("상점이 개설되었습니다!");
+      currentUser.shares[id] = shares;
+      save(); closeModal('modal-create-store'); updateDash();
     }
 
-    function openStoreDetail(storeId) {
-      activeStoreId = storeId;
-      const store = stores.find(s => s.id === storeId);
-      document.getElementById('modal-store-title').innerText = store.name;
-
+    function openStoreDetail(id) {
+      activeStoreId = id;
+      const s = stores.find(st => st.id === id);
+      document.getElementById('modal-store-title').innerText = s.name;
       const actions = document.getElementById('store-owner-actions');
-      const isOwner = currentUser && (currentUser.account === store.owner || isAdmin);
-
-      if (isOwner) {
-        actions.classList.remove('hidden');
-      } else {
-        actions.classList.add('hidden');
-      }
-
-      renderStoreProducts();
-      openModal('modal-store-detail');
+      if (currentUser.account === s.owner || isAdmin) actions.classList.remove('hidden'); else actions.classList.add('hidden');
+      renderStoreProducts(); openModal('modal-store-detail');
     }
 
     function renderStoreProducts() {
-      const store = stores.find(s => s.id === activeStoreId);
+      const s = stores.find(st => st.id === activeStoreId);
       const grid = document.getElementById('store-products-grid');
-      grid.innerHTML = '';
-
-      if (!store.items || store.items.length === 0) {
-        grid.innerHTML = '<p style="color:var(--text-muted); grid-column:1/-1;">등록된 상품이 없습니다.</p>';
-        return;
-      }
-
-      store.items.forEach(item => {
-        grid.innerHTML += `
-          <div style="background:var(--input-bg); border:1px solid var(--card-border); border-radius:14px; overflow:hidden; cursor:pointer;" onclick="openProductPopup('${item.id}')">
-            <img src="${item.img || 'https://via.placeholder.com/300'}" style="width:100%; height:120px; object-fit:cover;">
-            <div style="padding:0.6rem;">
-              <h4>${item.name}</h4>
-              <p style="color:var(--primary); font-weight:700;">${item.price.toLocaleString()} G</p>
-            </div>
-          </div>
-        `;
-      });
+      grid.innerHTML = (s.items || []).map(i => `
+        <div style="background:var(--input-bg); border-radius:12px; padding:0.5rem; cursor:pointer;" onclick="openProductPopup('${i.id}')">
+          <img src="${i.img}" style="width:100%; height:100px; object-fit:cover; border-radius:8px;">
+          <h4>${i.name}</h4><p>${i.price} G</p>
+        </div>`).join('');
     }
 
     function handleAddItem(e) {
       e.preventDefault();
-      const store = stores.find(s => s.id === activeStoreId);
+      const s = stores.find(st => st.id === activeStoreId);
+      s.items.push({ id: "I" + Date.now(), name: document.getElementById('item-name').value, price: parseInt(document.getElementById('item-price').value), img: tempItemImgBase64 || document.getElementById('item-img-url').value || "https://via.placeholder.com/300", likes: 0, dislikes: 0, reviews: [] });
+      save(); closeModal('modal-add-item'); renderStoreProducts(); updateDash();
+    }
 
-      const imgInput = document.getElementById('item-img-url').value;
-      const finalImg = tempItemImgBase64 || imgInput || "https://via.placeholder.com/300";
-
-      store.items.push({
-        id: "I" + Date.now(),
-        name: document.getElementById('item-name').value,
-        price: parseInt(document.getElementById('item-price').value),
-        img: finalImg,
-        likes: 0,
-        dislikes: 0,
-        reviews: []
-      });
-
-      tempItemImgBase64 = "";
-      save();
-      closeModal('modal-add-item');
-      renderStoreProducts();
-      updateDash();
+    function renderReviews(item) {
+      const list = document.getElementById('pop-review-list');
+      if (!item.reviews || item.reviews.length === 0) {
+        list.innerHTML = '<p style="font-size:0.85rem; color:var(--text-muted);">등록된 리뷰가 없습니다.</p>';
+        return;
+      }
+      list.innerHTML = item.reviews.map(r => `
+        <div class="review-box">
+          <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:700;">
+            <span>${r.author}</span>
+            <span>${'⭐'.repeat(r.rating)}</span>
+          </div>
+          <p style="font-size:0.9rem; margin-top:0.25rem;">${r.text}</p>
+        </div>`).join('');
     }
 
     function openProductPopup(itemId) {
       activeItemId = itemId;
-      const store = stores.find(s => s.id === activeStoreId);
-      const item = store.items.find(i => i.id === itemId);
-
+      const s = stores.find(st => st.id === activeStoreId);
+      const item = s.items.find(i => i.id === itemId);
       document.getElementById('pop-product-title').innerText = item.name;
-      document.getElementById('pop-product-img').src = item.img || 'https://via.placeholder.com/300';
-      document.getElementById('pop-product-price').innerText = `${item.price.toLocaleString()} G`;
+      document.getElementById('pop-product-img').src = item.img;
+      document.getElementById('pop-product-price').innerText = `${item.price} G`;
       document.getElementById('pop-likes').innerText = item.likes || 0;
       document.getElementById('pop-dislikes').innerText = item.dislikes || 0;
 
       const eraseBtn = document.getElementById('pop-erase-btn');
-      if (currentUser && (currentUser.account === store.owner || isAdmin)) {
-        eraseBtn.classList.remove('hidden');
-      } else {
-        eraseBtn.classList.add('hidden');
-      }
+      if (currentUser.account === s.owner || isAdmin) eraseBtn.classList.remove('hidden'); else eraseBtn.classList.add('hidden');
 
-      renderPopupReviews();
+      renderReviews(item);
       openModal('modal-product-popup');
     }
 
     function reactProduct(type) {
-      const store = stores.find(s => s.id === activeStoreId);
-      const item = store.items.find(i => i.id === activeItemId);
-
+      const s = stores.find(st => st.id === activeStoreId);
+      const item = s.items.find(i => i.id === activeItemId);
       if (type === 'like') item.likes = (item.likes || 0) + 1;
-      if (type === 'dislike') item.dislikes = (item.dislikes || 0) + 1;
-
+      else item.dislikes = (item.dislikes || 0) + 1;
       save();
-      document.getElementById('pop-likes').innerText = item.likes;
-      document.getElementById('pop-dislikes').innerText = item.dislikes;
-    }
-
-    function buyActiveProduct() {
-      const store = stores.find(s => s.id === activeStoreId);
-      const item = store.items.find(i => i.id === activeItemId);
-
-      if (currentUser.balance < item.price) return alert("잔액이 부족합니다.");
-
-      currentUser.balance -= item.price;
-      store.totalSales += item.price;
-      
-      store.price += Math.max(1, Math.ceil(item.price / 100));
-      if (!store.priceHistory) store.priceHistory = [];
-      store.priceHistory.push(store.price);
-
-      const ownerAcc = accounts.find(a => a.account === store.owner);
-      if (ownerAcc) ownerAcc.balance += item.price;
-
-      save();
-      updateDash();
-      renderStockList();
-      alert(`[${item.name}] 구매가 완료되었습니다!`);
-    }
-
-    function eraseActiveProduct() {
-      const store = stores.find(s => s.id === activeStoreId);
-      if (!currentUser || (currentUser.account !== store.owner && !isAdmin)) {
-        return alert("상점 소유자만 상품을 삭제할 수 있습니다.");
-      }
-
-      if (confirm("이 상품을 정말 삭제하시겠습니까?")) {
-        store.items = store.items.filter(i => i.id !== activeItemId);
-        save();
-        closeModal('modal-product-popup');
-        renderStoreProducts();
-        updateDash();
-      }
+      document.getElementById('pop-likes').innerText = item.likes || 0;
+      document.getElementById('pop-dislikes').innerText = item.dislikes || 0;
     }
 
     function handlePostReview(e) {
       e.preventDefault();
-      const store = stores.find(s => s.id === activeStoreId);
-      const item = store.items.find(i => i.id === activeItemId);
-
+      const s = stores.find(st => st.id === activeStoreId);
+      const item = s.items.find(i => i.id === activeItemId);
       if (!item.reviews) item.reviews = [];
-
-      item.reviews.push({
-        author: currentUser ? currentUser.name : "익명",
-        rating: parseInt(document.getElementById('review-rating').value),
-        text: document.getElementById('review-text').value
-      });
-
-      save();
+      const rating = parseInt(document.getElementById('review-rating').value);
+      const text = document.getElementById('review-text').value;
+      item.reviews.unshift({ author: currentUser.name, rating, text });
       document.getElementById('review-text').value = '';
-      renderPopupReviews();
+      save(); renderReviews(item);
     }
 
-    function renderPopupReviews() {
-      const store = stores.find(s => s.id === activeStoreId);
-      const item = store.items.find(i => i.id === activeItemId);
-      const list = document.getElementById('pop-review-list');
-      list.innerHTML = '';
-
-      if (!item.reviews || item.reviews.length === 0) {
-        list.innerHTML = '<p style="color:var(--text-muted);">작성된 리뷰가 없습니다.</p>';
-        return;
-      }
-
-      item.reviews.forEach(r => {
-        list.innerHTML += `
-          <div class="review-box">
-            <div style="display:flex; justify-content:space-between; font-weight:600;">
-              <span>${r.author}</span>
-              <span>${'⭐'.repeat(r.rating)}</span>
-            </div>
-            <p style="margin-top:0.25rem; font-size:0.9rem;">${r.text}</p>
-          </div>
-        `;
-      });
-    }
-
-    function eraseCurrentStore() {
-      const store = stores.find(s => s.id === activeStoreId);
-      if (!currentUser || (currentUser.account !== store.owner && !isAdmin)) {
-        return alert("권한이 없습니다. 상점 개설자만 상점을 폐업할 수 있습니다.");
-      }
-
-      if (confirm("이 상점을 영구 삭제하시겠습니까?")) {
-        stores = stores.filter(s => s.id !== activeStoreId);
-        save();
-        closeModal('modal-store-detail');
-        updateDash();
+    function eraseActiveProduct() {
+      const s = stores.find(st => st.id === activeStoreId);
+      if (confirm("이 상품을 삭제하시겠습니까?")) {
+        s.items = s.items.filter(i => i.id !== activeItemId);
+        save(); closeModal('modal-product-popup'); renderStoreProducts(); updateDash();
       }
     }
 
-    // Stock Market Logic
+    function buyActiveProduct() {
+      const s = stores.find(st => st.id === activeStoreId);
+      const item = s.items.find(i => i.id === activeItemId);
+      if (currentUser.balance < item.price) return alert("잔액 부족");
+      currentUser.balance -= item.price;
+      s.price += Math.max(1, Math.ceil(item.price / 100));
+      s.priceHistory.push(s.price);
+      save(); updateDash(); alert("구매 완료!");
+    }
+
     function tradeStock(storeId, type) {
-      const store = stores.find(s => s.id === storeId);
+      const s = stores.find(st => st.id === storeId);
       if (!currentUser.shares) currentUser.shares = {};
-
       if (type === 'buy') {
-        if (currentUser.balance < store.price) return alert("잔액이 부족합니다.");
-        currentUser.balance -= store.price;
+        if (currentUser.balance < s.price) return alert("잔액 부족");
+        currentUser.balance -= s.price;
         currentUser.shares[storeId] = (currentUser.shares[storeId] || 0) + 1;
-        store.price += 1;
+        s.price += 1;
       } else {
-        if (!currentUser.shares[storeId] || currentUser.shares[storeId] <= 0) return alert("보유 주식이 없습니다.");
-        currentUser.balance += store.price;
+        if (!currentUser.shares[storeId]) return alert("주식 없음");
+        currentUser.balance += s.price;
         currentUser.shares[storeId] -= 1;
-        store.price = Math.max(1, store.price - 1);
+        s.price = Math.max(1, s.price - 1);
       }
-
-      if (!store.priceHistory) store.priceHistory = [];
-      store.priceHistory.push(store.price);
-
-      save();
-      updateDash();
-      renderStockList();
-      renderStockChart();
+      s.priceHistory.push(s.price);
+      save(); updateDash(); renderStockList(); renderStockChart();
     }
 
-    // Admin Authenticated Home Screen Mode
     function handleAdminAuth(e) {
       e.preventDefault();
       if (document.getElementById('admin-pass').value === "20140204") {
-        isAdmin = true;
-        closeModal('modal-admin');
-
-        // Create virtual Admin user to run as Home Dashboard user
-        currentUser = {
-          name: "관리자 (Admin)",
-          account: "ADMIN-001",
-          pin: "20140204",
-          balance: 9999999,
-          loan: 0,
-          avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
-          shares: {}
-        };
-
+        isAdmin = true; closeModal('modal-admin');
+        currentUser = { name: "관리자 (Admin)", account: "ADMIN-001", balance: 9999999, loan: 0, avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150", shares: {} };
         document.getElementById('view-login').classList.add('hidden');
         document.getElementById('logout-btn').classList.remove('hidden');
         document.getElementById('admin-login-btn').classList.add('hidden');
         document.getElementById('admin-panel-btn').classList.remove('hidden');
         document.getElementById('dash-admin-tag').classList.remove('hidden');
-
-        updateDash();
-        renderAdmin();
-        document.getElementById('view-dashboard').classList.remove('hidden');
-        alert("관리자 권한으로 로그인되었습니다. 모든 앱을 관리하실 수 있습니다.");
-      } else alert("비밀번호가 일치하지 않습니다.");
+        updateDash(); renderAdmin(); document.getElementById('view-dashboard').classList.remove('hidden');
+      } else alert("비밀번호 불일치");
     }
 
     function renderAdmin() {
       const tbody = document.getElementById('admin-acc-list');
-      tbody.innerHTML = '';
-      accounts.forEach(a => {
-        tbody.innerHTML += `
-          <tr>
-            <td>${a.name}</td>
-            <td>${a.account}</td>
-            <td>${a.balance.toLocaleString()} G</td>
-            <td>
-              <button class="btn btn-outline" style="padding:0.2rem 0.5rem;" onclick="editAccBal('${a.account}')">잔액 수정</button>
-              <button class="btn btn-danger" style="padding:0.2rem 0.5rem;" onclick="eraseAcc('${a.account}')">삭제</button>
-            </td>
-          </tr>
-        `;
-      });
+      tbody.innerHTML = accounts.map(a => `
+        <tr><td>${a.name}</td><td>${a.account}</td><td>${a.balance.toLocaleString()} G</td><td><button class="btn btn-danger" onclick="eraseAcc('${a.account}')">삭제</button></td></tr>`).join('');
     }
 
     function adminCreateAcc(e) {
       e.preventDefault();
-      accounts.push({
-        name: document.getElementById('adm-name').value,
-        account: document.getElementById('adm-acc').value,
-        pin: document.getElementById('adm-pin').value,
-        balance: parseInt(document.getElementById('adm-bal').value),
-        loan: 0,
-        shares: {}
-      });
-      save();
-      renderAdmin();
-      alert("신규 계좌 생성이 완료되었습니다.");
+      accounts.push({ name: document.getElementById('adm-name').value, account: document.getElementById('adm-acc').value, pin: document.getElementById('adm-pin').value, balance: parseInt(document.getElementById('adm-bal').value), loan: 0, shares: {} });
+      save(); renderAdmin();
     }
 
-    function editAccBal(accNum) {
-      const acc = accounts.find(a => a.account === accNum);
-      const val = prompt("새 잔액을 입력하세요 (G):", acc.balance);
-      if (val !== null) {
-        acc.balance = parseInt(val);
-        save();
-        renderAdmin();
-      }
-    }
-
-    function eraseAcc(accNum) {
-      if (confirm("이 계좌를 정말 영구 삭제하시겠습니까?")) {
-        accounts = accounts.filter(a => a.account !== accNum);
-        save();
-        renderAdmin();
-      }
-    }
-
-    function logout() {
-      currentUser = null;
-      isAdmin = false;
-      location.reload();
-    }
+    function eraseAcc(acc) { accounts = accounts.filter(a => a.account !== acc); save(); renderAdmin(); }
+    function logout() { currentUser = null; isAdmin = false; location.reload(); }
   </script>
 </body>
 </html>

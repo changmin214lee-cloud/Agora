@@ -1,54 +1,4 @@
-<!DOCTYPE html>
-<html lang="ko" data-theme="emerald">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agora Capital</title>
-  <!-- Google Fonts & Font Awesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <style>
-    /* Themes Configuration with Crisp White Accents */
-    :root[data-theme="emerald"] {
-      --bg-gradient: linear-gradient(135deg, #2d6a4f 0%, #1b4332 50%, #081c15 100%);
-      --card-bg: rgba(255, 255, 255, 0.12);
-      --card-border: rgba(255, 255, 255, 0.45);
-      --text: #ffffff;
-      --text-muted: #d8f3dc;
-      --primary: #52b788;
-      --primary-hover: #74c69d;
-      --danger: #ef4444;
-      --header-bg: rgba(27, 67, 50, 0.85);
-      --input-bg: rgba(255, 255, 255, 0.18);
-      --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.35);
-      --dropdown-option-bg: #1b4332;
-    }
-
-    :root[data-theme="skyblue"] {
-      --bg-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #0c4a6e 100%);
-      --card-bg: rgba(255, 255, 255, 0.15);
-      --card-border: rgba(255, 255, 255, 0.5);
-      --text: #ffffff;
-      --text-muted: #e0f2fe;
-      --primary: #38bdf8;
-      --primary-hover: #7dd3fc;
-      --danger: #f87171;
-      --header-bg: rgba(3, 105, 161, 0.85);
-      --input-bg: rgba(255, 255, 255, 0.2);
-      --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.3);
-      --dropdown-option-bg: #0369a1;
-    }
-
-    :root[data-theme="retro"] {
-      --bg-gradient: linear-gradient(135deg, #c2410c 0%, #9a3412 50%, #431407 100%);
-      --card-bg: rgba(255, 255, 255, 0.14);
-      --card-border: rgba(255, 255, 255, 0.45);
-      --text: #ffffff;
-      --text-muted: #ffedd5;
-      --primary: #fb923c;
-      --primary-hover: #fdba74;
-      --danger: #ef4444;
+--danger: #ef4444;
       --header-bg: rgba(154, 52, 18, 0.85);
       --input-bg: rgba(255, 255, 255, 0.18);
       --glass-glow: 0 12px 32px 0 rgba(0, 0, 0, 0.35);
@@ -108,6 +58,17 @@
       color: var(--text);
       padding-bottom: 50px;
       min-height: 100vh;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
     }
 
     /* Header */
@@ -145,13 +106,15 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: all 0.2s;
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
+    .btn:active { transform: scale(0.95); }
     .btn-primary { background-color: var(--primary); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
-    .btn-primary:hover { background-color: var(--primary-hover); }
+    .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
     .btn-danger { background-color: var(--danger); color: white; }
+    .btn-danger:hover { transform: translateY(-2px); }
     .btn-outline { background: rgba(255, 255, 255, 0.2); border: 1px solid var(--card-border); color: var(--text); }
-    .btn-outline:hover { background: rgba(255, 255, 255, 0.35); }
+    .btn-outline:hover { background: rgba(255, 255, 255, 0.35); transform: translateY(-2px); }
 
     .container { max-width: 1150px; margin: 2rem auto; padding: 0 1rem; }
 
@@ -196,11 +159,11 @@
       justify-content: center;
       cursor: pointer;
       box-shadow: var(--glass-glow);
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      transition: all 0.3s ease;
       padding: 1rem;
     }
     .top-profile-box:hover {
-      transform: scale(1.04);
+      transform: scale(1.05) rotate(1deg);
       border-color: #ffffff;
     }
 
@@ -228,25 +191,29 @@
       border-top: 2px solid #ffffff;
       border-radius: 32px;
       padding: 2rem 1.25rem;
-      min-height: 260px;
+      min-height: 250px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       box-shadow: var(--glass-glow);
       cursor: pointer;
-      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, box-shadow 0.3s ease;
     }
     .app-card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-10px) scale(1.02);
       border-color: #ffffff;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
     }
 
     .app-card-icon {
-      font-size: 3rem;
+      font-size: 3.2rem;
       color: var(--primary);
       margin-bottom: 1rem;
+      transition: transform 0.3s ease;
+    }
+    .app-card:hover .app-card-icon {
+      transform: scale(1.15) rotate(-5deg);
     }
 
     .column-header-title {
@@ -266,6 +233,7 @@
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
+      animation: fadeIn 0.3s ease-out;
     }
 
     .app-header-bar {
@@ -290,7 +258,9 @@
       color: var(--text);
       border-radius: 12px;
       outline: none;
+      transition: border-color 0.2s;
     }
+    .form-control:focus { border-color: #ffffff; }
 
     select.form-control option {
       background-color: var(--dropdown-option-bg);
@@ -307,9 +277,7 @@
       transition: border-color 0.2s;
       margin-bottom: 0.5rem;
     }
-    .image-upload-box:hover {
-      border-color: #ffffff;
-    }
+    .image-upload-box:hover { border-color: #ffffff; }
     .image-preview {
       width: 80px;
       height: 80px;
@@ -320,20 +288,17 @@
       display: none;
     }
 
-    .store-item-card {
-      background: var(--input-bg);
+    .store-item-card, .feed-card {
+      background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 20px;
-      padding: 1.25rem;
-      margin-bottom: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      backdrop-filter: blur(16px);
+      transition: transform 0.25s ease, border-color 0.25s ease;
     }
-    .store-item-card:hover {
-      transform: translateY(-2px);
+    .store-item-card:hover, .feed-card:hover {
+      transform: translateY(-3px);
       border-color: #ffffff;
     }
 
@@ -346,16 +311,6 @@
       background: rgba(0,0,0,0.2);
     }
 
-    /* Custom Reddit Post & Auction Cards */
-    .feed-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 1.5rem;
-      margin-bottom: 1.25rem;
-      backdrop-filter: blur(16px);
-    }
-
     /* Modals */
     .modal-overlay {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
@@ -363,7 +318,7 @@
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
       display: flex; align-items: center; justify-content: center; z-index: 1000;
-      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+      opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
     }
     .modal-overlay.active { opacity: 1; pointer-events: auto; }
     .modal {
@@ -377,14 +332,18 @@
       max-height: 90vh;
       overflow-y: auto;
       box-shadow: var(--glass-glow);
+      transform: scale(0.9);
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
+    .modal-overlay.active .modal { transform: scale(1); }
 
     table { width: 100%; border-collapse: collapse; text-align: left; }
     th, td { padding: 0.75rem 0.5rem; border-bottom: 1px solid var(--card-border); font-size: 0.95rem; }
     th { color: var(--text-muted); }
 
     .review-box { background: var(--input-bg); border-radius: 10px; padding: 0.75rem; margin-top: 0.5rem; border: 1px solid var(--card-border); }
-    .reaction-btn { background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text); padding: 0.4rem 0.8rem; border-radius: 8px; cursor: pointer; }
+    .reaction-btn { background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text); padding: 0.4rem 0.8rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+    .reaction-btn:hover { background: rgba(255, 255, 255, 0.3); }
 
     .hidden { display: none !important; }
   </style>
@@ -400,7 +359,8 @@
 
     <div class="header-actions">
       <button class="btn btn-outline" onclick="openModal('modal-settings')"><i class="fa-solid fa-gear"></i> 설정</button>
-      <button id="admin-login-btn" class="btn btn-outline" onclick="openModal('modal-admin')"><i class="fa-solid fa-user-shield"></i> 관리자</button>
+      <button id="admin-panel-btn" class="btn btn-outline hidden" onclick="openModal('modal-admin-panel')"><i class="fa-solid fa-user-shield"></i> 계좌 관리</button>
+      <button id="admin-login-btn" class="btn btn-outline" onclick="openModal('modal-admin')"><i class="fa-solid fa-lock"></i> 관리자 로그인</button>
       <button id="logout-btn" class="btn btn-danger hidden" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</button>
     </div>
   </header>
@@ -436,6 +396,7 @@
 
         <div class="top-profile-box" onclick="openModal('modal-profile')" title="프로필 상세보기">
           <img id="dash-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" class="user-avatar-lg">
+          <span id="dash-admin-tag" class="hidden" style="font-size: 0.7rem; background: var(--danger); color: white; padding: 2px 6px; border-radius: 4px; margin-top: 4px; font-weight: 800;">ADMIN</span>
         </div>
       </div>
 
@@ -460,19 +421,19 @@
           <h2 class="column-header-title">은행</h2>
         </div>
 
-        <!-- App 4: 이메일 (Email) -->
+        <!-- App 4: 이메일 -->
         <div class="app-card" onclick="openAppScreen('screen-email')">
           <i class="fa-solid fa-envelope app-card-icon"></i>
           <h2 class="column-header-title">이메일</h2>
         </div>
 
-        <!-- App 5: 아고라 피드 (Reddit Version) -->
+        <!-- App 5: 아고라 피드 (Pencil Icon) -->
         <div class="app-card" onclick="openAppScreen('screen-feed')">
-          <i class="fa-brands fa-reddit-alien app-card-icon"></i>
+          <i class="fa-solid fa-pen-to-square app-card-icon"></i>
           <h2 class="column-header-title">아고라 피드</h2>
         </div>
 
-        <!-- App 6: 경매장 (Auction) -->
+        <!-- App 6: 경매장 -->
         <div class="app-card" onclick="openAppScreen('screen-auction')">
           <i class="fa-solid fa-gavel app-card-icon"></i>
           <h2 class="column-header-title">경매장</h2>
@@ -480,35 +441,6 @@
 
       </div>
 
-    </div>
-
-    <!-- ADMIN VIEW -->
-    <div id="view-admin" class="hidden">
-      <div class="app-card" style="min-height: auto; cursor: default; align-items: stretch;">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <h2 class="column-header-title" style="margin:0;">관리자 대시보드</h2>
-          <button class="btn btn-outline" onclick="logout()">관리자 종료</button>
-        </div>
-
-        <div style="margin: 1.5rem 0; background: var(--input-bg); padding: 1rem; border-radius: 16px; border:1px solid var(--card-border);">
-          <h4>신규 계좌 생성</h4>
-          <form onsubmit="adminCreateAcc(event)" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
-            <input type="text" id="adm-name" class="form-control" placeholder="이름" style="flex:1" required>
-            <input type="text" id="adm-acc" class="form-control" placeholder="계좌번호" style="flex:1" required>
-            <input type="text" id="adm-pin" class="form-control" placeholder="비밀번호" style="flex:1" required>
-            <input type="number" id="adm-bal" class="form-control" placeholder="잔액" style="flex:1" value="1000" required>
-            <button type="submit" class="btn btn-primary">생성</button>
-          </form>
-        </div>
-
-        <h3>전체 계좌 목록</h3>
-        <table>
-          <thead>
-            <tr><th>이름</th><th>계좌번호</th><th>비밀번호</th><th>잔액</th><th>관리</th></tr>
-          </thead>
-          <tbody id="admin-acc-list"></tbody>
-        </table>
-      </div>
     </div>
 
   </div>
@@ -646,11 +578,11 @@
     </div>
   </div>
 
-  <!-- FULL-SCREEN APP 5: AGORA FEED (REDDIT) -->
+  <!-- FULL-SCREEN APP 5: AGORA FEED -->
   <div id="screen-feed" class="fullscreen-app-overlay hidden">
     <div class="app-header-bar">
       <button class="btn btn-outline" onclick="closeAppScreen('screen-feed')"><i class="fa-solid fa-arrow-left"></i> 메인으로</button>
-      <h1 style="font-size:1.8rem; font-weight:900; color:var(--primary);"><i class="fa-brands fa-reddit-alien"></i> 아고라 피드</h1>
+      <h1 style="font-size:1.8rem; font-weight:900; color:var(--primary);"><i class="fa-solid fa-pen-to-square"></i> 아고라 피드</h1>
       <button class="btn btn-primary" onclick="openModal('modal-create-post')"><i class="fa-solid fa-plus"></i> 포스트 작성</button>
     </div>
 
@@ -706,11 +638,11 @@
     </div>
   </div>
 
-  <!-- COMPOSE EMAIL MODAL -->
+  <!-- COMPOSE EMAIL MODAL WITH DIRECT SEND BUTTON -->
   <div id="modal-compose-email" class="modal-overlay">
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-        <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;">메일 작성</h3>
+        <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;"><i class="fa-solid fa-paper-plane"></i> 메일 작성</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-compose-email')">&times;</button>
       </div>
       <form onsubmit="handleSendEmail(event)">
@@ -720,13 +652,13 @@
         </div>
         <div class="form-group">
           <label>제목</label>
-          <input type="text" id="email-subject" class="form-control" required>
+          <input type="text" id="email-subject" class="form-control" placeholder="메일 제목 입력" required>
         </div>
         <div class="form-group">
           <label>내용</label>
-          <textarea id="email-body" class="form-control" rows="5" required></textarea>
+          <textarea id="email-body" class="form-control" rows="5" placeholder="보낼 내용을 작성하세요..." required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;">발송하기</button>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding:0.75rem; font-size:1rem;"><i class="fa-solid fa-paper-plane"></i> 메일 보내기</button>
       </form>
     </div>
   </div>
@@ -952,28 +884,56 @@
     </div>
   </div>
 
+  <!-- ADMIN ACCOUNT REGULATION PANEL MODAL -->
+  <div id="modal-admin-panel" class="modal-overlay">
+    <div class="modal" style="max-width:700px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;"><i class="fa-solid fa-user-shield"></i> 전체 계좌 정보 관리</h3>
+        <button class="btn btn-outline" onclick="closeModal('modal-admin-panel')">&times;</button>
+      </div>
+
+      <div style="margin-bottom:1rem; background:var(--input-bg); padding:1rem; border-radius:16px;">
+        <h4 style="margin-bottom:0.5rem;">신규 계좌 추가</h4>
+        <form onsubmit="adminCreateAcc(event)" style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <input type="text" id="adm-name" class="form-control" placeholder="이름" style="flex:1" required>
+          <input type="text" id="adm-acc" class="form-control" placeholder="계좌번호" style="flex:1" required>
+          <input type="text" id="adm-pin" class="form-control" placeholder="PIN" style="flex:1" required>
+          <input type="number" id="adm-bal" class="form-control" placeholder="잔액" style="flex:1" value="5000" required>
+          <button type="submit" class="btn btn-primary">생성</button>
+        </form>
+      </div>
+
+      <table>
+        <thead>
+          <tr><th>이름</th><th>계좌번호</th><th>잔액</th><th>관리</th></tr>
+        </thead>
+        <tbody id="admin-acc-list"></tbody>
+      </table>
+    </div>
+  </div>
+
   <script>
     const defaultAvatar = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150";
     const defaultStoreLogo = "https://images.unsplash.com/photo-1534723452862-4c874018d66d?w=150";
 
-    let accounts = JSON.parse(localStorage.getItem('ag_accs_v15')) || [
+    let accounts = JSON.parse(localStorage.getItem('ag_accs_v16')) || [
       { name: "민수", account: "101-001", pin: "1234", balance: 5000, loan: 0, avatar: defaultAvatar, shares: {} },
       { name: "지아", account: "101-002", pin: "1234", balance: 12000, loan: 0, avatar: defaultAvatar, shares: {} }
     ];
 
-    let stores = JSON.parse(localStorage.getItem('ag_stores_v15')) || [
+    let stores = JSON.parse(localStorage.getItem('ag_stores_v16')) || [
       { id: "S1", name: "아고라 메인 상점", logo: defaultStoreLogo, owner: "101-001", totalShares: 100, price: 50, priceHistory: [30, 35, 40, 45, 50], totalSales: 0, items: [] }
     ];
 
-    let emails = JSON.parse(localStorage.getItem('ag_emails_v15')) || [
+    let emails = JSON.parse(localStorage.getItem('ag_emails_v16')) || [
       { id: "E1", from: "101-001", fromName: "민수", to: "101-002", subject: "환영합니다!", body: "아고라 캐피탈에 오신 것을 환영합니다.", time: "방금 전", read: false }
     ];
 
-    let posts = JSON.parse(localStorage.getItem('ag_posts_v15')) || [
-      { id: "P1", author: "민수", authorAcc: "101-001", title: "첫 번째 게시글입니다!", content: "아고라 피드가 오픈했습니다. 많은 공유 부탁드립니다.", img: "", likes: 5, comments: [] }
+    let posts = JSON.parse(localStorage.getItem('ag_posts_v16')) || [
+      { id: "P1", author: "민수", authorAcc: "101-001", title: "첫 번째 게시글입니다!", content: "아고라 피드가 오픈했습니다. 많은 공유 부탁드립니다.", img: "", upvotedBy: [], likes: 0, comments: [] }
     ];
 
-    let auctions = JSON.parse(localStorage.getItem('ag_auctions_v15')) || [
+    let auctions = JSON.parse(localStorage.getItem('ag_auctions_v16')) || [
       { id: "A1", seller: "지아", sellerAcc: "101-002", title: "희귀 카드 컬렉션", currentBid: 500, highestBidder: "민수", buyout: 1500, img: "https://via.placeholder.com/300" }
     ];
 
@@ -991,11 +951,11 @@
     let tempAucImgBase64 = "";
 
     function save() {
-      localStorage.setItem('ag_accs_v15', JSON.stringify(accounts));
-      localStorage.setItem('ag_stores_v15', JSON.stringify(stores));
-      localStorage.setItem('ag_emails_v15', JSON.stringify(emails));
-      localStorage.setItem('ag_posts_v15', JSON.stringify(posts));
-      localStorage.setItem('ag_auctions_v15', JSON.stringify(auctions));
+      localStorage.setItem('ag_accs_v16', JSON.stringify(accounts));
+      localStorage.setItem('ag_stores_v16', JSON.stringify(stores));
+      localStorage.setItem('ag_emails_v16', JSON.stringify(emails));
+      localStorage.setItem('ag_posts_v16', JSON.stringify(posts));
+      localStorage.setItem('ag_auctions_v16', JSON.stringify(auctions));
     }
 
     function changeTheme(themeName) {
@@ -1035,7 +995,6 @@
     }
     function closeAppScreen(id) { document.getElementById(id).classList.add('hidden'); }
 
-    // Helper for Paste & File Input
     function setupImagePasteAndFile(boxId, fileInputId, previewId, callback) {
       const box = document.getElementById(boxId);
       const fileInput = document.getElementById(fileInputId);
@@ -1087,7 +1046,9 @@
         isAdmin = false;
         document.getElementById('view-login').classList.add('hidden');
         document.getElementById('logout-btn').classList.remove('hidden');
-        document.getElementById('admin-login-btn').classList.add('hidden');
+        document.getElementById('admin-login-btn').classList.remove('hidden');
+        document.getElementById('admin-panel-btn').classList.add('hidden');
+        document.getElementById('dash-admin-tag').classList.add('hidden');
         updateDash();
         document.getElementById('view-dashboard').classList.remove('hidden');
       } else {
@@ -1162,13 +1123,23 @@
         box.innerHTML += `
           <div class="store-item-card" onclick="openStoreDetail('${s.id}')">
             <img src="${logo}" class="store-logo-img">
-            <div>
+            <div style="flex:1;">
               <h4 style="color:var(--primary); font-size:1.3rem;">${s.name}</h4>
               <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.2rem;">상품 수: ${s.items.length}개 | 현재 주가: ${s.price} G</p>
             </div>
+            ${isAdmin ? `<button class="btn btn-danger" onclick="event.stopPropagation(); eraseStoreByAdmin('${s.id}')"><i class="fa-solid fa-trash"></i> 삭제</button>` : ''}
           </div>
         `;
       });
+    }
+
+    function eraseStoreByAdmin(storeId) {
+      if (confirm("관리자 권한: 이 상점을 영구 삭제하시겠습니까?")) {
+        stores = stores.filter(s => s.id !== storeId);
+        save();
+        renderMarketStores();
+        renderStockList();
+      }
     }
 
     function renderStockList() {
@@ -1304,7 +1275,7 @@
       alert("메일이 성공적으로 발송되었습니다!");
     }
 
-    /* AGORA FEED / REDDIT LOGIC */
+    /* AGORA FEED LOGIC */
     function renderFeedPosts() {
       const box = document.getElementById('feed-posts-container');
       box.innerHTML = '';
@@ -1315,17 +1286,23 @@
       }
 
       posts.forEach(p => {
+        if (!p.upvotedBy) p.upvotedBy = [];
+        const hasUpvoted = p.upvotedBy.includes(currentUser.account);
+
         box.innerHTML += `
           <div class="feed-card">
             <div style="display:flex; justify-content:space-between; font-weight:600; font-size:0.85rem; color:var(--text-muted); margin-bottom:0.4rem;">
               <span>작성자: ${p.author} (${p.authorAcc})</span>
+              ${isAdmin ? `<button class="btn btn-danger" style="padding:0.2rem 0.5rem;" onclick="erasePostByAdmin('${p.id}')"><i class="fa-solid fa-trash"></i> 관리자 삭제</button>` : ''}
             </div>
             <h3 style="font-size:1.3rem; margin-bottom:0.5rem; color:var(--primary);">${p.title}</h3>
             <p style="margin-bottom:1rem; font-size:0.95rem;">${p.content}</p>
             ${p.img ? `<img src="${p.img}" style="width:100%; max-height:300px; object-fit:cover; border-radius:12px; margin-bottom:1rem;">` : ''}
             
             <div style="display:flex; gap:1rem; align-items:center;">
-              <button class="reaction-btn" onclick="likePost('${p.id}')"><i class="fa-solid fa-arrow-up"></i> 추천 ${p.likes}</button>
+              <button class="reaction-btn" style="${hasUpvoted ? 'background:var(--primary); color:#fff;' : ''}" onclick="toggleUpvotePost('${p.id}')">
+                <i class="fa-solid fa-arrow-up"></i> 추천 ${p.upvotedBy.length}
+              </button>
             </div>
 
             <div style="margin-top:1rem; border-top:1px solid var(--card-border); padding-top:0.75rem;">
@@ -1343,6 +1320,29 @@
       });
     }
 
+    function toggleUpvotePost(id) {
+      const p = posts.find(post => post.id === id);
+      if (!p.upvotedBy) p.upvotedBy = [];
+
+      const index = p.upvotedBy.indexOf(currentUser.account);
+      if (index === -1) {
+        p.upvotedBy.push(currentUser.account);
+      } else {
+        p.upvotedBy.splice(index, 1);
+      }
+
+      save();
+      renderFeedPosts();
+    }
+
+    function erasePostByAdmin(id) {
+      if (confirm("관리자 권한: 이 포스트를 영구 삭제하시겠습니까?")) {
+        posts = posts.filter(p => p.id !== id);
+        save();
+        renderFeedPosts();
+      }
+    }
+
     function handleCreatePost(e) {
       e.preventDefault();
       posts.unshift({
@@ -1352,6 +1352,7 @@
         title: document.getElementById('post-title').value,
         content: document.getElementById('post-content').value,
         img: tempPostImgBase64 || "",
+        upvotedBy: [],
         likes: 0,
         comments: []
       });
@@ -1359,13 +1360,6 @@
       tempPostImgBase64 = "";
       save();
       closeModal('modal-create-post');
-      renderFeedPosts();
-    }
-
-    function likePost(id) {
-      const p = posts.find(post => post.id === id);
-      p.likes++;
-      save();
       renderFeedPosts();
     }
 
@@ -1760,16 +1754,35 @@
       renderStockChart();
     }
 
-    // Admin Controls
+    // Admin Authenticated Home Screen Mode
     function handleAdminAuth(e) {
       e.preventDefault();
       if (document.getElementById('admin-pass').value === "20140204") {
         isAdmin = true;
         closeModal('modal-admin');
+
+        // Create virtual Admin user to run as Home Dashboard user
+        currentUser = {
+          name: "관리자 (Admin)",
+          account: "ADMIN-001",
+          pin: "20140204",
+          balance: 9999999,
+          loan: 0,
+          avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150",
+          shares: {}
+        };
+
         document.getElementById('view-login').classList.add('hidden');
-        document.getElementById('view-admin').classList.remove('hidden');
+        document.getElementById('logout-btn').classList.remove('hidden');
+        document.getElementById('admin-login-btn').classList.add('hidden');
+        document.getElementById('admin-panel-btn').classList.remove('hidden');
+        document.getElementById('dash-admin-tag').classList.remove('hidden');
+
+        updateDash();
         renderAdmin();
-      } else alert("비밀번호 불일치");
+        document.getElementById('view-dashboard').classList.remove('hidden');
+        alert("관리자 권한으로 로그인되었습니다. 모든 앱을 관리하실 수 있습니다.");
+      } else alert("비밀번호가 일치하지 않습니다.");
     }
 
     function renderAdmin() {
@@ -1780,10 +1793,9 @@
           <tr>
             <td>${a.name}</td>
             <td>${a.account}</td>
-            <td>${a.pin}</td>
-            <td>${a.balance} G</td>
+            <td>${a.balance.toLocaleString()} G</td>
             <td>
-              <button class="btn btn-outline" style="padding:0.2rem 0.5rem;" onclick="editAccBal('${a.account}')">수정</button>
+              <button class="btn btn-outline" style="padding:0.2rem 0.5rem;" onclick="editAccBal('${a.account}')">잔액 수정</button>
               <button class="btn btn-danger" style="padding:0.2rem 0.5rem;" onclick="eraseAcc('${a.account}')">삭제</button>
             </td>
           </tr>
@@ -1803,12 +1815,12 @@
       });
       save();
       renderAdmin();
-      alert("계좌 추가 완료");
+      alert("신규 계좌 생성이 완료되었습니다.");
     }
 
     function editAccBal(accNum) {
       const acc = accounts.find(a => a.account === accNum);
-      const val = prompt("새 잔액 입력:", acc.balance);
+      const val = prompt("새 잔액을 입력하세요 (G):", acc.balance);
       if (val !== null) {
         acc.balance = parseInt(val);
         save();

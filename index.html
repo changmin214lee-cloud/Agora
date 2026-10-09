@@ -101,6 +101,16 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+
+    /* Prevent Image Dragging across browser */
+    img {
+      -webkit-user-drag: none;
+      -khtml-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+      user-drag: none;
+      user-select: none;
+    }
     
     body {
       background: var(--bg-gradient);
@@ -326,11 +336,12 @@
     .image-preview {
       width: 80px;
       height: 80px;
-      object-fit: cover;
+      object-fit: contain;
       border-radius: 12px;
       border: 2px solid #ffffff;
       margin-top: 0.5rem;
       display: none;
+      background: rgba(0,0,0,0.2);
     }
 
     .store-item-card, .feed-card {
@@ -351,7 +362,7 @@
       width: 64px;
       height: 64px;
       border-radius: 16px;
-      object-fit: cover;
+      object-fit: contain;
       border: 2px solid #ffffff;
       background: rgba(0,0,0,0.2);
     }
@@ -391,6 +402,34 @@
     .reaction-btn:hover { background: rgba(255, 255, 255, 0.3); }
 
     .hidden { display: none !important; }
+
+    /* Pop-out Animation Container */
+    @keyframes itemPopOutAnimation {
+      0% {
+        transform: scale(1) translate(0, 0);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.2) translate(80px, -100px);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(0.1) translate(300px, -500px);
+        opacity: 0;
+      }
+    }
+
+    .popout-animated-img {
+      position: fixed;
+      z-index: 2000;
+      pointer-events: none;
+      border-radius: 16px;
+      border: 3px solid #ffffff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      object-fit: contain;
+      background: rgba(0,0,0,0.4);
+      animation: itemPopOutAnimation 0.8s ease-in-out forwards;
+    }
   </style>
 </head>
 <body>
@@ -438,7 +477,7 @@
         </div>
 
         <div class="top-profile-box" onclick="openModal('modal-profile')" title="프로필 상세보기">
-          <img id="dash-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" class="user-avatar-lg">
+          <img id="dash-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" class="user-avatar-lg" draggable="false">
           <span id="dash-admin-tag" class="hidden" style="font-size: 0.7rem; background: var(--danger); color: white; padding: 2px 6px; border-radius: 4px; margin-top: 4px; font-weight: 800;">ADMIN</span>
         </div>
       </div>
@@ -630,7 +669,7 @@
         <button class="btn btn-outline" onclick="closeModal('modal-profile')">&times;</button>
       </div>
       <div style="text-align: center; margin-bottom: 1.5rem;">
-        <img id="profile-modal-avatar" src="" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #ffffff; object-fit: cover; margin-bottom: 0.5rem;">
+        <img id="profile-modal-avatar" src="" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #ffffff; object-fit: cover; margin-bottom: 0.5rem;" draggable="false">
         <h2 id="profile-modal-name" style="font-size: 1.8rem; color: #fff;">-</h2>
         <p style="font-size: 0.95rem; color: var(--text-muted);">계좌번호: <span id="profile-modal-acc">-</span></p>
         <p style="font-size: 1.2rem; color: var(--primary); font-weight: 800; margin-top: 0.5rem;">현재 잔액: <span id="profile-modal-balance">0 G</span></p>
@@ -641,7 +680,7 @@
         <i class="fa-solid fa-paste" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
         <span>클립보드 이미지를 <strong>Ctrl+V / Cmd+V</strong> 로 붙여넣거나 파일 선택</span>
         <input type="file" id="avatar-file-input" accept="image/*" style="display:none;">
-        <center><img id="avatar-preview" class="image-preview"></center>
+        <center><img id="avatar-preview" class="image-preview" draggable="false"></center>
       </div>
       <form onsubmit="handleUpdateAvatar(event)">
         <div class="form-group">
@@ -697,7 +736,7 @@
             <i class="fa-solid fa-image" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
             <span>이미지를 붙여넣거나 파일 선택</span>
             <input type="file" id="post-img-file" accept="image/*" style="display:none;">
-            <center><img id="post-img-preview" class="image-preview"></center>
+            <center><img id="post-img-preview" class="image-preview" draggable="false"></center>
           </div>
         </div>
         <button type="submit" class="btn btn-primary" style="width:100%;">게시하기</button>
@@ -730,7 +769,7 @@
             <i class="fa-solid fa-gavel" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
             <span>이미지를 붙여넣거나 파일 선택</span>
             <input type="file" id="auc-img-file" accept="image/*" style="display:none;">
-            <center><img id="auc-img-preview" class="image-preview"></center>
+            <center><img id="auc-img-preview" class="image-preview" draggable="false"></center>
           </div>
         </div>
         <button type="submit" class="btn btn-primary" style="width:100%;">경매 시작</button>
@@ -755,7 +794,7 @@
             <i class="fa-solid fa-image" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
             <span>이미지를 붙여넣거나 클릭하여 파일 선택</span>
             <input type="file" id="store-logo-file" accept="image/*" style="display:none;">
-            <center><img id="store-logo-preview" class="image-preview"></center>
+            <center><img id="store-logo-preview" class="image-preview" draggable="false"></center>
           </div>
           <input type="url" id="store-logo-url" class="form-control" placeholder="또는 로고 이미지 URL">
         </div>
@@ -808,7 +847,7 @@
             <i class="fa-solid fa-upload" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
             <span>이미지를 붙여넣거나 파일 선택</span>
             <input type="file" id="item-img-file" accept="image/*" style="display:none;">
-            <center><img id="item-img-preview" class="image-preview"></center>
+            <center><img id="item-img-preview" class="image-preview" draggable="false"></center>
           </div>
           <input type="url" id="item-img-url" class="form-control" placeholder="또는 이미지 URL">
         </div>
@@ -823,7 +862,7 @@
         <h3 id="pop-product-title" style="font-size:1.3rem; color:var(--primary); font-weight:800;">상품 상세 정보</h3>
         <button class="btn btn-outline" onclick="closeModal('modal-product-popup')">&times;</button>
       </div>
-      <img id="pop-product-img" src="" style="width:100%; height:200px; object-fit:cover; border-radius:16px; margin-bottom:1rem; background:var(--input-bg);">
+      <img id="pop-product-img" src="" style="width:100%; height:220px; object-fit:contain; border-radius:16px; margin-bottom:1rem; background:rgba(0,0,0,0.35); border:1px solid var(--card-border);" draggable="false">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h2 id="pop-product-price" style="color:var(--primary);">0 G</h2>
         <div style="display:flex; gap:0.5rem;">
@@ -1080,7 +1119,7 @@
       stores.forEach(s => {
         box.innerHTML += `
           <div class="store-item-card" onclick="openStoreDetail('${s.id}')">
-            <img src="${s.logo || defaultStoreLogo}" class="store-logo-img">
+            <img src="${s.logo || defaultStoreLogo}" class="store-logo-img" draggable="false">
             <div style="flex:1;">
               <h4 style="color:var(--primary); font-size:1.3rem;">${s.name}</h4>
               <p style="font-size:0.85rem; color:var(--text-muted);">상품 수: ${s.items.length}개 | 주가: ${s.price} G</p>
@@ -1203,7 +1242,7 @@
             </div>
             <h3 style="color:var(--primary); font-size:1.3rem; margin:0.4rem 0;">${p.title}</h3>
             <p>${p.content}</p>
-            ${p.img ? `<img src="${p.img}" style="width:100%; border-radius:12px; margin-top:0.5rem;">` : ''}
+            ${p.img ? `<img src="${p.img}" style="width:100%; border-radius:12px; margin-top:0.5rem;" draggable="false">` : ''}
             <div style="margin-top:0.75rem;">
               <button class="reaction-btn" onclick="toggleUpvotePost('${p.id}')"><i class="fa-solid fa-arrow-up"></i> 추천 ${p.upvotedBy.length}</button>
             </div>
@@ -1233,7 +1272,7 @@
       auctions.forEach(a => {
         grid.innerHTML += `
           <div class="feed-card">
-            <img src="${a.img || 'https://via.placeholder.com/300'}" style="width:100%; height:160px; object-fit:cover; border-radius:12px;">
+            <img src="${a.img || 'https://via.placeholder.com/300'}" style="width:100%; height:160px; object-fit:contain; border-radius:12px; background:rgba(0,0,0,0.3);" draggable="false">
             <h3 style="color:var(--primary); font-size:1.2rem; margin-top:0.5rem;">${a.title}</h3>
             <p style="font-weight:800; font-size:1.1rem; margin:0.4rem 0;">입찰가: ${a.currentBid.toLocaleString()} G</p>
             <div style="display:flex; gap:0.5rem;">
@@ -1317,8 +1356,8 @@
       const grid = document.getElementById('store-products-grid');
       grid.innerHTML = (s.items || []).map(i => `
         <div style="background:var(--input-bg); border-radius:12px; padding:0.5rem; cursor:pointer;" onclick="openProductPopup('${i.id}')">
-          <img src="${i.img}" style="width:100%; height:100px; object-fit:cover; border-radius:8px;">
-          <h4>${i.name}</h4><p>${i.price} G</p>
+          <img src="${i.img}" style="width:100%; height:100px; object-fit:contain; border-radius:8px; background:rgba(0,0,0,0.2);" draggable="false">
+          <h4 style="margin-top:0.4rem;">${i.name}</h4><p style="color:var(--primary); font-weight:700;">${i.price} G</p>
         </div>`).join('');
     }
 
@@ -1392,14 +1431,37 @@
       }
     }
 
+    function animatePopoutImage(imgSrc) {
+      const targetImg = document.getElementById('pop-product-img');
+      const rect = targetImg.getBoundingClientRect();
+      const clone = document.createElement('img');
+      
+      clone.src = imgSrc;
+      clone.className = 'popout-animated-img';
+      clone.style.left = `${rect.left}px`;
+      clone.style.top = `${rect.top}px`;
+      clone.style.width = `${rect.width}px`;
+      clone.style.height = `${rect.height}px`;
+
+      document.body.appendChild(clone);
+
+      setTimeout(() => {
+        if (clone.parentNode) clone.parentNode.removeChild(clone);
+      }, 850);
+    }
+
     function buyActiveProduct() {
       const s = stores.find(st => st.id === activeStoreId);
       const item = s.items.find(i => i.id === activeItemId);
       if (currentUser.balance < item.price) return alert("잔액 부족");
+      
       currentUser.balance -= item.price;
       s.price += Math.max(1, Math.ceil(item.price / 100));
       s.priceHistory.push(s.price);
-      save(); updateDash(); alert("구매 완료!");
+      save(); updateDash();
+      
+      animatePopoutImage(item.img);
+      alert(`${item.name} 구매가 완료되었습니다!`);
     }
 
     function tradeStock(storeId, type) {

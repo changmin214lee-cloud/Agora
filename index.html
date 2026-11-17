@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="emerald">
-<head>
+<html lang="ko" data-theme="emerald"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Agora Capital</title>
   <!-- Google Fonts & Font Awesome CDN -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
   
   <style>
     /* Global Themes & Color Definitions */
@@ -140,6 +139,8 @@
       position: sticky;
       top: 0;
       z-index: 100;
+      flex-wrap: wrap;
+      gap: 0.75rem;
     }
     
     .brand {
@@ -149,6 +150,13 @@
       font-size: 1.4rem;
       font-weight: 800;
       color: var(--primary);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
     .btn {
@@ -179,6 +187,12 @@
       grid-template-columns: 1fr 160px;
       gap: 1.25rem;
       margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 640px) {
+      .dashboard-top-row {
+        grid-template-columns: 1fr;
+      }
     }
 
     .top-banner-card {
@@ -238,6 +252,18 @@
       gap: 1.25rem;
     }
 
+    @media (max-width: 900px) {
+      .dashboard-bottom-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .dashboard-bottom-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .app-card {
       background: var(--card-bg);
       -webkit-backdrop-filter: blur(20px);
@@ -284,7 +310,7 @@
       background: var(--bg-gradient);
       z-index: 500;
       overflow-y: auto;
-      padding: 2rem;
+      padding: 1.5rem;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
@@ -299,8 +325,10 @@
       backdrop-filter: blur(20px);
       border: 2px solid var(--card-border);
       border-radius: 20px;
-      padding: 1rem 2rem;
-      margin-bottom: 2rem;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
     }
 
     .form-group { margin-bottom: 1rem; }
@@ -353,6 +381,12 @@
       backdrop-filter: blur(16px);
       transition: transform 0.25s ease, border-color 0.25s ease;
     }
+    .store-item-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+    }
     .store-item-card:hover, .feed-card:hover {
       transform: translateY(-3px);
       border-color: #ffffff;
@@ -367,6 +401,91 @@
       background: rgba(0,0,0,0.2);
     }
 
+    /* Agora Docs Workspace */
+    .docs-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 1.25rem;
+      align-items: start;
+    }
+    @media (max-width: 820px) {
+      .docs-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    .docs-sidebar {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 24px;
+      padding: 1.25rem;
+      backdrop-filter: blur(20px);
+    }
+    .doc-list-item {
+      padding: 0.75rem 0.9rem;
+      border-radius: 14px;
+      background: var(--input-bg);
+      border: 1px solid transparent;
+      margin-bottom: 0.6rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s;
+    }
+    .doc-list-item:hover, .doc-list-item.active {
+      border-color: #ffffff;
+      background: rgba(255, 255, 255, 0.25);
+    }
+    .docs-workspace {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: 24px;
+      padding: 1.5rem;
+      backdrop-filter: blur(20px);
+    }
+    .docs-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      padding: 0.65rem;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      margin-bottom: 1rem;
+      align-items: center;
+    }
+    .doc-tool-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      padding: 0.4rem 0.65rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .doc-tool-btn:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
+    .docs-paper {
+      min-height: 460px;
+      background: rgba(255, 255, 255, 0.94);
+      color: #0f172a;
+      border-radius: 16px;
+      padding: 2rem 2.25rem;
+      outline: none;
+      line-height: 1.7;
+      font-size: 1rem;
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.08);
+      overflow-y: auto;
+    }
+    .docs-paper:empty:before {
+      content: attr(data-placeholder);
+      color: #94a3b8;
+      pointer-events: none;
+    }
+
     /* Modals System */
     .modal-overlay {
       position: fixed; top: 0; left: 0; right: 0; bottom: 0;
@@ -375,6 +494,7 @@
       backdrop-filter: blur(12px);
       display: flex; align-items: center; justify-content: center; z-index: 1000;
       opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+      padding: 1rem;
     }
     .modal-overlay.active { opacity: 1; pointer-events: auto; }
     .modal {
@@ -400,6 +520,27 @@
     .review-box { background: var(--input-bg); border-radius: 10px; padding: 0.75rem; margin-top: 0.5rem; border: 1px solid var(--card-border); }
     .reaction-btn { background: var(--input-bg); border: 1px solid var(--card-border); color: var(--text); padding: 0.4rem 0.8rem; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
     .reaction-btn:hover { background: rgba(255, 255, 255, 0.3); }
+
+    /* Custom Toast Message Box (Replaces alert) */
+    .toast-box {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--header-bg);
+      border: 2px solid #ffffff;
+      color: var(--text);
+      padding: 0.9rem 1.4rem;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      box-shadow: 0 14px 32px rgba(0,0,0,0.45);
+      backdrop-filter: blur(20px);
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: fadeIn 0.25s ease-out;
+    }
 
     .hidden { display: none !important; }
 
@@ -443,32 +584,32 @@
 
     <div class="header-actions">
       <button class="btn btn-outline" onclick="openModal('modal-settings')"><i class="fa-solid fa-gear"></i> 설정</button>
-      <button id="admin-panel-btn" class="btn btn-outline hidden" onclick="openModal('modal-admin-panel')"><i class="fa-solid fa-user-shield"></i> 계좌 관리</button>
-      <button id="admin-login-btn" class="btn btn-outline" onclick="openModal('modal-admin')"><i class="fa-solid fa-lock"></i> 관리자 로그인</button>
-      <button id="logout-btn" class="btn btn-danger hidden" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</button>
+      <button id="admin-panel-btn" class="btn btn-outline" onclick="openModal('modal-admin-panel')"><i class="fa-solid fa-user-shield"></i> 계좌 관리</button>
+      <button id="admin-login-btn" class="btn btn-outline hidden" onclick="openModal('modal-admin')"><i class="fa-solid fa-lock"></i> 관리자 로그인</button>
+      <button id="logout-btn" class="btn btn-danger" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> 로그아웃</button>
     </div>
   </header>
 
   <div class="container">
 
     <!-- LOGIN VIEW -->
-    <div id="view-login" class="app-card" style="max-width: 400px; margin: 3rem auto; min-height: auto; cursor: default;">
+    <div id="view-login" class="app-card hidden" style="max-width: 400px; margin: 3rem auto; min-height: auto; cursor: default;">
       <h2 class="column-header-title" style="margin-bottom: 1rem;">계좌 로그인</h2>
       <form onsubmit="handleLogin(event)" style="width: 100%;">
         <div class="form-group">
           <label>계좌번호</label>
-          <input type="text" id="login-acc" class="form-control" placeholder="예: 101-001" required>
+          <input type="text" id="login-acc" class="form-control" placeholder="계좌번호 입력" required="">
         </div>
         <div class="form-group">
           <label>비밀번호 (PIN)</label>
-          <input type="password" id="login-pin" class="form-control" placeholder="비밀번호" required>
+          <input type="password" id="login-pin" class="form-control" placeholder="비밀번호" required="">
         </div>
         <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem;">로그인</button>
       </form>
     </div>
 
     <!-- MAIN DASHBOARD -->
-    <div id="view-dashboard" class="hidden">
+    <div id="view-dashboard" class="">
       <div class="dashboard-top-row">
         <div class="top-banner-card">
           <div>
@@ -477,8 +618,8 @@
         </div>
 
         <div class="top-profile-box" onclick="openModal('modal-profile')" title="프로필 상세보기">
-          <img id="dash-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" class="user-avatar-lg" draggable="false">
-          <span id="dash-admin-tag" class="hidden" style="font-size: 0.7rem; background: var(--danger); color: white; padding: 2px 6px; border-radius: 4px; margin-top: 4px; font-weight: 800;">ADMIN</span>
+          <img id="dash-avatar" src="https://placehold.co/150x150/0f172a/ffffff?text=ADMIN" class="user-avatar-lg" draggable="false" onerror="this.src='https://placehold.co/150x150/1b4332/ffffff?text=USER'">
+          <span id="dash-admin-tag" class="" style="font-size: 0.7rem; background: var(--danger); color: white; padding: 2px 6px; border-radius: 4px; margin-top: 4px; font-weight: 800;">ADMIN</span>
         </div>
       </div>
 
@@ -508,9 +649,9 @@
           <h2 class="column-header-title">아고라 피드</h2>
         </div>
 
-        <div class="app-card" onclick="openAppScreen('screen-auction')">
-          <i class="fa-solid fa-gavel app-card-icon"></i>
-          <h2 class="column-header-title">경매장</h2>
+        <div class="app-card" onclick="openAppScreen('screen-docs')">
+          <i class="fa-solid fa-file-lines app-card-icon"></i>
+          <h2 class="column-header-title">아고라 문서</h2>
         </div>
       </div>
     </div>
@@ -525,7 +666,7 @@
       <button class="btn btn-primary" onclick="openModal('modal-create-store')"><i class="fa-solid fa-plus"></i> 상점 개설 (1,000 G)</button>
     </div>
     <div class="container" style="max-width:900px; margin:0 auto; width:100%;">
-      <div id="market-store-list"></div>
+      <div id="market-store-list"><p style="text-align:center; padding:2rem; color:var(--text-muted);">개설된 상점이 없습니다. 상단 버튼을 눌러 첫 상점을 개설해보세요.</p></div>
     </div>
   </div>
 
@@ -537,7 +678,7 @@
     </div>
     <div class="container" style="max-width:900px; margin:0 auto; width:100%;">
       <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem; margin-bottom:1.5rem; backdrop-filter:blur(20px);">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
           <h3 style="color:var(--primary); font-size:1.2rem;"><i class="fa-solid fa-chart-area"></i> 실시간 주가 추이 그래프</h3>
           <select id="chart-store-select" class="form-control" style="width:200px;" onchange="renderStockChart()"></select>
         </div>
@@ -548,7 +689,7 @@
           <thead>
             <tr><th>상점명</th><th>현재 주가</th><th>매매 액션</th></tr>
           </thead>
-          <tbody id="stock-list"></tbody>
+          <tbody id="stock-list"><tr><td colspan="3" style="text-align:center; color:var(--text-muted); padding:1.5rem;">상장된 종목이 없습니다.</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -561,15 +702,15 @@
       <div></div>
     </div>
     <div class="container" style="max-width:1000px; margin:0 auto; width:100%;">
-      <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem 2rem; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center;">
+      <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem 2rem; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
         <div>
-          <h2 style="font-size:1.5rem;"><span id="bank-user-name">-</span> 님의 계좌</h2>
-          <p style="color:var(--text-muted);">계좌번호: <span id="bank-user-acc">-</span></p>
+          <h2 style="font-size:1.5rem;"><span id="bank-user-name">관리자 (Admin)</span> 님의 계좌</h2>
+          <p style="color:var(--text-muted);">계좌번호: <span id="bank-user-acc">ADMIN-001</span></p>
         </div>
         <div style="display:flex; gap:2rem; text-align:right;">
           <div>
             <p style="font-size:0.85rem; color:var(--text-muted);">현금 잔액</p>
-            <h2 id="bank-user-balance" style="color:var(--primary); font-size:1.8rem;">0 G</h2>
+            <h2 id="bank-user-balance" style="color:var(--primary); font-size:1.8rem;">9,999,999 G</h2>
           </div>
           <div>
             <p style="font-size:0.85rem; color:var(--danger);">대출금 잔액</p>
@@ -577,17 +718,17 @@
           </div>
         </div>
       </div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.5rem;">
         <div style="background:var(--card-bg); border:2px solid var(--card-border); border-radius:24px; padding:1.5rem;">
           <h3 style="color:var(--primary); margin-bottom:1rem;"><i class="fa-solid fa-paper-plane"></i> 계좌 송금</h3>
           <form onsubmit="handleTransfer(event)">
             <div class="form-group">
               <label>받는 계좌번호</label>
-              <input type="text" id="trans-acc" class="form-control" placeholder="상대 계좌번호 입력" required>
+              <input type="text" id="trans-acc" class="form-control" placeholder="상대 계좌번호 입력" required="">
             </div>
             <div class="form-group">
               <label>송금 금액 (G)</label>
-              <input type="number" id="trans-amt" class="form-control" placeholder="금액" min="1" required>
+              <input type="number" id="trans-amt" class="form-control" placeholder="금액" min="1" required="">
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">송금하기</button>
           </form>
@@ -616,7 +757,7 @@
         <h3 style="color:var(--primary); margin-bottom:1rem;"><i class="fa-solid fa-chart-pie"></i> 나의 주식 포트폴리오</h3>
         <table>
           <thead><tr><th>종목</th><th>보유 주식</th><th>지분율</th></tr></thead>
-          <tbody id="portfolio-list"></tbody>
+          <tbody id="portfolio-list"><tr><td colspan="3" style="text-align:center; color:var(--text-muted); padding:1rem;">보유 중인 주식이 없습니다.</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -650,14 +791,59 @@
     </div>
   </div>
 
-  <div id="screen-auction" class="fullscreen-app-overlay hidden">
+  <!-- AGORA DOCS (Google Docs Style Editor) -->
+  <div id="screen-docs" class="fullscreen-app-overlay">
     <div class="app-header-bar">
-      <button class="btn btn-outline" onclick="closeAppScreen('screen-auction')"><i class="fa-solid fa-arrow-left"></i> 메인으로</button>
-      <h1 style="font-size:1.8rem; font-weight:900; color:var(--primary);"><i class="fa-solid fa-gavel"></i> 경매장</h1>
-      <button class="btn btn-primary" onclick="openModal('modal-create-auction')"><i class="fa-solid fa-plus"></i> 경매 물품 등록</button>
+      <button class="btn btn-outline" onclick="closeAppScreen('screen-docs')"><i class="fa-solid fa-arrow-left"></i> 메인으로</button>
+      <h1 style="font-size:1.8rem; font-weight:900; color:var(--primary);"><i class="fa-solid fa-file-lines"></i> 아고라 문서</h1>
+      <button class="btn btn-primary" onclick="createNewDoc()"><i class="fa-solid fa-plus"></i> 새 문서 작성</button>
     </div>
-    <div class="container" style="max-width:950px; margin:0 auto; width:100%;">
-      <div id="auction-grid-container" style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;"></div>
+    <div class="container" style="max-width:1100px; margin:0 auto; width:100%;">
+      <div class="docs-layout">
+        <!-- Document List Sidebar -->
+        <div class="docs-sidebar">
+          <h3 style="color:var(--primary); font-size:1.05rem; margin-bottom:0.85rem;"><i class="fa-solid fa-folder-open"></i> 내 문서 목록</h3>
+          <div id="docs-list-container">
+        <div class="doc-list-item active" onclick="selectDoc('DOC1794906589159')">
+          <div style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:180px;">
+            <div style="font-weight:700; font-size:0.9rem;">제목 없는 문서</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">06:09 PM</div>
+          </div>
+          <i class="fa-solid fa-chevron-right" style="font-size:0.75rem; opacity:0.7;"></i>
+        </div>
+      </div>
+        </div>
+
+        <!-- Document Editor Workspace -->
+        <div class="docs-workspace" id="docs-workspace-area">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:0.75rem; margin-bottom:1rem; flex-wrap:wrap;">
+            <input type="text" id="doc-title-input" class="form-control" style="flex:1; font-size:1.2rem; font-weight:800;" placeholder="문서 제목을 입력하세요..." oninput="autoSaveCurrentDoc()">
+            <div style="display:flex; gap:0.5rem;">
+              <button class="btn btn-primary" onclick="saveCurrentDoc(true)"><i class="fa-solid fa-floppy-disk"></i> 저장</button>
+              <button class="btn btn-danger" onclick="deleteCurrentDoc()"><i class="fa-solid fa-trash"></i> 삭제</button>
+            </div>
+          </div>
+          <div class="docs-toolbar">
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('bold')" title="굵게"><i class="fa-solid fa-bold"></i></button>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('italic')" title="기울임"><i class="fa-solid fa-italic"></i></button>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('underline')" title="밑줄"><i class="fa-solid fa-underline"></i></button>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('strikeThrough')" title="취소선"><i class="fa-solid fa-strikethrough"></i></button>
+            <span style="width:1px; height:20px; background:var(--card-border); margin:0 4px;"></span>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('formatBlock', 'H1')" title="제목 1">H1</button>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('formatBlock', 'H2')" title="제목 2">H2</button>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('formatBlock', 'P')" title="본문">P</button>
+            <span style="width:1px; height:20px; background:var(--card-border); margin:0 4px;"></span>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('insertUnorderedList')" title="글머리 기호"><i class="fa-solid fa-list-ul"></i></button>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('insertOrderedList')" title="번호 매기기"><i class="fa-solid fa-list-ol"></i></button>
+            <span style="width:1px; height:20px; background:var(--card-border); margin:0 4px;"></span>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('justifyLeft')" title="왼쪽 정렬"><i class="fa-solid fa-align-left"></i></button>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('justifyCenter')" title="가운데 정렬"><i class="fa-solid fa-align-center"></i></button>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('justifyRight')" title="오른쪽 정렬"><i class="fa-solid fa-align-right"></i></button>
+            <span style="margin-left:auto; font-size:0.8rem; color:var(--text-muted);" id="doc-word-count">30 자</span>
+          </div>
+          <div id="doc-editor-paper" class="docs-paper" contenteditable="true" data-placeholder="여기에 내용을 작성하세요..." oninput="handleDocInput()"><div align="center"><div align="right"><br></div><ol><li><strike><b><i><u>18 bottles of beer on the wall</u></i></b></strike></li></ol></div></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -666,13 +852,13 @@
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
         <h3 style="font-size:1.5rem; color:var(--primary); font-weight:800;">내 프로필 정보</h3>
-        <button class="btn btn-outline" onclick="closeModal('modal-profile')">&times;</button>
+        <button class="btn btn-outline" onclick="closeModal('modal-profile')">×</button>
       </div>
       <div style="text-align: center; margin-bottom: 1.5rem;">
-        <img id="profile-modal-avatar" src="" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #ffffff; object-fit: cover; margin-bottom: 0.5rem;" draggable="false">
-        <h2 id="profile-modal-name" style="font-size: 1.8rem; color: #fff;">-</h2>
-        <p style="font-size: 0.95rem; color: var(--text-muted);">계좌번호: <span id="profile-modal-acc">-</span></p>
-        <p style="font-size: 1.2rem; color: var(--primary); font-weight: 800; margin-top: 0.5rem;">현재 잔액: <span id="profile-modal-balance">0 G</span></p>
+        <img id="profile-modal-avatar" src="https://placehold.co/150x150/0f172a/ffffff?text=ADMIN" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #ffffff; object-fit: cover; margin-bottom: 0.5rem;" draggable="false">
+        <h2 id="profile-modal-name" style="font-size: 1.8rem;">관리자 (Admin)</h2>
+        <p style="font-size: 0.95rem; color: var(--text-muted);">계좌번호: <span id="profile-modal-acc">ADMIN-001</span></p>
+        <p style="font-size: 1.2rem; color: var(--primary); font-weight: 800; margin-top: 0.5rem;">현재 잔액: <span id="profile-modal-balance">9,999,999 G</span></p>
       </div>
       <hr style="border: 0; border-top: 1px solid var(--card-border); margin: 1rem 0;">
       <h4 style="margin-bottom: 0.5rem; color: var(--primary);">프로필 사진 변경</h4>
@@ -680,13 +866,13 @@
         <i class="fa-solid fa-paste" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
         <span>클립보드 이미지를 <strong>Ctrl+V / Cmd+V</strong> 로 붙여넣거나 파일 선택</span>
         <input type="file" id="avatar-file-input" accept="image/*" style="display:none;">
-        <center><img id="avatar-preview" class="image-preview" draggable="false"></center>
+        <center><img id="avatar-preview" class="image-preview" draggable="false" src="" style="display: none;"></center>
       </div>
       <form onsubmit="handleUpdateAvatar(event)">
         <div class="form-group">
           <input type="url" id="avatar-url-input" class="form-control" placeholder="또는 이미지 URL 입력 (https...)">
         </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%;">프로필 저장</button>
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">프로필 저장</button>
       </form>
     </div>
   </div>
@@ -695,20 +881,20 @@
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;"><i class="fa-solid fa-paper-plane"></i> 메일 작성</h3>
-        <button class="btn btn-outline" onclick="closeModal('modal-compose-email')">&times;</button>
+        <button class="btn btn-outline" onclick="closeModal('modal-compose-email')">×</button>
       </div>
       <form onsubmit="handleSendEmail(event)">
         <div class="form-group">
           <label>받는 사람 계좌번호</label>
-          <input type="text" id="email-to-acc" class="form-control" placeholder="예: 101-002" required>
+          <input type="text" id="email-to-acc" class="form-control" placeholder="받는 사람 계좌번호 입력" required="">
         </div>
         <div class="form-group">
           <label>제목</label>
-          <input type="text" id="email-subject" class="form-control" placeholder="메일 제목 입력" required>
+          <input type="text" id="email-subject" class="form-control" placeholder="메일 제목 입력" required="">
         </div>
         <div class="form-group">
           <label>내용</label>
-          <textarea id="email-body" class="form-control" rows="5" placeholder="보낼 내용을 작성하세요..." required></textarea>
+          <textarea id="email-body" class="form-control" rows="5" placeholder="보낼 내용을 작성하세요..." required=""></textarea>
         </div>
         <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding:0.75rem; font-size:1rem;"><i class="fa-solid fa-paper-plane"></i> 메일 보내기</button>
       </form>
@@ -719,16 +905,16 @@
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;">아고라 피드 포스트 작성</h3>
-        <button class="btn btn-outline" onclick="closeModal('modal-create-post')">&times;</button>
+        <button class="btn btn-outline" onclick="closeModal('modal-create-post')">×</button>
       </div>
       <form onsubmit="handleCreatePost(event)">
         <div class="form-group">
           <label>제목</label>
-          <input type="text" id="post-title" class="form-control" required>
+          <input type="text" id="post-title" class="form-control" required="">
         </div>
         <div class="form-group">
           <label>본문 내용</label>
-          <textarea id="post-content" class="form-control" rows="4" required></textarea>
+          <textarea id="post-content" class="form-control" rows="4" required=""></textarea>
         </div>
         <div class="form-group">
           <label>첨부 이미지 (선택)</label>
@@ -736,43 +922,10 @@
             <i class="fa-solid fa-image" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
             <span>이미지를 붙여넣거나 파일 선택</span>
             <input type="file" id="post-img-file" accept="image/*" style="display:none;">
-            <center><img id="post-img-preview" class="image-preview" draggable="false"></center>
+            <center><img id="post-img-preview" class="image-preview" draggable="false" src="" style="display: none;"></center>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;">게시하기</button>
-      </form>
-    </div>
-  </div>
-
-  <div id="modal-create-auction" class="modal-overlay">
-    <div class="modal">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-        <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;">경매 물품 등록</h3>
-        <button class="btn btn-outline" onclick="closeModal('modal-create-auction')">&times;</button>
-      </div>
-      <form onsubmit="handleCreateAuction(event)">
-        <div class="form-group">
-          <label>경매 물품명</label>
-          <input type="text" id="auc-item-name" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label>시작가 (G)</label>
-          <input type="number" id="auc-start-price" class="form-control" min="1" required>
-        </div>
-        <div class="form-group">
-          <label>즉시 구매가 (G) (선택)</label>
-          <input type="number" id="auc-buyout-price" class="form-control" min="1">
-        </div>
-        <div class="form-group">
-          <label>물품 이미지</label>
-          <div class="image-upload-box" id="auc-img-paste-area">
-            <i class="fa-solid fa-gavel" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
-            <span>이미지를 붙여넣거나 파일 선택</span>
-            <input type="file" id="auc-img-file" accept="image/*" style="display:none;">
-            <center><img id="auc-img-preview" class="image-preview" draggable="false"></center>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;">경매 시작</button>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content: center;">게시하기</button>
       </form>
     </div>
   </div>
@@ -781,12 +934,12 @@
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;">신규 상점 개설 (1,000 G)</h3>
-        <button class="btn btn-outline" onclick="closeModal('modal-create-store')">&times;</button>
+        <button class="btn btn-outline" onclick="closeModal('modal-create-store')">×</button>
       </div>
       <form onsubmit="handleCreateStore(event)">
         <div class="form-group">
           <label>상점 이름</label>
-          <input type="text" id="store-name" class="form-control" required>
+          <input type="text" id="store-name" class="form-control" required="">
         </div>
         <div class="form-group">
           <label>상점 로고 이미지</label>
@@ -794,19 +947,19 @@
             <i class="fa-solid fa-image" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
             <span>이미지를 붙여넣거나 클릭하여 파일 선택</span>
             <input type="file" id="store-logo-file" accept="image/*" style="display:none;">
-            <center><img id="store-logo-preview" class="image-preview" draggable="false"></center>
+            <center><img id="store-logo-preview" class="image-preview" draggable="false" src="" style="display: none;"></center>
           </div>
           <input type="url" id="store-logo-url" class="form-control" placeholder="또는 로고 이미지 URL">
         </div>
         <div class="form-group">
           <label>발행 주식 수량 (주)</label>
-          <input type="number" id="store-shares" class="form-control" min="10" value="100" required>
+          <input type="number" id="store-shares" class="form-control" min="10" value="100" required="">
         </div>
         <div class="form-group">
           <label>주당 초기 가격 (G)</label>
-          <input type="number" id="store-price" class="form-control" min="1" value="10" required>
+          <input type="number" id="store-price" class="form-control" min="1" value="10" required="">
         </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%;">개설 및 주식 발행</button>
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">개설 및 주식 발행</button>
       </form>
     </div>
   </div>
@@ -815,7 +968,7 @@
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h3 id="modal-store-title" style="font-size:1.4rem; color:var(--primary); font-weight:800;">상점 상세보기</h3>
-        <button class="btn btn-outline" onclick="closeModal('modal-store-detail')">&times;</button>
+        <button class="btn btn-outline" onclick="closeModal('modal-store-detail')">×</button>
       </div>
       <div id="store-owner-actions" class="hidden" style="margin-bottom: 1rem; display:flex; gap:0.5rem;">
         <button class="btn btn-primary" onclick="openModal('modal-add-item')"><i class="fa-solid fa-plus"></i> 상품 추가</button>
@@ -830,16 +983,16 @@
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;">상품 등록</h3>
-        <button class="btn btn-outline" onclick="closeModal('modal-add-item')">&times;</button>
+        <button class="btn btn-outline" onclick="closeModal('modal-add-item')">×</button>
       </div>
       <form onsubmit="handleAddItem(event)">
         <div class="form-group">
           <label>상품명</label>
-          <input type="text" id="item-name" class="form-control" required>
+          <input type="text" id="item-name" class="form-control" required="">
         </div>
         <div class="form-group">
           <label>가격 (G)</label>
-          <input type="number" id="item-price" class="form-control" min="1" required>
+          <input type="number" id="item-price" class="form-control" min="1" required="">
         </div>
         <div class="form-group">
           <label>상품 이미지</label>
@@ -847,11 +1000,11 @@
             <i class="fa-solid fa-upload" style="font-size:1.5rem; margin-bottom:0.4rem; display:block;"></i>
             <span>이미지를 붙여넣거나 파일 선택</span>
             <input type="file" id="item-img-file" accept="image/*" style="display:none;">
-            <center><img id="item-img-preview" class="image-preview" draggable="false"></center>
+            <center><img id="item-img-preview" class="image-preview" draggable="false" src="" style="display: none;"></center>
           </div>
           <input type="url" id="item-img-url" class="form-control" placeholder="또는 이미지 URL">
         </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%;">등록하기</button>
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">등록하기</button>
       </form>
     </div>
   </div>
@@ -860,7 +1013,7 @@
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h3 id="pop-product-title" style="font-size:1.3rem; color:var(--primary); font-weight:800;">상품 상세 정보</h3>
-        <button class="btn btn-outline" onclick="closeModal('modal-product-popup')">&times;</button>
+        <button class="btn btn-outline" onclick="closeModal('modal-product-popup')">×</button>
       </div>
       <img id="pop-product-img" src="" style="width:100%; height:220px; object-fit:contain; border-radius:16px; margin-bottom:1rem; background:rgba(0,0,0,0.35); border:1px solid var(--card-border);" draggable="false">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
@@ -884,7 +1037,7 @@
             <option value="2">⭐⭐</option>
             <option value="1">⭐</option>
           </select>
-          <input type="text" id="review-text" class="form-control" placeholder="리뷰 작성..." required>
+          <input type="text" id="review-text" class="form-control" placeholder="리뷰 작성..." required="">
         </div>
         <button type="submit" class="btn btn-outline" style="width:100%; justify-content:center;">리뷰 등록</button>
       </form>
@@ -896,11 +1049,11 @@
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;"><i class="fa-solid fa-palette"></i> 테마 설정</h3>
-        <button class="btn btn-outline" onclick="closeModal('modal-settings')">&times;</button>
+        <button class="btn btn-outline" onclick="closeModal('modal-settings')">×</button>
       </div>
       <div class="form-group">
         <label>테마 선택</label>
-        <select class="form-control" onchange="changeTheme(this.value)">
+        <select id="theme-selector" class="form-control" onchange="changeTheme(this.value)">
           <option value="emerald">에메랄드 그린 (Emerald Green)</option>
           <option value="skyblue">스카이 블루 (Sky Blue)</option>
           <option value="retro">레트로 오렌지 (Retro Orange)</option>
@@ -916,14 +1069,14 @@
     <div class="modal">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;">관리자 로그인</h3>
-        <button class="btn btn-outline" onclick="closeModal('modal-admin')">&times;</button>
+        <button class="btn btn-outline" onclick="closeModal('modal-admin')">×</button>
       </div>
       <form onsubmit="handleAdminAuth(event)">
         <div class="form-group">
           <label>비밀번호</label>
-          <input type="password" id="admin-pass" class="form-control" required>
+          <input type="password" id="admin-pass" class="form-control" required="">
         </div>
-        <button type="submit" class="btn btn-primary" style="width: 100%;">인증</button>
+        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">인증</button>
       </form>
     </div>
   </div>
@@ -932,15 +1085,15 @@
     <div class="modal" style="max-width:700px;">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <h3 style="font-size:1.3rem; color:var(--primary); font-weight:800;"><i class="fa-solid fa-user-shield"></i> 전체 계좌 정보 관리</h3>
-        <button class="btn btn-outline" onclick="closeModal('modal-admin-panel')">&times;</button>
+        <button class="btn btn-outline" onclick="closeModal('modal-admin-panel')">×</button>
       </div>
       <div style="margin-bottom:1rem; background:var(--input-bg); padding:1rem; border-radius:16px;">
         <h4 style="margin-bottom:0.5rem;">신규 계좌 추가</h4>
         <form onsubmit="adminCreateAcc(event)" style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-          <input type="text" id="adm-name" class="form-control" placeholder="이름" style="flex:1" required>
-          <input type="text" id="adm-acc" class="form-control" placeholder="계좌번호" style="flex:1" required>
-          <input type="text" id="adm-pin" class="form-control" placeholder="PIN" style="flex:1" required>
-          <input type="number" id="adm-bal" class="form-control" placeholder="잔액" style="flex:1" value="5000" required>
+          <input type="text" id="adm-name" class="form-control" placeholder="이름" style="flex:1" required="">
+          <input type="text" id="adm-acc" class="form-control" placeholder="계좌번호" style="flex:1" required="">
+          <input type="text" id="adm-pin" class="form-control" placeholder="PIN" style="flex:1" required="">
+          <input type="number" id="adm-bal" class="form-control" placeholder="잔액" style="flex:1" value="5000" required="">
           <button type="submit" class="btn btn-primary">생성</button>
         </form>
       </div>
@@ -948,40 +1101,28 @@
         <thead>
           <tr><th>이름</th><th>계좌번호</th><th>잔액</th><th>관리</th></tr>
         </thead>
-        <tbody id="admin-acc-list"></tbody>
+        <tbody id="admin-acc-list"><tr><td colspan="4" style="text-align:center; color:var(--text-muted); padding:1rem;">생성된 계좌가 없습니다. 위 폼에서 신규 계좌를 생성하세요.</td></tr></tbody>
       </table>
     </div>
   </div>
 
   <!-- JavaScript App Logic -->
   <script>
-    const defaultAvatar = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150";
-    const defaultStoreLogo = "https://images.unsplash.com/photo-1534723452862-4c874018d66d?w=150";
+    const defaultAvatar = "https://placehold.co/150x150/1b4332/ffffff?text=USER";
+    const defaultStoreLogo = "https://placehold.co/150x150/1b4332/ffffff?text=STORE";
+    const defaultItemImg = "https://placehold.co/300x300/1b4332/ffffff?text=ITEM";
 
-    let accounts = JSON.parse(localStorage.getItem('ag_accs_v17')) || [
-      { name: "민수", account: "101-001", pin: "1234", balance: 5000, loan: 0, avatar: defaultAvatar, shares: {} },
-      { name: "지아", account: "101-002", pin: "1234", balance: 12000, loan: 0, avatar: defaultAvatar, shares: {} }
-    ];
-
-    let stores = JSON.parse(localStorage.getItem('ag_stores_v17')) || [
-      { id: "S1", name: "아고라 메인 상점", logo: defaultStoreLogo, owner: "101-001", totalShares: 100, price: 50, priceHistory: [30, 35, 40, 45, 50], totalSales: 0, items: [] }
-    ];
-
-    let emails = JSON.parse(localStorage.getItem('ag_emails_v17')) || [
-      { id: "E1", from: "101-001", fromName: "민수", to: "101-002", subject: "환영합니다!", body: "아고라 캐피탈에 오신 것을 환영합니다.", time: "방금 전", read: false }
-    ];
-
-    let posts = JSON.parse(localStorage.getItem('ag_posts_v17')) || [
-      { id: "P1", author: "민수", authorAcc: "101-001", title: "첫 번째 게시글입니다!", content: "아고라 피드가 오픈했습니다. 많은 공유 부탁드립니다.", img: "", upvotedBy: [], likes: 0, comments: [] }
-    ];
-
-    let auctions = JSON.parse(localStorage.getItem('ag_auctions_v17')) || [
-      { id: "A1", seller: "지아", sellerAcc: "101-002", title: "희귀 카드 컬렉션", currentBid: 500, highestBidder: "민수", buyout: 1500, img: "https://via.placeholder.com/300" }
-    ];
+    // Clean initial state with zero pre-populated examples/dummy items
+    let accounts = JSON.parse(localStorage.getItem('ag_accs_clean_v1')) || [];
+    let stores = JSON.parse(localStorage.getItem('ag_stores_clean_v1')) || [];
+    let emails = JSON.parse(localStorage.getItem('ag_emails_clean_v1')) || [];
+    let posts = JSON.parse(localStorage.getItem('ag_posts_clean_v1')) || [];
+    let docs = JSON.parse(localStorage.getItem('ag_docs_clean_v1')) || [];
 
     let currentUser = null;
     let activeStoreId = null;
     let activeItemId = null;
+    let activeDocId = null;
     let currentMailTab = "inbox";
     let isAdmin = false;
 
@@ -989,39 +1130,68 @@
     let tempStoreLogoBase64 = "";
     let tempItemImgBase64 = "";
     let tempPostImgBase64 = "";
-    let tempAucImgBase64 = "";
+
+    function showToast(msg, isError = false) {
+      const existing = document.querySelector('.toast-box');
+      if (existing) existing.remove();
+      const box = document.createElement('div');
+      box.className = 'toast-box';
+      box.style.borderColor = isError ? 'var(--danger)' : '#ffffff';
+      box.innerHTML = `<i class="fa-solid ${isError ? 'fa-circle-exclamation' : 'fa-circle-check'}" style="color:${isError ? 'var(--danger)' : 'var(--primary)'};"></i><span>${msg}</span>`;
+      document.body.appendChild(box);
+      setTimeout(() => {
+        if (box.parentNode) box.remove();
+      }, 2800);
+    }
 
     function save() {
-      localStorage.setItem('ag_accs_v17', JSON.stringify(accounts));
-      localStorage.setItem('ag_stores_v17', JSON.stringify(stores));
-      localStorage.setItem('ag_emails_v17', JSON.stringify(emails));
-      localStorage.setItem('ag_posts_v17', JSON.stringify(posts));
-      localStorage.setItem('ag_auctions_v17', JSON.stringify(auctions));
+      localStorage.setItem('ag_accs_clean_v1', JSON.stringify(accounts));
+      localStorage.setItem('ag_stores_clean_v1', JSON.stringify(stores));
+      localStorage.setItem('ag_emails_clean_v1', JSON.stringify(emails));
+      localStorage.setItem('ag_posts_clean_v1', JSON.stringify(posts));
+      localStorage.setItem('ag_docs_clean_v1', JSON.stringify(docs));
     }
 
     function changeTheme(themeName) {
       document.documentElement.setAttribute('data-theme', themeName);
+      const sel = document.getElementById('theme-selector');
+      if (sel) sel.value = themeName;
       localStorage.setItem('ag_theme_choice', themeName);
     }
     const savedTheme = localStorage.getItem('ag_theme_choice') || 'emerald';
     changeTheme(savedTheme);
 
     function clearUploadPreviews() {
-      tempAvatarBase64 = ""; tempStoreLogoBase64 = ""; tempItemImgBase64 = ""; tempPostImgBase64 = ""; tempAucImgBase64 = "";
-      document.querySelectorAll('.image-preview').forEach(img => { img.src = ''; img.style.display = 'none'; });
+      tempAvatarBase64 = "";
+      tempStoreLogoBase64 = "";
+      tempItemImgBase64 = "";
+      tempPostImgBase64 = "";
+      document.querySelectorAll('.image-preview').forEach(img => {
+        img.src = '';
+        img.style.display = 'none';
+      });
     }
 
-    function openModal(id) { clearUploadPreviews(); document.getElementById(id).classList.add('active'); }
-    function closeModal(id) { clearUploadPreviews(); document.getElementById(id).classList.remove('active'); }
+    function openModal(id) {
+      clearUploadPreviews();
+      if (id === 'modal-admin-panel') renderAdmin();
+      document.getElementById(id).classList.add('active');
+    }
+    function closeModal(id) {
+      clearUploadPreviews();
+      document.getElementById(id).classList.remove('active');
+    }
 
-    function openAppScreen(id) { 
-      document.getElementById(id).classList.remove('hidden'); 
+    function openAppScreen(id) {
+      document.getElementById(id).classList.remove('hidden');
       if (id === 'screen-stock') { populateChartStoreSelect(); renderStockChart(); }
       if (id === 'screen-email') renderEmails();
       if (id === 'screen-feed') renderFeedPosts();
-      if (id === 'screen-auction') renderAuctions();
+      if (id === 'screen-docs') renderDocsApp();
     }
-    function closeAppScreen(id) { document.getElementById(id).classList.add('hidden'); }
+    function closeAppScreen(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
 
     function setupImagePasteAndFile(boxId, fileInputId, previewId, callback) {
       const box = document.getElementById(boxId);
@@ -1059,16 +1229,16 @@
     setupImagePasteAndFile('store-logo-paste-area', 'store-logo-file', 'store-logo-preview', (b) => tempStoreLogoBase64 = b);
     setupImagePasteAndFile('item-img-paste-area', 'item-img-file', 'item-img-preview', (b) => tempItemImgBase64 = b);
     setupImagePasteAndFile('post-img-paste-area', 'post-img-file', 'post-img-preview', (b) => tempPostImgBase64 = b);
-    setupImagePasteAndFile('auc-img-paste-area', 'auc-img-file', 'auc-img-preview', (b) => tempAucImgBase64 = b);
 
     function handleLogin(e) {
       e.preventDefault();
-      const acc = document.getElementById('login-acc').value;
-      const pin = document.getElementById('login-pin').value;
+      const acc = document.getElementById('login-acc').value.trim();
+      const pin = document.getElementById('login-pin').value.trim();
       const user = accounts.find(a => a.account === acc && a.pin === pin);
 
       if (user) {
-        currentUser = user; isAdmin = false;
+        currentUser = user;
+        isAdmin = false;
         document.getElementById('view-login').classList.add('hidden');
         document.getElementById('logout-btn').classList.remove('hidden');
         document.getElementById('admin-login-btn').classList.remove('hidden');
@@ -1076,10 +1246,14 @@
         document.getElementById('dash-admin-tag').classList.add('hidden');
         updateDash();
         document.getElementById('view-dashboard').classList.remove('hidden');
-      } else { alert("로그인 정보가 올바르지 않습니다."); }
+        showToast(`${user.name}님 환영합니다.`);
+      } else {
+        showToast("로그인 정보가 올바르지 않습니다. (관리자 로그인 후 계좌를 먼저 생성하세요)", true);
+      }
     }
 
     function updateDash() {
+      if (!currentUser) return;
       const userImg = currentUser.avatar || defaultAvatar;
       document.getElementById('dash-avatar').src = userImg;
       document.getElementById('profile-modal-avatar').src = userImg;
@@ -1097,29 +1271,35 @@
 
     function handleTakeLoan() {
       const amt = parseInt(document.getElementById('loan-get-amt').value);
-      if (!amt || amt <= 0) return alert("금액을 입력하세요.");
+      if (!amt || amt <= 0) return showToast("금액을 입력하세요.", true);
       currentUser.loan = (currentUser.loan || 0) + amt;
       currentUser.balance += amt;
-      save(); updateDash();
-      alert(`${amt.toLocaleString()} G 대출 완료!`);
+      document.getElementById('loan-get-amt').value = '';
+      save();
+      updateDash();
+      showToast(`${amt.toLocaleString()} G 대출 완료!`);
     }
 
     function handlePayLoan() {
       const amt = parseInt(document.getElementById('loan-pay-amt').value);
-      if (!amt || amt <= 0 || (currentUser.loan || 0) <= 0 || amt > currentUser.loan || currentUser.balance < amt) return alert("유효하지 않은 상환 요청입니다.");
+      if (!amt || amt <= 0 || (currentUser.loan || 0) <= 0 || amt > currentUser.loan || currentUser.balance < amt) {
+        return showToast("유효하지 않은 상환 요청입니다.", true);
+      }
       currentUser.balance -= amt;
       currentUser.loan -= amt;
-      save(); updateDash();
-      alert("대출 상환 완료!");
+      document.getElementById('loan-pay-amt').value = '';
+      save();
+      updateDash();
+      showToast("대출 상환 완료!");
     }
 
     function renderMarketStores() {
       const box = document.getElementById('market-store-list');
-      box.innerHTML = stores.length === 0 ? '<p style="text-align:center;">상점이 없습니다.</p>' : '';
+      box.innerHTML = stores.length === 0 ? '<p style="text-align:center; padding:2rem; color:var(--text-muted);">개설된 상점이 없습니다. 상단 버튼을 눌러 첫 상점을 개설해보세요.</p>' : '';
       stores.forEach(s => {
         box.innerHTML += `
           <div class="store-item-card" onclick="openStoreDetail('${s.id}')">
-            <img src="${s.logo || defaultStoreLogo}" class="store-logo-img" draggable="false">
+            <img src="${s.logo || defaultStoreLogo}" class="store-logo-img" draggable="false" onerror="this.src='${defaultStoreLogo}'">
             <div style="flex:1;">
               <h4 style="color:var(--primary); font-size:1.3rem;">${s.name}</h4>
               <p style="font-size:0.85rem; color:var(--text-muted);">상품 수: ${s.items.length}개 | 주가: ${s.price} G</p>
@@ -1130,25 +1310,29 @@
     }
 
     function eraseStoreByAdmin(storeId) {
-      if (confirm("이 상점을 삭제합니까?")) {
-        stores = stores.filter(s => s.id !== storeId);
-        save(); renderMarketStores(); renderStockList();
-      }
+      stores = stores.filter(s => s.id !== storeId);
+      save();
+      renderMarketStores();
+      renderStockList();
+      showToast("상점이 삭제되었습니다.");
     }
 
     function eraseCurrentStore() {
       if (!activeStoreId) return;
-      if (confirm("정말로 이 상점을 폐업(삭제)하시겠습니까?")) {
-        stores = stores.filter(s => s.id !== activeStoreId);
-        save();
-        closeModal('modal-store-detail');
-        renderMarketStores();
-        renderStockList();
-      }
+      stores = stores.filter(s => s.id !== activeStoreId);
+      save();
+      closeModal('modal-store-detail');
+      renderMarketStores();
+      renderStockList();
+      showToast("상점이 폐업(삭제)되었습니다.");
     }
 
     function renderStockList() {
       const tbody = document.getElementById('stock-list');
+      if (stores.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:var(--text-muted); padding:1.5rem;">상장된 종목이 없습니다.</td></tr>';
+        return;
+      }
       tbody.innerHTML = '';
       stores.forEach(s => {
         tbody.innerHTML += `
@@ -1165,6 +1349,10 @@
 
     function populateChartStoreSelect() {
       const select = document.getElementById('chart-store-select');
+      if (stores.length === 0) {
+        select.innerHTML = '<option value="">종목 없음</option>';
+        return;
+      }
       select.innerHTML = stores.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
     }
 
@@ -1203,11 +1391,14 @@
       ctx.stroke();
     }
 
-    function switchMailTab(tab) { currentMailTab = tab; renderEmails(); }
+    function switchMailTab(tab) {
+      currentMailTab = tab;
+      renderEmails();
+    }
     function renderEmails() {
       const box = document.getElementById('email-list-container');
       const list = emails.filter(e => currentMailTab === 'inbox' ? e.to === currentUser.account : e.from === currentUser.account);
-      box.innerHTML = list.length === 0 ? '<p style="text-align:center;">보관된 메일이 없습니다.</p>' : '';
+      box.innerHTML = list.length === 0 ? '<p style="text-align:center; padding:1.5rem; color:var(--text-muted);">보관된 메일이 없습니다.</p>' : '';
       list.forEach(m => {
         box.innerHTML += `
           <div class="review-box" style="margin-bottom:0.75rem;">
@@ -1223,15 +1414,30 @@
 
     function handleSendEmail(e) {
       e.preventDefault();
-      const to = document.getElementById('email-to-acc').value;
-      if (!accounts.find(a => a.account === to)) return alert("존재하지 않는 계좌입니다.");
-      emails.unshift({ id: "E" + Date.now(), from: currentUser.account, fromName: currentUser.name, to, subject: document.getElementById('email-subject').value, body: document.getElementById('email-body').value, time: "방금 전", read: false });
-      save(); closeModal('modal-compose-email'); renderEmails();
+      const to = document.getElementById('email-to-acc').value.trim();
+      if (!accounts.find(a => a.account === to)) return showToast("존재하지 않는 계좌입니다.", true);
+      emails.unshift({
+        id: "E" + Date.now(),
+        from: currentUser.account,
+        fromName: currentUser.name,
+        to,
+        subject: document.getElementById('email-subject').value,
+        body: document.getElementById('email-body').value,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        read: false
+      });
+      document.getElementById('email-to-acc').value = '';
+      document.getElementById('email-subject').value = '';
+      document.getElementById('email-body').value = '';
+      save();
+      closeModal('modal-compose-email');
+      renderEmails();
+      showToast("메일을 전송했습니다.");
     }
 
     function renderFeedPosts() {
       const box = document.getElementById('feed-posts-container');
-      box.innerHTML = posts.length === 0 ? '<p style="text-align:center;">포스트가 없습니다.</p>' : '';
+      box.innerHTML = posts.length === 0 ? '<p style="text-align:center; padding:2rem; color:var(--text-muted);">등록된 포스트가 없습니다.</p>' : '';
       posts.forEach(p => {
         if (!p.upvotedBy) p.upvotedBy = [];
         box.innerHTML += `
@@ -1242,7 +1448,7 @@
             </div>
             <h3 style="color:var(--primary); font-size:1.3rem; margin:0.4rem 0;">${p.title}</h3>
             <p>${p.content}</p>
-            ${p.img ? `<img src="${p.img}" style="width:100%; border-radius:12px; margin-top:0.5rem;" draggable="false">` : ''}
+            ${p.img ? `<img src="${p.img}" style="width:100%; max-height:360px; object-fit:contain; background:rgba(0,0,0,0.25); border-radius:12px; margin-top:0.75rem;" draggable="false">` : ''}
             <div style="margin-top:0.75rem;">
               <button class="reaction-btn" onclick="toggleUpvotePost('${p.id}')"><i class="fa-solid fa-arrow-up"></i> 추천 ${p.upvotedBy.length}</button>
             </div>
@@ -1254,92 +1460,255 @@
       const p = posts.find(post => post.id === id);
       if (!p.upvotedBy) p.upvotedBy = [];
       const idx = p.upvotedBy.indexOf(currentUser.account);
-      if (idx === -1) p.upvotedBy.push(currentUser.account); else p.upvotedBy.splice(idx, 1);
-      save(); renderFeedPosts();
+      if (idx === -1) p.upvotedBy.push(currentUser.account);
+      else p.upvotedBy.splice(idx, 1);
+      save();
+      renderFeedPosts();
     }
 
-    function erasePostByAdmin(id) { posts = posts.filter(p => p.id !== id); save(); renderFeedPosts(); }
+    function erasePostByAdmin(id) {
+      posts = posts.filter(p => p.id !== id);
+      save();
+      renderFeedPosts();
+      showToast("포스트가 삭제되었습니다.");
+    }
 
     function handleCreatePost(e) {
       e.preventDefault();
-      posts.unshift({ id: "P" + Date.now(), author: currentUser.name, authorAcc: currentUser.account, title: document.getElementById('post-title').value, content: document.getElementById('post-content').value, img: tempPostImgBase64, upvotedBy: [], likes: 0, comments: [] });
-      save(); closeModal('modal-create-post'); renderFeedPosts();
-    }
-
-    function renderAuctions() {
-      const grid = document.getElementById('auction-grid-container');
-      grid.innerHTML = auctions.length === 0 ? '<p style="grid-column:1/-1; text-align:center;">경매 물품이 없습니다.</p>' : '';
-      auctions.forEach(a => {
-        grid.innerHTML += `
-          <div class="feed-card">
-            <img src="${a.img || 'https://via.placeholder.com/300'}" style="width:100%; height:160px; object-fit:contain; border-radius:12px; background:rgba(0,0,0,0.3);" draggable="false">
-            <h3 style="color:var(--primary); font-size:1.2rem; margin-top:0.5rem;">${a.title}</h3>
-            <p style="font-weight:800; font-size:1.1rem; margin:0.4rem 0;">입찰가: ${a.currentBid.toLocaleString()} G</p>
-            <div style="display:flex; gap:0.5rem;">
-              <button class="btn btn-primary" style="flex:1;" onclick="placeBid('${a.id}')">입찰 (+50G)</button>
-              ${a.buyout ? `<button class="btn btn-danger" onclick="buyoutAuction('${a.id}')">즉시 구매</button>` : ''}
-            </div>
-          </div>`;
+      posts.unshift({
+        id: "P" + Date.now(),
+        author: currentUser.name,
+        authorAcc: currentUser.account,
+        title: document.getElementById('post-title').value,
+        content: document.getElementById('post-content').value,
+        img: tempPostImgBase64,
+        upvotedBy: [],
+        likes: 0,
+        comments: []
       });
+      document.getElementById('post-title').value = '';
+      document.getElementById('post-content').value = '';
+      save();
+      closeModal('modal-create-post');
+      renderFeedPosts();
+      showToast("포스트가 게시되었습니다.");
     }
 
-    function handleCreateAuction(e) {
-      e.preventDefault();
-      auctions.unshift({ id: "A" + Date.now(), seller: currentUser.name, sellerAcc: currentUser.account, title: document.getElementById('auc-item-name').value, currentBid: parseInt(document.getElementById('auc-start-price').value), buyout: parseInt(document.getElementById('auc-buyout-price').value) || null, img: tempAucImgBase64 || "https://via.placeholder.com/300" });
-      save(); closeModal('modal-create-auction'); renderAuctions();
+    // AGORA DOCS LOGIC (Google Docs Style)
+    function renderDocsApp() {
+      const userDocs = docs.filter(d => d.owner === currentUser.account);
+      const listContainer = document.getElementById('docs-list-container');
+      const workspace = document.getElementById('docs-workspace-area');
+
+      if (userDocs.length === 0) {
+        activeDocId = null;
+        listContainer.innerHTML = '<p style="font-size:0.85rem; color:var(--text-muted); text-align:center; padding:1rem 0;">저장된 문서가 없습니다.</p>';
+        workspace.innerHTML = `
+          <div style="text-align:center; padding:4rem 1rem;">
+            <i class="fa-solid fa-file-circle-plus" style="font-size:3rem; color:var(--primary); margin-bottom:1rem; display:block;"></i>
+            <h3 style="margin-bottom:0.5rem;">작성된 문서가 없습니다</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.25rem;">새 문서를 생성하여 아고라 문서를 시작하세요.</p>
+            <button class="btn btn-primary" onclick="createNewDoc()"><i class="fa-solid fa-plus"></i> 새 문서 작성</button>
+          </div>`;
+        return;
+      }
+
+      if (!activeDocId || !userDocs.find(d => d.id === activeDocId)) {
+        activeDocId = userDocs[0].id;
+      }
+
+      listContainer.innerHTML = userDocs.map(d => `
+        <div class="doc-list-item ${d.id === activeDocId ? 'active' : ''}" onclick="selectDoc('${d.id}')">
+          <div style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:180px;">
+            <div style="font-weight:700; font-size:0.9rem;">${d.title || '제목 없는 문서'}</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">${d.updatedAt}</div>
+          </div>
+          <i class="fa-solid fa-chevron-right" style="font-size:0.75rem; opacity:0.7;"></i>
+        </div>
+      `).join('');
+
+      // Ensure workspace structure exists if it was previously replaced by empty state
+      if (!document.getElementById('doc-title-input')) {
+        workspace.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:0.75rem; margin-bottom:1rem; flex-wrap:wrap;">
+            <input type="text" id="doc-title-input" class="form-control" style="flex:1; font-size:1.2rem; font-weight:800;" placeholder="문서 제목을 입력하세요..." oninput="autoSaveCurrentDoc()">
+            <div style="display:flex; gap:0.5rem;">
+              <button class="btn btn-primary" onclick="saveCurrentDoc(true)"><i class="fa-solid fa-floppy-disk"></i> 저장</button>
+              <button class="btn btn-danger" onclick="deleteCurrentDoc()"><i class="fa-solid fa-trash"></i> 삭제</button>
+            </div>
+          </div>
+          <div class="docs-toolbar">
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('bold')" title="굵게"><i class="fa-solid fa-bold"></i></button>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('italic')" title="기울임"><i class="fa-solid fa-italic"></i></button>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('underline')" title="밑줄"><i class="fa-solid fa-underline"></i></button>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('strikeThrough')" title="취소선"><i class="fa-solid fa-strikethrough"></i></button>
+            <span style="width:1px; height:20px; background:var(--card-border); margin:0 4px;"></span>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('formatBlock', 'H1')" title="제목 1">H1</button>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('formatBlock', 'H2')" title="제목 2">H2</button>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('formatBlock', 'P')" title="본문">P</button>
+            <span style="width:1px; height:20px; background:var(--card-border); margin:0 4px;"></span>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('insertUnorderedList')" title="글머리 기호"><i class="fa-solid fa-list-ul"></i></button>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('insertOrderedList')" title="번호 매기기"><i class="fa-solid fa-list-ol"></i></button>
+            <span style="width:1px; height:20px; background:var(--card-border); margin:0 4px;"></span>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('justifyLeft')" title="왼쪽 정렬"><i class="fa-solid fa-align-left"></i></button>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('justifyCenter')" title="가운데 정렬"><i class="fa-solid fa-align-center"></i></button>
+            <button type="button" class="doc-tool-btn" onclick="execDocCmd('justifyRight')" title="오른쪽 정렬"><i class="fa-solid fa-align-right"></i></button>
+            <span style="margin-left:auto; font-size:0.8rem; color:var(--text-muted);" id="doc-word-count">0 자</span>
+          </div>
+          <div id="doc-editor-paper" class="docs-paper" contenteditable="true" data-placeholder="여기에 내용을 작성하세요..." oninput="handleDocInput()"></div>
+        `;
+      }
+
+      const activeDoc = userDocs.find(d => d.id === activeDocId);
+      if (activeDoc) {
+        document.getElementById('doc-title-input').value = activeDoc.title;
+        document.getElementById('doc-editor-paper').innerHTML = activeDoc.content;
+        updateDocWordCount();
+      }
     }
 
-    function placeBid(id) {
-      const a = auctions.find(auc => auc.id === id);
-      const next = a.currentBid + 50;
-      if (currentUser.balance < next) return alert("잔액 부족");
-      currentUser.balance -= 50; a.currentBid = next; a.highestBidder = currentUser.name;
-      save(); updateDash(); renderAuctions();
+    function createNewDoc() {
+      const newDoc = {
+        id: "DOC" + Date.now(),
+        owner: currentUser.account,
+        title: "제목 없는 문서",
+        content: "",
+        updatedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      docs.unshift(newDoc);
+      activeDocId = newDoc.id;
+      save();
+      renderDocsApp();
+      showToast("새 문서가 생성되었습니다.");
     }
 
-    function buyoutAuction(id) {
-      const a = auctions.find(auc => auc.id === id);
-      if (currentUser.balance < a.buyout) return alert("잔액 부족");
-      currentUser.balance -= a.buyout;
-      auctions = auctions.filter(auc => auc.id !== id);
-      save(); updateDash(); renderAuctions();
+    function selectDoc(docId) {
+      saveCurrentDoc(false);
+      activeDocId = docId;
+      renderDocsApp();
+    }
+
+    function execDocCmd(command, value = null) {
+      const paper = document.getElementById('doc-editor-paper');
+      if (!paper) return;
+      paper.focus();
+      document.execCommand(command, false, value);
+      autoSaveCurrentDoc();
+    }
+
+    function handleDocInput() {
+      updateDocWordCount();
+      autoSaveCurrentDoc();
+    }
+
+    function updateDocWordCount() {
+      const paper = document.getElementById('doc-editor-paper');
+      const counter = document.getElementById('doc-word-count');
+      if (paper && counter) {
+        const len = paper.innerText.replace(/\n/g, '').length;
+        counter.innerText = `${len} 자`;
+      }
+    }
+
+    function autoSaveCurrentDoc() {
+      saveCurrentDoc(false);
+    }
+
+    function saveCurrentDoc(notify = false) {
+      if (!activeDocId) return;
+      const doc = docs.find(d => d.id === activeDocId);
+      const titleInput = document.getElementById('doc-title-input');
+      const paper = document.getElementById('doc-editor-paper');
+      if (doc && titleInput && paper) {
+        doc.title = titleInput.value.trim() || "제목 없는 문서";
+        doc.content = paper.innerHTML;
+        doc.updatedAt = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        save();
+        if (notify) {
+          renderDocsApp();
+          showToast("문서가 저장되었습니다.");
+        }
+      }
+    }
+
+    function deleteCurrentDoc() {
+      if (!activeDocId) return;
+      docs = docs.filter(d => d.id !== activeDocId);
+      activeDocId = null;
+      save();
+      renderDocsApp();
+      showToast("문서가 삭제되었습니다.");
     }
 
     function renderPortfolio() {
       const tbody = document.getElementById('portfolio-list');
       tbody.innerHTML = '';
+      let hasShares = false;
       stores.forEach(s => {
         const owned = (currentUser.shares && currentUser.shares[s.id]) || 0;
-        if (owned > 0) tbody.innerHTML += `<tr><td>${s.name}</td><td>${owned}주</td><td>${((owned / s.totalShares) * 100).toFixed(1)}%</td></tr>`;
+        if (owned > 0) {
+          hasShares = true;
+          tbody.innerHTML += `<tr><td>${s.name}</td><td>${owned}주</td><td>${((owned / s.totalShares) * 100).toFixed(1)}%</td></tr>`;
+        }
       });
+      if (!hasShares) {
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:var(--text-muted); padding:1rem;">보유 중인 주식이 없습니다.</td></tr>';
+      }
     }
 
     function handleUpdateAvatar(e) {
       e.preventDefault();
       currentUser.avatar = tempAvatarBase64 || document.getElementById('avatar-url-input').value || defaultAvatar;
-      save(); updateDash(); closeModal('modal-profile');
+      document.getElementById('avatar-url-input').value = '';
+      save();
+      updateDash();
+      closeModal('modal-profile');
+      showToast("프로필이 업데이트되었습니다.");
     }
 
     function handleTransfer(e) {
       e.preventDefault();
-      const target = accounts.find(a => a.account === document.getElementById('trans-acc').value);
+      const targetAcc = document.getElementById('trans-acc').value.trim();
+      const target = accounts.find(a => a.account === targetAcc);
       const amt = parseInt(document.getElementById('trans-amt').value);
-      if (!target || currentUser.balance < amt) return alert("송금 실패");
-      currentUser.balance -= amt; target.balance += amt;
-      save(); updateDash();
+      if (!target || target.account === currentUser.account || currentUser.balance < amt) {
+        return showToast("송금 정보를 확인해주세요.", true);
+      }
+      currentUser.balance -= amt;
+      target.balance += amt;
+      document.getElementById('trans-acc').value = '';
+      document.getElementById('trans-amt').value = '';
+      save();
+      updateDash();
+      showToast(`${target.name}님에게 ${amt.toLocaleString()} G 송금 완료!`);
     }
 
     function handleCreateStore(e) {
       e.preventDefault();
-      if (currentUser.balance < 1000) return alert("잔액 부족");
+      if (currentUser.balance < 1000) return showToast("상점 개설 비용(1,000 G)이 부족합니다.", true);
       currentUser.balance -= 1000;
       const id = "S" + Date.now();
       const shares = parseInt(document.getElementById('store-shares').value);
       const price = parseInt(document.getElementById('store-price').value);
-      stores.push({ id, name: document.getElementById('store-name').value, logo: tempStoreLogoBase64 || document.getElementById('store-logo-url').value || defaultStoreLogo, owner: currentUser.account, totalShares: shares, price, priceHistory: [price], totalSales: 0, items: [] });
+      stores.push({
+        id,
+        name: document.getElementById('store-name').value,
+        logo: tempStoreLogoBase64 || document.getElementById('store-logo-url').value || defaultStoreLogo,
+        owner: currentUser.account,
+        totalShares: shares,
+        price,
+        priceHistory: [price],
+        totalSales: 0,
+        items: []
+      });
       if (!currentUser.shares) currentUser.shares = {};
       currentUser.shares[id] = shares;
-      save(); closeModal('modal-create-store'); updateDash();
+      document.getElementById('store-name').value = '';
+      document.getElementById('store-logo-url').value = '';
+      save();
+      closeModal('modal-create-store');
+      updateDash();
+      showToast("상점이 개설되었습니다!");
     }
 
     function openStoreDetail(id) {
@@ -1347,25 +1716,47 @@
       const s = stores.find(st => st.id === id);
       document.getElementById('modal-store-title').innerText = s.name;
       const actions = document.getElementById('store-owner-actions');
-      if (currentUser.account === s.owner || isAdmin) actions.classList.remove('hidden'); else actions.classList.add('hidden');
-      renderStoreProducts(); openModal('modal-store-detail');
+      if (currentUser.account === s.owner || isAdmin) actions.classList.remove('hidden');
+      else actions.classList.add('hidden');
+      renderStoreProducts();
+      openModal('modal-store-detail');
     }
 
     function renderStoreProducts() {
       const s = stores.find(st => st.id === activeStoreId);
       const grid = document.getElementById('store-products-grid');
-      grid.innerHTML = (s.items || []).map(i => `
-        <div style="background:var(--input-bg); border-radius:12px; padding:0.5rem; cursor:pointer;" onclick="openProductPopup('${i.id}')">
-          <img src="${i.img}" style="width:100%; height:100px; object-fit:contain; border-radius:8px; background:rgba(0,0,0,0.2);" draggable="false">
-          <h4 style="margin-top:0.4rem;">${i.name}</h4><p style="color:var(--primary); font-weight:700;">${i.price} G</p>
+      if (!s.items || s.items.length === 0) {
+        grid.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); padding:1.5rem;">등록된 상품이 없습니다.</p>';
+        return;
+      }
+      grid.innerHTML = s.items.map(i => `
+        <div style="background:var(--input-bg); border-radius:12px; padding:0.75rem; cursor:pointer; border:1px solid var(--card-border);" onclick="openProductPopup('${i.id}')">
+          <img src="${i.img}" style="width:100%; height:110px; object-fit:contain; border-radius:8px; background:rgba(0,0,0,0.2);" draggable="false" onerror="this.src='${defaultItemImg}'">
+          <h4 style="margin-top:0.5rem;">${i.name}</h4>
+          <p style="color:var(--primary); font-weight:700;">${i.price.toLocaleString()} G</p>
         </div>`).join('');
     }
 
     function handleAddItem(e) {
       e.preventDefault();
       const s = stores.find(st => st.id === activeStoreId);
-      s.items.push({ id: "I" + Date.now(), name: document.getElementById('item-name').value, price: parseInt(document.getElementById('item-price').value), img: tempItemImgBase64 || document.getElementById('item-img-url').value || "https://via.placeholder.com/300", likes: 0, dislikes: 0, reviews: [] });
-      save(); closeModal('modal-add-item'); renderStoreProducts(); updateDash();
+      s.items.push({
+        id: "I" + Date.now(),
+        name: document.getElementById('item-name').value,
+        price: parseInt(document.getElementById('item-price').value),
+        img: tempItemImgBase64 || document.getElementById('item-img-url').value || defaultItemImg,
+        likes: 0,
+        dislikes: 0,
+        reviews: []
+      });
+      document.getElementById('item-name').value = '';
+      document.getElementById('item-price').value = '';
+      document.getElementById('item-img-url').value = '';
+      save();
+      closeModal('modal-add-item');
+      renderStoreProducts();
+      updateDash();
+      showToast("상품이 등록되었습니다.");
     }
 
     function renderReviews(item) {
@@ -1390,12 +1781,13 @@
       const item = s.items.find(i => i.id === itemId);
       document.getElementById('pop-product-title').innerText = item.name;
       document.getElementById('pop-product-img').src = item.img;
-      document.getElementById('pop-product-price').innerText = `${item.price} G`;
+      document.getElementById('pop-product-price').innerText = `${item.price.toLocaleString()} G`;
       document.getElementById('pop-likes').innerText = item.likes || 0;
       document.getElementById('pop-dislikes').innerText = item.dislikes || 0;
 
       const eraseBtn = document.getElementById('pop-erase-btn');
-      if (currentUser.account === s.owner || isAdmin) eraseBtn.classList.remove('hidden'); else eraseBtn.classList.add('hidden');
+      if (currentUser.account === s.owner || isAdmin) eraseBtn.classList.remove('hidden');
+      else eraseBtn.classList.add('hidden');
 
       renderReviews(item);
       openModal('modal-product-popup');
@@ -1420,15 +1812,19 @@
       const text = document.getElementById('review-text').value;
       item.reviews.unshift({ author: currentUser.name, rating, text });
       document.getElementById('review-text').value = '';
-      save(); renderReviews(item);
+      save();
+      renderReviews(item);
+      showToast("리뷰가 등록되었습니다.");
     }
 
     function eraseActiveProduct() {
       const s = stores.find(st => st.id === activeStoreId);
-      if (confirm("이 상품을 삭제하시겠습니까?")) {
-        s.items = s.items.filter(i => i.id !== activeItemId);
-        save(); closeModal('modal-product-popup'); renderStoreProducts(); updateDash();
-      }
+      s.items = s.items.filter(i => i.id !== activeItemId);
+      save();
+      closeModal('modal-product-popup');
+      renderStoreProducts();
+      updateDash();
+      showToast("상품이 삭제되었습니다.");
     }
 
     function animatePopoutImage(imgSrc) {
@@ -1437,6 +1833,7 @@
       const clone = document.createElement('img');
       
       clone.src = imgSrc;
+      clone.draggable = false;
       clone.className = 'popout-animated-img';
       clone.style.left = `${rect.left}px`;
       clone.style.top = `${rect.top}px`;
@@ -1453,63 +1850,128 @@
     function buyActiveProduct() {
       const s = stores.find(st => st.id === activeStoreId);
       const item = s.items.find(i => i.id === activeItemId);
-      if (currentUser.balance < item.price) return alert("잔액 부족");
+      if (currentUser.balance < item.price) return showToast("잔액이 부족합니다.", true);
       
       currentUser.balance -= item.price;
+      const ownerAcc = accounts.find(a => a.account === s.owner);
+      if (ownerAcc && ownerAcc.account !== currentUser.account) {
+        ownerAcc.balance += item.price;
+      }
       s.price += Math.max(1, Math.ceil(item.price / 100));
       s.priceHistory.push(s.price);
-      save(); updateDash();
+      save();
+      updateDash();
       
       animatePopoutImage(item.img);
-      alert(`${item.name} 구매가 완료되었습니다!`);
+      showToast(`${item.name} 구매가 완료되었습니다!`);
     }
 
     function tradeStock(storeId, type) {
       const s = stores.find(st => st.id === storeId);
       if (!currentUser.shares) currentUser.shares = {};
       if (type === 'buy') {
-        if (currentUser.balance < s.price) return alert("잔액 부족");
+        if (currentUser.balance < s.price) return showToast("잔액이 부족합니다.", true);
         currentUser.balance -= s.price;
         currentUser.shares[storeId] = (currentUser.shares[storeId] || 0) + 1;
         s.price += 1;
+        showToast(`${s.name} 1주 매수 완료`);
       } else {
-        if (!currentUser.shares[storeId]) return alert("주식 없음");
+        if (!currentUser.shares[storeId]) return showToast("보유 주식이 없습니다.", true);
         currentUser.balance += s.price;
         currentUser.shares[storeId] -= 1;
         s.price = Math.max(1, s.price - 1);
+        showToast(`${s.name} 1주 매도 완료`);
       }
       s.priceHistory.push(s.price);
-      save(); updateDash(); renderStockList(); renderStockChart();
+      save();
+      updateDash();
+      renderStockList();
+      renderStockChart();
     }
 
     function handleAdminAuth(e) {
       e.preventDefault();
-      if (document.getElementById('admin-pass').value === "20140204") {
-        isAdmin = true; closeModal('modal-admin');
-        currentUser = { name: "관리자 (Admin)", account: "ADMIN-001", balance: 9999999, loan: 0, avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150", shares: {} };
+      if (document.getElementById('admin-pass').value === "2014") {
+        isAdmin = true;
+        document.getElementById('admin-pass').value = '';
+        closeModal('modal-admin');
+        currentUser = {
+          name: "관리자 (Admin)",
+          account: "ADMIN-001",
+          balance: 9999999,
+          loan: 0,
+          avatar: "https://placehold.co/150x150/0f172a/ffffff?text=ADMIN",
+          shares: {}
+        };
         document.getElementById('view-login').classList.add('hidden');
         document.getElementById('logout-btn').classList.remove('hidden');
         document.getElementById('admin-login-btn').classList.add('hidden');
         document.getElementById('admin-panel-btn').classList.remove('hidden');
         document.getElementById('dash-admin-tag').classList.remove('hidden');
-        updateDash(); renderAdmin(); document.getElementById('view-dashboard').classList.remove('hidden');
-      } else alert("비밀번호 불일치");
+        updateDash();
+        renderAdmin();
+        document.getElementById('view-dashboard').classList.remove('hidden');
+        showToast("관리자 모드로 로그인했습니다.");
+      } else {
+        showToast("관리자 비밀번호가 일치하지 않습니다.", true);
+      }
     }
 
     function renderAdmin() {
       const tbody = document.getElementById('admin-acc-list');
+      if (accounts.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--text-muted); padding:1rem;">생성된 계좌가 없습니다. 위 폼에서 신규 계좌를 생성하세요.</td></tr>';
+        return;
+      }
       tbody.innerHTML = accounts.map(a => `
-        <tr><td>${a.name}</td><td>${a.account}</td><td>${a.balance.toLocaleString()} G</td><td><button class="btn btn-danger" onclick="eraseAcc('${a.account}')">삭제</button></td></tr>`).join('');
+        <tr>
+          <td>${a.name}</td>
+          <td>${a.account}</td>
+          <td>${a.balance.toLocaleString()} G</td>
+          <td><button class="btn btn-danger" onclick="eraseAcc('${a.account}')">삭제</button></td>
+        </tr>`).join('');
     }
 
     function adminCreateAcc(e) {
       e.preventDefault();
-      accounts.push({ name: document.getElementById('adm-name').value, account: document.getElementById('adm-acc').value, pin: document.getElementById('adm-pin').value, balance: parseInt(document.getElementById('adm-bal').value), loan: 0, shares: {} });
-      save(); renderAdmin();
+      const name = document.getElementById('adm-name').value.trim();
+      const account = document.getElementById('adm-acc').value.trim();
+      const pin = document.getElementById('adm-pin').value.trim();
+      const balance = parseInt(document.getElementById('adm-bal').value);
+
+      if (accounts.find(a => a.account === account)) {
+        return showToast("이미 존재하는 계좌번호입니다.", true);
+      }
+
+      accounts.push({
+        name,
+        account,
+        pin,
+        balance,
+        loan: 0,
+        avatar: defaultAvatar,
+        shares: {}
+      });
+      document.getElementById('adm-name').value = '';
+      document.getElementById('adm-acc').value = '';
+      document.getElementById('adm-pin').value = '';
+      save();
+      renderAdmin();
+      showToast(`${name} (${account}) 계좌가 생성되었습니다.`);
     }
 
-    function eraseAcc(acc) { accounts = accounts.filter(a => a.account !== acc); save(); renderAdmin(); }
-    function logout() { currentUser = null; isAdmin = false; location.reload(); }
+    function eraseAcc(acc) {
+      accounts = accounts.filter(a => a.account !== acc);
+      save();
+      renderAdmin();
+      showToast("계좌가 삭제되었습니다.");
+    }
+
+    function logout() {
+      currentUser = null;
+      isAdmin = false;
+      location.reload();
+    }
   </script>
-</body>
-</html>
+
+</body></html>
